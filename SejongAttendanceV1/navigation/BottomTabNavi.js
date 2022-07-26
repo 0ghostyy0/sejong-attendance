@@ -1,8 +1,8 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import AttendanceScreen from '../screens/attendance/AttendanceScreen';
 import AnalysisScreen from '../screens/analysis/AnalysisScreen';
 import ProfileScreen from '../screens/profile/ProfileScreen';
+import AttendanceStackNavi from './attendance/AttendanceStackNavi';
 
 const Tab = createBottomTabNavigator();
 
@@ -11,9 +11,10 @@ const BottomTabNavi = () => {
     <Tab.Navigator backBehavior="none">
       <Tab.Screen
         name="attendance"
-        component={AttendanceScreen}
+        component={AttendanceStackNavi}
         options={{
           title: '출석확인',
+          headerShown: false,
           // tabBarIcon: () => (),
         }}
       />
