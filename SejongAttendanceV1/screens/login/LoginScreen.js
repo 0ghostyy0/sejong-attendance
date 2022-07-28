@@ -48,8 +48,8 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 0.065,
-    marginLeft: width / 20,
-    marginRight: width / 20,
+    marginLeft: width * 19,
+    marginRight: width * 19,
     marginBottom: height / 150,
     paddingLeft: 10,
     backgroundColor: '#ffffff',
@@ -68,8 +68,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#C30E2E',
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: width / 20,
-    marginRight: width / 20,
+    marginLeft: width * 19,
+    marginRight: width * 19,
     marginTop: height / 150,
     borderRadius: 10,
   },
@@ -80,8 +80,8 @@ const styles = StyleSheet.create({
   loginInfo: {
     flex: 0.35,
     alignItems: 'center',
-    marginLeft: width / 20,
-    marginRight: width / 20,
+    marginLeft: width * 19,
+    marginRight: width * 19,
   },
 });
 
