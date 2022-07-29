@@ -2,17 +2,22 @@ import React from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 const AttendanceCard = () => {
   return (
     <View style={styles.component}>
       <TouchableOpacity style={styles.card}>
-        <View style={styles.row1}>
+        <View flexDirection="row" style={styles.row1}>
           <View style={styles.badge}>
             <Text style={styles.badgeText}>미완료</Text>
           </View>
+          <Ionicons name={'ios-chevron-forward'} style={styles.chevronIcon} />
         </View>
+
         <View style={styles.row2}>
           <Text style={styles.classNameText}>데이터베이스</Text>
+          <Text style={styles.numOfAtendanceCaption}>미수강</Text>
           <Text style={styles.numOfAttendanceText}>1개</Text>
         </View>
       </TouchableOpacity>
@@ -47,7 +52,7 @@ const styles = StyleSheet.create({
     color: '#EB5828',
     fontSize: scale * 12,
     fontWeight: '700',
-    marginTop: height * 2,
+    marginTop: height * 5,
     marginLeft: width * 8,
   },
   // classNumText: {
@@ -58,19 +63,34 @@ const styles = StyleSheet.create({
   // },
   row2: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: height * 17,
   },
   classNameText: {
     marginLeft: width * 16,
     fontSize: scale * 18,
-    fontWeight: '700',
+    fontWeight: 'bold',
   },
   numOfAttendanceText: {
-    marginRight: width * 16,
+    marginLeft: width * 2,
+    // marginRight: width * 16,
     fontSize: scale * 18,
-    fontWeight: '700',
+    fontWeight: 'bold',
+  },
+  numOfAtendanceCaption: {
+    marginLeft: width * 168,
+    marginRight: width * 2,
+    marginTop: height * 3,
+    alignItems: 'baseline',
+    color: '#8a8a8d',
+    fontWeight: 'bold',
+  },
+  chevronIcon: {
+    marginTop: height * 14,
+    marginRight: width * 14,
+    fontSize: scale * 16,
+    color: '#c4c4c6',
   },
 });
 
