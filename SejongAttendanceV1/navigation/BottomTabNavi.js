@@ -30,6 +30,7 @@ const BottomTabNavi = () => {
         component={ProfileScreen}
         options={{
           title: '마이페이지',
+          headerShown: false,
         }}
       />
     </Tab.Navigator>
