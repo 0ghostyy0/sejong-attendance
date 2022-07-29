@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     height: height * 23,
     width: width * 48,
     borderRadius: 8,
-    marginTop: height * 10,
+    marginTop: height * 12,
     marginLeft: width * 16,
   },
   badgeText: {
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: height * 17,
+    marginTop: height * 16,
   },
   classNameText: {
     marginLeft: width * 16,
