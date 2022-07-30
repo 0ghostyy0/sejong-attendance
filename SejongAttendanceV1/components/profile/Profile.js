@@ -28,6 +28,10 @@ const styles = StyleSheet.create({
     height: height * 77,
     borderRadius: 14,
     backgroundColor: 'white',
+    shadowRadius: 4,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowOffset: {height: 2},
   },
   row: {
     flexDirection: 'row',

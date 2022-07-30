@@ -30,6 +30,10 @@ const styles = StyleSheet.create({
     marginLeft: width * 16,
     marginRight: width * 16,
     marginBottom: height * 8,
+    shadowRadius: 4,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowOffset: {height: 2},
   },
   card: {
     backgroundColor: 'white',
