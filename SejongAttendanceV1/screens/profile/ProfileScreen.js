@@ -7,7 +7,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const ProfileScreen = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.title}>마이페이지</Text>
       <Profile />
       <View style={{flexDirection: 'row'}}>
@@ -42,6 +42,9 @@ const ProfileScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#f2f2f6',
+  },
   title: {
     fontSize: scale * 28,
     fontWeight: 'bold',
