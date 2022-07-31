@@ -4,10 +4,14 @@ import {height, width, scale} from '../../config/globalStyles';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const AttendanceCard = () => {
+const AttendanceCard = ({navigation}) => {
   return (
     <View style={styles.component}>
-      <TouchableOpacity style={styles.card}>
+      <TouchableOpacity
+        onPress={() => {
+          navigation.navigate('single');
+        }}
+        style={styles.card}>
         <View flexDirection="row" style={styles.row1}>
           <View style={styles.badge}>
             <Text style={styles.badgeText}>미완료</Text>
@@ -35,6 +39,10 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     height: height * 86,
     borderRadius: 10,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowRadius: 4,
+    shadowOffset: {height: 2},
   },
   row1: {
     flexDirection: 'row',

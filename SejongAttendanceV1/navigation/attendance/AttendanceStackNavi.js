@@ -1,6 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AttendanceScreen from '../../screens/attendance/AttendanceScreen';
+import CourseScreen from '../../screens/course/CourseScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -13,6 +14,11 @@ const AttendanceStackNavi = () => {
         options={{
           headerShown: false,
         }}
+      />
+      <Stack.Screen
+        name="single"
+        component={CourseScreen}
+        options={{headerShown: true}}
       />
     </Stack.Navigator>
   );

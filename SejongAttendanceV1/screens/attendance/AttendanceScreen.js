@@ -33,9 +33,9 @@ const AttendanceScreen = ({navigation}) => {
           setThisWeek(event.nativeEvent.selectedSegmentIndex);
         }}
       />
-      {thisWeek ? (
+      {!thisWeek ? (
         <ScrollView showsVerticalScrollIndicator={false}>
-          <AttendanceCard />
+          <AttendanceCard navigation={navigation} />
           <AttendanceCard />
           <AttendanceCard />
           <AttendanceCard />
