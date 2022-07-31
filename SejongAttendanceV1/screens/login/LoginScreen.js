@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -7,9 +7,45 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import axios from 'axios';
+import Config from 'react-native-config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {height, width} from '../../config/globalStyles';
 
 const LoginScreen = ({navigation}) => {
+  const [loading, setLoading] = useState(false);
+  const [id, setId] = useState('');
+  const [pwd, setPwd] = useState('');
+
+  const login = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post(`${Config.LOGIN_API_URL}`, {
+        id: id,
+        pw: pwd,
+        method: `${Config.LOGIN_METHOD}`,
+      });
+      console.log(response.data);
+      if (response.data.result.is_auth) {
+        console.log('true');
+        storeStudentId();
+        navigation.navigate('home');
+      } else {
+        console.log('false');
+      }
+    } catch (error) {
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const storeStudentId = async () => {
+    try {
+      const value = JSON.stringify({id: id});
+      await AsyncStorage.setItem(Config.STUDENT_ID_KEY, value);
+    } catch (error) {}
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
@@ -19,12 +55,28 @@ const LoginScreen = ({navigation}) => {
         />
         <Text>Login screen</Text>
       </View>
-      <TextInput style={styles.textInput} placeholder={'학번'} />
-      <TextInput style={styles.textInput} placeholder={'비밀번호'} />
+      <TextInput
+        style={styles.textInput}
+        value={id}
+        placeholder={'학번'}
+        keyboardType={'numbers-and-punctuation'}
+        onChangeText={id => {
+          setId(id);
+        }}
+      />
+      <TextInput
+        style={styles.textInput}
+        value={pwd}
+        placeholder={'비밀번호'}
+        keyboardType={'ascii-capable'}
+        onChangeText={pwd => {
+          setPwd(pwd);
+        }}
+      />
       <TouchableOpacity
         style={styles.loginBtn}
         onPress={() => {
-          navigation.navigate('home');
+          login();
         }}>
         <Text style={styles.loginText}>세종대학교 구성원 인증하기</Text>
       </TouchableOpacity>
@@ -40,6 +92,7 @@ const LoginScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#f2f2f6',
   },
   logo: {
     flex: 0.35,
