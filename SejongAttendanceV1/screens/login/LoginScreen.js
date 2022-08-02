@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
+  TurboModuleRegistry,
 } from 'react-native';
 import axios from 'axios';
 import Config from 'react-native-config';
@@ -36,6 +37,7 @@ const LoginScreen = ({navigation}) => {
     } catch (error) {
     } finally {
       setLoading(false);
+      navigation.navigate('home');
     }
   };
 
@@ -59,7 +61,10 @@ const LoginScreen = ({navigation}) => {
         style={styles.textInput}
         value={id}
         placeholder={'학번'}
-        keyboardType={'numbers-and-punctuation'}
+        keyboardType={'number-pad'}
+        autoCapitalize="none"
+        autoComplete="none"
+        textContentType="username"
         onChangeText={id => {
           setId(id);
         }}
@@ -68,7 +73,11 @@ const LoginScreen = ({navigation}) => {
         style={styles.textInput}
         value={pwd}
         placeholder={'비밀번호'}
-        keyboardType={'ascii-capable'}
+        keyboardType={'default'}
+        autoCapitalize="none"
+        autoComplete="none"
+        textContentType="password"
+        secureTextEntry={true}
         onChangeText={pwd => {
           setPwd(pwd);
         }}

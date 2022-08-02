@@ -36,12 +36,12 @@ const AttendanceScreen = ({navigation}) => {
       {!thisWeek ? (
         <ScrollView showsVerticalScrollIndicator={false}>
           <AttendanceCard navigation={navigation} />
-          <AttendanceCard />
-          <AttendanceCard />
-          <AttendanceCard />
-          <AttendanceCard />
-          <AttendanceCard />
-          <AttendanceCard />
+          <AttendanceCard navigation={navigation} />
+          <AttendanceCard navigation={navigation} />
+          <AttendanceCard navigation={navigation} />
+          <AttendanceCard navigation={navigation} />
+          <AttendanceCard navigation={navigation} />
+          <AttendanceCard navigation={navigation} />
         </ScrollView>
       ) : (
         <View style={styles.emptyAttendanceContainer}>

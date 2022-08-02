@@ -18,11 +18,19 @@ const AttendanceCard = ({navigation}) => {
           </View>
           <Ionicons name={'ios-chevron-forward'} style={styles.chevronIcon} />
         </View>
-
         <View style={styles.row2}>
-          <Text style={styles.classNameText}>데이터베이스</Text>
-          <Text style={styles.numOfAtendanceCaption}>미수강</Text>
-          <Text style={styles.numOfAttendanceText}>1개</Text>
+          <View style={styles.courseNameContainer}>
+            <Text
+              style={styles.classNameText}
+              numberOfLines={1}
+              ellipsizeMode={'tail'}>
+              데이터베이스
+            </Text>
+          </View>
+          <View style={styles.attendanceNumberContainer}>
+            <Text style={styles.numOfAtendanceCaption}>미수강</Text>
+            <Text style={styles.numOfAttendanceText}>1개</Text>
+          </View>
         </View>
       </TouchableOpacity>
     </View>
@@ -57,6 +65,8 @@ const styles = StyleSheet.create({
     height: height * 23,
     width: width * 48,
     borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
     marginTop: height * 12,
     marginLeft: width * 16,
   },
@@ -64,20 +74,19 @@ const styles = StyleSheet.create({
     color: '#EB5828',
     fontSize: scale * 12,
     fontWeight: '700',
-    marginTop: height * 5,
-    marginLeft: width * 8,
   },
-  // classNumText: {
-  //   opacity: 0.5,
-  //   marginTop: height / 40,
-  //   marginLeft: width / 30,
-  //   fontSize: 13,
-  // },
   row2: {
     flexDirection: 'row',
-    // justifyContent: 'space-between',
+    justifyContent: 'space-between',
     alignItems: 'center',
     marginTop: height * 16,
+  },
+  courseNameContainer: {
+    width: width * 200,
+  },
+  attendanceNumberContainer: {
+    flexDirection: 'row',
+    alignItems: 'baseline',
   },
   classNameText: {
     marginLeft: width * 16,
@@ -86,15 +95,12 @@ const styles = StyleSheet.create({
   },
   numOfAttendanceText: {
     marginLeft: width * 2,
-    // marginRight: width * 16,
+    marginRight: width * 16,
     fontSize: scale * 18,
     fontWeight: 'bold',
   },
   numOfAtendanceCaption: {
-    marginLeft: width * 168,
     marginRight: width * 2,
-    marginTop: height * 3,
-    alignItems: 'baseline',
     color: '#8a8a8d',
     fontWeight: 'bold',
   },
