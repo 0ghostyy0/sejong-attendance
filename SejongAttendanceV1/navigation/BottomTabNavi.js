@@ -1,9 +1,8 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AnalysisScreen from '../screens/analysis/AnalysisScreen';
-import ProfileScreen from '../screens/profile/ProfileScreen';
 import AttendanceStackNavi from './attendance/AttendanceStackNavi';
-
+import ProfileStackNavi from './profile/ProfileStackNavi';
 import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AnalysisIcon from '../assets/images/mdi_sign-caution.svg';
 
@@ -38,7 +37,7 @@ const BottomTabNavi = () => {
       />
       <Tab.Screen
         name="profile"
-        component={ProfileScreen}
+        component={ProfileStackNavi}
         options={{
           title: '마이페이지',
           headerShown: false,

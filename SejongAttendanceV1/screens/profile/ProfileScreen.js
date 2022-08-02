@@ -5,14 +5,17 @@ import {height, width, scale} from '../../config/globalStyles';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const ProfileScreen = () => {
+const ProfileScreen = ({navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>마이페이지</Text>
       <Profile />
       <View style={{flexDirection: 'row'}}>
         <Text style={styles.subtitle}>과목 설정</Text>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('addcourse');
+          }}>
           <Ionicons name="add-circle-outline" style={styles.addIcon} />
         </TouchableOpacity>
       </View>
