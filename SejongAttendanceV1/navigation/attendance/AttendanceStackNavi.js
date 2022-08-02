@@ -2,6 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AttendanceScreen from '../../screens/attendance/AttendanceScreen';
 import CourseScreen from '../../screens/course/CourseScreen';
+import {Modal} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 
@@ -18,7 +19,14 @@ const AttendanceStackNavi = () => {
       <Stack.Screen
         name="single"
         component={CourseScreen}
-        options={{headerShown: true}}
+        options={{
+          headerShown: true,
+          // headerTransparent: true,
+          headerTitle: '',
+          headerBackTitle: '출석 확인하기',
+          headerStyle: {backgroundColor: '#f2f2f6'},
+          headerShadowVisible: false,
+        }}
       />
     </Stack.Navigator>
   );
