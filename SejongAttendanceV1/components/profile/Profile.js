@@ -13,7 +13,7 @@ const Profile = () => {
         <View style={styles.profileImg}>
           <Senior width={40} height={40} />
         </View>
-        <View>
+        <View style={styles.studentInfoContainer}>
           <Text style={styles.studentID}>18011480</Text>
           <Text style={styles.semester}>2022학년도 2학기</Text>
         </View>
@@ -46,13 +46,14 @@ const styles = StyleSheet.create({
     marginRight: width * 13,
     padding: scale * 10,
   },
+  studentInfoContainer: {
+    justifyContent: 'center',
+  },
   studentID: {
     fontSize: scale * 22,
-    marginTop: height * 8,
   },
   semester: {
     fontSize: scale * 13,
-    marginTop: height * 2,
   },
 });
 

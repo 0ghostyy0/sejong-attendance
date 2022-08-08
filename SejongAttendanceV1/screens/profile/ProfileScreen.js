@@ -1,46 +1,91 @@
-import React from 'react';
-import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  SafeAreaView,
+} from 'react-native';
+import {Section, TableView} from 'react-native-tableview-simple';
 import Profile from '../../components/profile/Profile';
 import {height, width, scale} from '../../config/globalStyles';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import CourseTable from '../../components/profile/CourseTable';
 
 const ProfileScreen = ({navigation}) => {
+  const [courses, setCourses] = useState([]);
+  useEffect(() => {
+    setCourses([
+      {course: '데이터베이스', course_num: '009959-001'},
+      {course: '기계학습', course_num: '009959-001'},
+      {course: '운영체제', course_num: '009959-001'},
+      {course: '컴퓨터네트워크', course_num: '009959-001'},
+      {course: '알고리즘', course_num: '009959-001'},
+      {course: '자료구조', course_num: '009959-001'},
+      {course: '무선통신', course_num: '009959-001'},
+    ]);
+  }, []);
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>마이페이지</Text>
-      <Profile />
-      <View style={{flexDirection: 'row'}}>
-        <Text style={styles.subtitle}>과목 설정</Text>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('addcourse');
-          }}>
-          <Ionicons name="add-circle-outline" style={styles.addIcon} />
-        </TouchableOpacity>
-      </View>
-      <View>
-        <Text style={styles.addCourseText}>
-          오른쪽 위의 + 버튼을 눌러 과목을 추가해주세요.
-        </Text>
-      </View>
-      <Text style={styles.subtitle}>문의하기</Text>
-      <View style={styles.margin1}>
-        <TouchableOpacity style={{...styles.btn, flexDirection: 'row'}}>
-          <Text style={styles.text}>만든 솨람</Text>
-          <Ionicons name={'ios-chevron-forward'} style={styles.chevronIcon} />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.margin2}>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={{...styles.text, color: '#eb5828'}}>계정 삭제하기</Text>
-        </TouchableOpacity>
-        <Text style={styles.deleteText}>
-          기기에 있는 사용자의 데이터는 서버에 저장되지 않으며 계정 삭제 시
-          등록한 정보가 모두 초기화됩니다.
-        </Text>
-      </View>
-    </View>
+    <SafeAreaView>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        alwaysBounceVertical={false}>
+        <View style={styles.container}>
+          <Profile />
+          <View style={styles.row1}>
+            <Text style={styles.subtitle}>과목 설정</Text>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('addcourse');
+              }}>
+              <Ionicons name="add-circle-outline" style={styles.addIcon} />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.shadow}>
+            {courses.length > 0 ? (
+              <TableView style={styles.tableview}>
+                <Section roundedCorners={true} hideSurroundingSeparators={true}>
+                  {courses.map(course => (
+                    <CourseTable
+                      key={course.course}
+                      course={course.course}
+                      course_num={course.course_num}
+                    />
+                  ))}
+                </Section>
+              </TableView>
+            ) : (
+              <Text style={styles.addCourseText}>
+                오른쪽 위의 + 버튼을 눌러 과목을 추가해주세요.
+              </Text>
+            )}
+          </View>
+          <Text style={styles.subtitle}>문의하기</Text>
+          <View style={styles.margin1}>
+            <TouchableOpacity style={{...styles.btn, ...styles.row1}}>
+              <Text style={styles.text}>만든 솨람</Text>
+              <Ionicons
+                name={'ios-chevron-forward'}
+                style={styles.chevronIcon}
+              />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.margin2}>
+            <TouchableOpacity style={styles.btn}>
+              <Text style={{...styles.text, color: '#eb5828'}}>
+                계정 삭제하기
+              </Text>
+            </TouchableOpacity>
+            <Text style={styles.deleteText}>
+              기기에 있는 사용자의 데이터는 서버에 저장되지 않으며 계정 삭제 시
+              등록한 정보가 모두 초기화됩니다.
+            </Text>
+          </View>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -48,35 +93,43 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f2f2f6',
   },
-  title: {
-    fontSize: scale * 28,
-    fontWeight: 'bold',
-    marginTop: height * 95,
-    marginBottom: height * 12,
-    marginLeft: width * 16,
-  },
   subtitle: {
     marginLeft: width * 16,
     marginTop: height * 18,
     fontSize: scale * 20,
     fontWeight: 'bold',
   },
+  row1: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  shadow: {
+    shadowRadius: 4,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowOffset: {height: 2},
+  },
+  tableview: {
+    marginHorizontal: width * 16,
+  },
   addIcon: {
     fontSize: scale * 20,
     color: '#007aff',
-    marginLeft: width * 252,
+    marginRight: width * 26,
     marginTop: height * 21,
   },
   addCourseText: {
     fontSize: scale * 14,
     fontWeight: 'bold',
     color: '#979799',
-    marginLeft: width * 63,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: width * 60,
     marginTop: height * 30,
     marginBottom: height * 14,
   },
   margin1: {
-    marginTop: height * 12,
+    marginTop: height * 15,
   },
   margin2: {
     marginTop: height * 44,
@@ -94,14 +147,14 @@ const styles = StyleSheet.create({
   },
   chevronIcon: {
     color: '#c4c4c6',
-    fontSize: scale * 16,
-    marginTop: height * 13,
-    marginLeft: width * 250,
+    fontSize: scale * 20,
+    marginVertical: height * 12,
+    marginRight: width * 16,
   },
   deleteText: {
     marginLeft: width * 25,
     marginRight: width * 34,
-    marginTop: height * 8,
+    marginVertical: height * 8,
     fontSize: scale * 10,
     color: '#86858c',
   },

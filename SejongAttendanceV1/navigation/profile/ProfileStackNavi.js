@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AddCourseScreen from '../../screens/profile/AddCourseScreen';
 import ProfileScreen from '../../screens/profile/ProfileScreen';
 import {Button} from 'react-native';
+import {scale} from '../../config/globalStyles';
 
 const Stack = createNativeStackNavigator();
 
@@ -10,10 +11,13 @@ const ProfileStackNavi = () => {
   return (
     <Stack.Navigator screenOptions={{presentation: 'modal'}}>
       <Stack.Screen
-        name="profiles"
+        name="마이페이지"
         component={ProfileScreen}
         options={{
-          headerShown: false,
+          headerLargeTitle: true,
+          headerLargeTitleStyle: {fontSize: scale * 28},
+          headerStyle: {backgroundColor: '#f2f2f6'},
+          headerShadowVisible: false,
         }}
       />
       <Stack.Group>
