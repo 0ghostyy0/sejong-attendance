@@ -7,7 +7,7 @@ import {scale} from '../../config/globalStyles';
 
 const Stack = createNativeStackNavigator();
 
-const ProfileStackNavi = () => {
+const ProfileStackNavi = ({navigation}) => {
   return (
     <Stack.Navigator screenOptions={{presentation: 'modal'}}>
       <Stack.Screen
@@ -30,7 +30,14 @@ const ProfileStackNavi = () => {
             headerBackTitle: '출석 확인하기',
             headerStyle: {backgroundColor: '#f2f2f6'},
             headerShadowVisible: false,
-            headerLeft: () => <Button title="취소" />,
+            headerLeft: () => (
+              <Button
+                title="취소"
+                onPress={() => {
+                  navigation.navigate('마이페이지');
+                }}
+              />
+            ),
             headerRight: () => <Button title="추가" />,
           }}
         />

@@ -12,6 +12,7 @@ import Profile from '../../components/profile/Profile';
 import {height, width, scale} from '../../config/globalStyles';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Entypo from 'react-native-vector-icons/Entypo';
 import CourseTable from '../../components/profile/CourseTable';
 
 const ProfileScreen = ({navigation}) => {
@@ -66,10 +67,7 @@ const ProfileScreen = ({navigation}) => {
           <View style={styles.margin1}>
             <TouchableOpacity style={{...styles.btn, ...styles.row1}}>
               <Text style={styles.text}>만든 솨람</Text>
-              <Ionicons
-                name={'ios-chevron-forward'}
-                style={styles.chevronIcon}
-              />
+              <Entypo name={'chevron-thin-right'} style={styles.chevronIcon} />
             </TouchableOpacity>
           </View>
           <View style={styles.margin2}>
@@ -147,8 +145,8 @@ const styles = StyleSheet.create({
   },
   chevronIcon: {
     color: '#c4c4c6',
-    fontSize: scale * 20,
-    marginVertical: height * 12,
+    fontSize: scale * 16,
+    alignSelf: 'center',
     marginRight: width * 16,
   },
   deleteText: {

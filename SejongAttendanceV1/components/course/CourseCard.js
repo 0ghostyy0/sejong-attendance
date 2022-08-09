@@ -106,7 +106,6 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   numOfAtendanceCaption: {
-    marginLeft: width * 69,
     marginRight: width * 2,
     marginTop: height * 3,
     alignItems: 'baseline',
