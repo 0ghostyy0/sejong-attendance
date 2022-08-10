@@ -8,6 +8,7 @@ const App = () => {
   React.useEffect(() => {
     SplashScreen.hide();
   });
+
   return (
     <NavigationContainer>
       <LoginStackNavi />
