@@ -1,17 +1,10 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  TextInput,
-  TurboModuleRegistry,
-} from 'react-native';
+import {StyleSheet, View, Text, TouchableOpacity, Linking} from 'react-native';
+import LoginText from '../../components/login/LoginText';
 import axios from 'axios';
 import Config from 'react-native-config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {height, width} from '../../config/globalStyles';
+import {height, width, scale} from '../../config/globalStyles';
 
 const LoginScreen = ({navigation}) => {
   const [loading, setLoading] = useState(false);
@@ -27,6 +20,8 @@ const LoginScreen = ({navigation}) => {
         method: `${Config.LOGIN_METHOD}`,
       });
       console.log(response.data);
+      console.log(id);
+      console.log(pwd);
       if (response.data.result.is_auth) {
         console.log('true');
         storeStudentId();
@@ -50,48 +45,43 @@ const LoginScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <View style={styles.logo}>
-        <Image
-        // source={require('')}
-        // style={{width: , height: }}
-        />
-        <Text>Login screen</Text>
-      </View>
-      <TextInput
-        style={styles.textInput}
-        value={id}
-        placeholder={'학번'}
+      <Text style={styles.title}>포탈 계정으로 로그인</Text>
+      <LoginText
+        header={'아이디'}
+        containerPlaceholder={'아이디'}
         keyboardType={'number-pad'}
-        autoCapitalize="none"
-        autoComplete="none"
-        textContentType="username"
-        onChangeText={id => {
-          setId(id);
-        }}
+        textContentType={'username'}
+        secureTextEntry={'false'}
+        setValue={setId}
       />
-      <TextInput
-        style={styles.textInput}
-        value={pwd}
-        placeholder={'비밀번호'}
+      <LoginText
+        header={'비밀번호'}
+        containerPlaceholder={'비밀번호'}
         keyboardType={'default'}
-        autoCapitalize="none"
-        autoComplete="none"
-        textContentType="password"
-        secureTextEntry={true}
-        onChangeText={pwd => {
-          setPwd(pwd);
-        }}
+        textContentType={'password'}
+        secureTextEntry={'true'}
+        setValue={setPwd}
       />
-      <TouchableOpacity
-        style={styles.loginBtn}
-        onPress={() => {
-          login();
-        }}>
-        <Text style={styles.loginText}>세종대학교 구성원 인증하기</Text>
-      </TouchableOpacity>
-      <View style={styles.loginInfo}>
-        <Text style={{marginTop: height / 100}}>
-          저장안함저장안함저장안함저장안함저장안함저장안함저장안함저장안함저장안함저장안함저장안함저장안함저장안함저장안함저장안함저장안함
+      <View style={styles.login}>
+        <TouchableOpacity
+          style={styles.loginBtn}
+          onPress={() => {
+            login();
+          }}>
+          <Text style={styles.loginText}>로그인</Text>
+        </TouchableOpacity>
+        <Text style={styles.loginInfo}>아이디나 비밀번호를 잊으셨나요?</Text>
+        <Text
+          style={{
+            ...styles.loginInfo,
+            ...styles.loginLink,
+          }}
+          onPress={() =>
+            Linking.openURL(
+              'https://portal.sejong.ac.kr/jsp/login/loginSSL.jsp?rtUrl=sjpt.sejong.ac.kr/main/view/Login/doSsoLogin.do?p=',
+            )
+          }>
+          포탈로 이동해서 계정 찾기
         </Text>
       </View>
     </View>
@@ -103,47 +93,38 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#f2f2f6',
   },
-  logo: {
-    flex: 0.35,
-    alignItems: 'center',
-    justifyContent: 'center',
+  title: {
+    fontSize: scale * 28,
+    fontWeight: 'bold',
+    marginTop: height * 95,
+    marginLeft: width * 16,
   },
-  textInput: {
-    flex: 0.065,
-    marginLeft: width * 19,
-    marginRight: width * 19,
-    marginBottom: height / 150,
-    paddingLeft: 10,
-    backgroundColor: '#ffffff',
-    borderRadius: 10,
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 1.41,
-    elevation: 2,
+  login: {
+    alignItems: 'center',
   },
   loginBtn: {
-    flex: 0.06,
     backgroundColor: '#C30E2E',
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: width * 19,
-    marginRight: width * 19,
-    marginTop: height / 150,
+    width: width * 358,
+    height: height * 48,
     borderRadius: 10,
+    marginTop: height * 48,
+    marginBottom: height * 14,
   },
   loginText: {
     color: 'white',
+    fontSize: scale * 17,
     fontWeight: 'bold',
   },
   loginInfo: {
-    flex: 0.35,
+    color: '#979799',
+    fontSize: scale * 12,
     alignItems: 'center',
-    marginLeft: width * 19,
-    marginRight: width * 19,
+  },
+  loginLink: {
+    textDecorationLine: 'underline',
+    textDecorationColor: '#979799',
   },
 });
 

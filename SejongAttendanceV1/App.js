@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {NavigationContainer} from '@react-navigation/native';
-import LoginStackNavi from './navigation/LoginStackNavi';
+import AppStackNavi from './navigation/AppStackNavi';
 import SplashScreen from 'react-native-splash-screen';
 
 const App = () => {
@@ -11,7 +11,7 @@ const App = () => {
 
   return (
     <NavigationContainer>
-      <LoginStackNavi />
+      <AppStackNavi />
     </NavigationContainer>
   );
 };
