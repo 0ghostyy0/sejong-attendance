@@ -1,16 +1,16 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import LoginScreen from '../screens/login/LoginScreen';
+import LoginStackNavi from './login/LoginStackNavi';
 import BottomTabNavi from './BottomTabNavi';
 
 const Stack = createNativeStackNavigator();
 
-const LoginStackNavi = () => {
+const AppStackNavi = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="login"
-        component={LoginScreen}
+        name="login_stack"
+        component={LoginStackNavi}
         options={{headerShown: false}}
       />
       <Stack.Screen
@@ -22,4 +22,4 @@ const LoginStackNavi = () => {
   );
 };
 
-export default LoginStackNavi;
+export default AppStackNavi;
