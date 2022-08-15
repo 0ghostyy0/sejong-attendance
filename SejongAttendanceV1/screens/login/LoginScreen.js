@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Linking} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Linking,
+  Alert,
+} from 'react-native';
 import LoginText from '../../components/login/LoginText';
 import axios from 'axios';
 import Config from 'react-native-config';
@@ -22,33 +29,63 @@ const LoginScreen = ({navigation}) => {
       console.log(response.data);
       console.log(id);
       console.log(pwd);
+      if (!response.data.result.success) {
+        Alert.alert('서버 오류', '죄송합니다.\n잠시 후 다시 시도해주세요.', [
+          {
+            text: '확인',
+            onPress: () => navigation.navigate('landing'),
+          },
+        ]);
+      }
       if (response.data.result.is_auth) {
         console.log('true');
         storeStudentId();
         navigation.navigate('home');
       } else {
         console.log('false');
+        Alert.alert('로그인 실패', '학번 또는 비밀번호를 확인해주세요.', [
+          {
+            text: '확인',
+            onPress: () => {
+              setId('');
+              setPwd('');
+            },
+          },
+        ]);
       }
     } catch (error) {
+      Alert.alert('서버 오류', '죄송합니다.\n잠시 후 다시 시도해주세요.', [
+        {
+          text: '확인',
+          onPress: () => navigation.navigate('landing'),
+        },
+      ]);
     } finally {
       setLoading(false);
-      navigation.navigate('home');
+      // navigation.navigate('home');
     }
   };
 
-  const storeStudentId = async () => {
+  const storeStudentId = () => {
     try {
       const value = JSON.stringify({id: id});
-      await AsyncStorage.setItem(Config.STUDENT_ID_KEY, value);
-    } catch (error) {}
+      AsyncStorage.setItem(Config.STUDENT_ID_KEY, value);
+    } catch (error) {
+      Alert.alert('내부 오류', '죄송합니다.\n로그인을 다시 시도해주세요.', [
+        {
+          text: '확인',
+          onPress: () => navigation.navigate('login'),
+        },
+      ]);
+    }
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.title}>포탈 계정으로 로그인</Text>
       <LoginText
-        header={'아이디'}
-        containerPlaceholder={'아이디'}
+        header={'학번'}
+        containerPlaceholder={'학번'}
         keyboardType={'number-pad'}
         textContentType={'username'}
         secureTextEntry={'false'}
@@ -70,7 +107,7 @@ const LoginScreen = ({navigation}) => {
           }}>
           <Text style={styles.loginText}>로그인</Text>
         </TouchableOpacity>
-        <Text style={styles.loginInfo}>아이디나 비밀번호를 잊으셨나요?</Text>
+        <Text style={styles.loginInfo}>비밀번호를 잊으셨나요?</Text>
         <Text
           style={{
             ...styles.loginInfo,

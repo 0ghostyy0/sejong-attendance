@@ -32,14 +32,12 @@ const LandingScreen = ({navigation}) => {
           <Image style={styles.sejong_logo} source={SejongLogo} />
           <Text style={styles.btn_text}>세종대학교 구성원 인증하기</Text>
         </TouchableOpacity>
-        <View>
-          <Text style={styles.caution}>
-            출석귀신은 서버를 통하지 않고 운영돼요.
-          </Text>
-          <Text style={styles.caution}>
-            내 출석기록은 아무도 확인할 수 없으니 걱정마세요!
-          </Text>
-        </View>
+        <Text style={styles.caution}>
+          출석귀신은 서버를 통하지 않고 운영돼요.
+        </Text>
+        <Text style={styles.caution}>
+          내 출석기록은 아무도 확인할 수 없으니 걱정마세요!
+        </Text>
       </View>
     </View>
   );
@@ -48,7 +46,8 @@ const LandingScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'space-between',
+    //flexDirection: 'column',
+    //justifyContent: 'space-between',
     backgroundColor: '#f2f2f6',
   },
   logo: {
@@ -62,6 +61,8 @@ const styles = StyleSheet.create({
   },
   login: {
     alignItems: 'center',
+    flexDirection: 'column',
+    justifyContent: 'space-around',
     marginBottom: height * 70,
   },
   login_info: {
