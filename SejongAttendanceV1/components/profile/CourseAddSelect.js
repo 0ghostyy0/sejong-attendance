@@ -3,11 +3,15 @@ import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-const CourseAddSelect = ({header, collegeName, footer}) => {
+const CourseAddSelect = ({header, collegeName, footer, navi, navigation}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{header}</Text>
-      <TouchableOpacity style={styles.boxContainer}>
+      <TouchableOpacity
+        style={styles.boxContainer}
+        onPress={() => {
+          navigation.navigate(navi);
+        }}>
         <Text style={styles.collegeName}>{collegeName}</Text>
         <Entypo name={'chevron-thin-right'} style={styles.chevronIcon} />
       </TouchableOpacity>

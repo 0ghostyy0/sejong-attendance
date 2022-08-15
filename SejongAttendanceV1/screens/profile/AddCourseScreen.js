@@ -6,6 +6,7 @@ import {
   StatusBar,
   ScrollView,
   ScrollViewBase,
+  TouchableOpacity,
 } from 'react-native';
 import CourseAddSelect from '../../components/profile/CourseAddSelect';
 import CourseAddView from '../../components/profile/CourseAddView';
@@ -42,6 +43,8 @@ const AddCourseScreen = ({navigation}) => {
           footer={
             '해당 과목의 주관 단과대학을 입력해주세요.\n예) 동양고전강독 - 대양휴머니티칼리지'
           }
+          navi={'addcollege'}
+          navigation={navigation}
         />
         <CourseAddSelect
           header={'학과'}
@@ -49,6 +52,8 @@ const AddCourseScreen = ({navigation}) => {
           footer={
             '해당 과목의 주관 학과를 입력해주세요.\n예) C프로그래밍 - 컴퓨터공학과\n*대양휴머니티칼리지는 단과대학과 학과의 명칭이 동일합니다.'
           }
+          navi={'adddept'}
+          navigation={navigation}
         />
       </View>
     </ScrollView>
