@@ -17,6 +17,7 @@ import CourseTable from '../../components/profile/CourseTable';
 
 const ProfileScreen = ({navigation}) => {
   const [courses, setCourses] = useState([]);
+
   useEffect(() => {
     setCourses([
       {course: '데이터베이스', course_num: '009959-001'},
@@ -28,6 +29,7 @@ const ProfileScreen = ({navigation}) => {
       {course: '무선통신', course_num: '009959-001'},
     ]);
   }, []);
+
   return (
     <SafeAreaView>
       <ScrollView
