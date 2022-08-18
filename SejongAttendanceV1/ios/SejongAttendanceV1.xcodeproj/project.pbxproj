@@ -12,7 +12,9 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		18F063781833D4759D7B5160 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = A7530B0F282AA7C137E1179A /* ExpoModulesProvider.swift */; };
 		7699B88040F8A987B510C191 /* libPods-SejongAttendanceV1-SejongAttendanceV1Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-SejongAttendanceV1-SejongAttendanceV1Tests.a */; };
+		7872429400640B515DD27202 /* ExpoModulesProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8ECC6A426E1321D264C6FE91 /* ExpoModulesProvider.swift */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
@@ -43,6 +45,8 @@
 		5DCACB8F33CDC322A6C60F78 /* libPods-SejongAttendanceV1.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SejongAttendanceV1.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = SejongAttendanceV1/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-SejongAttendanceV1-SejongAttendanceV1Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SejongAttendanceV1-SejongAttendanceV1Tests.release.xcconfig"; path = "Target Support Files/Pods-SejongAttendanceV1-SejongAttendanceV1Tests/Pods-SejongAttendanceV1-SejongAttendanceV1Tests.release.xcconfig"; sourceTree = "<group>"; };
+		8ECC6A426E1321D264C6FE91 /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-SejongAttendanceV1-SejongAttendanceV1Tests/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
+		A7530B0F282AA7C137E1179A /* ExpoModulesProvider.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ExpoModulesProvider.swift; path = "Pods/Target Support Files/Pods-SejongAttendanceV1/ExpoModulesProvider.swift"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -96,6 +100,14 @@
 			name = SejongAttendanceV1;
 			sourceTree = "<group>";
 		};
+		25A68D9AC5E96559B3F41267 /* SejongAttendanceV1Tests */ = {
+			isa = PBXGroup;
+			children = (
+				8ECC6A426E1321D264C6FE91 /* ExpoModulesProvider.swift */,
+			);
+			name = SejongAttendanceV1Tests;
+			sourceTree = "<group>";
+		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +116,15 @@
 				19F6CBCC0A4E27FBF8BF4A61 /* libPods-SejongAttendanceV1-SejongAttendanceV1Tests.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4D558BED221FCD37A9D18837 /* ExpoModulesProviders */ = {
+			isa = PBXGroup;
+			children = (
+				C3FB24E75FD6AFF2FC7FB24D /* SejongAttendanceV1 */,
+				25A68D9AC5E96559B3F41267 /* SejongAttendanceV1Tests */,
+			);
+			name = ExpoModulesProviders;
 			sourceTree = "<group>";
 		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
@@ -122,6 +143,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				BBD78D7AC51CEA395F1C20DB /* Pods */,
+				4D558BED221FCD37A9D18837 /* ExpoModulesProviders */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -146,6 +168,14 @@
 				89C6BE57DB24E9ADA2F236DE /* Pods-SejongAttendanceV1-SejongAttendanceV1Tests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		C3FB24E75FD6AFF2FC7FB24D /* SejongAttendanceV1 */ = {
+			isa = PBXGroup;
+			children = (
+				A7530B0F282AA7C137E1179A /* ExpoModulesProvider.swift */,
+			);
+			name = SejongAttendanceV1;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,6 +435,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				00E356F31AD99517003FC87E /* SejongAttendanceV1Tests.m in Sources */,
+				7872429400640B515DD27202 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,6 +445,7 @@
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				18F063781833D4759D7B5160 /* ExpoModulesProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +481,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SejongAttendanceV1.app/SejongAttendanceV1";
@@ -473,6 +506,7 @@
 					"-lc++",
 					"$(inherited)",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/SejongAttendanceV1.app/SejongAttendanceV1";
@@ -497,6 +531,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SejongAttendanceV1;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -522,6 +557,7 @@
 					"-ObjC",
 					"-lc++",
 				);
+				OTHER_SWIFT_FLAGS = "$(inherited) -D EXPO_CONFIGURATION_RELEASE";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = SejongAttendanceV1;
 				SWIFT_VERSION = 5.0;
