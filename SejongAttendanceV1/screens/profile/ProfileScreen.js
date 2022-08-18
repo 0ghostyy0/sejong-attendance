@@ -17,6 +17,7 @@ import CourseTable from '../../components/profile/CourseTable';
 
 const ProfileScreen = ({navigation}) => {
   const [courses, setCourses] = useState([]);
+
   useEffect(() => {
     setCourses([
       {course: '데이터베이스', course_num: '009959-001'},
@@ -28,6 +29,7 @@ const ProfileScreen = ({navigation}) => {
       {course: '무선통신', course_num: '009959-001'},
     ]);
   }, []);
+
   return (
     <SafeAreaView>
       <ScrollView
@@ -65,8 +67,12 @@ const ProfileScreen = ({navigation}) => {
           </View>
           <Text style={styles.subtitle}>문의하기</Text>
           <View style={styles.margin1}>
-            <TouchableOpacity style={{...styles.btn, ...styles.row1}}>
-              <Text style={styles.text}>만든 솨람</Text>
+            <TouchableOpacity
+              style={{...styles.btn, ...styles.row1}}
+              onPress={() => navigation.navigate('credit')}>
+              <Text style={{...styles.text, alignSelf: 'center'}}>
+                만든 솨람
+              </Text>
               <Entypo name={'chevron-thin-right'} style={styles.chevronIcon} />
             </TouchableOpacity>
           </View>
@@ -137,11 +143,12 @@ const styles = StyleSheet.create({
     marginHorizontal: width * 16,
     height: height * 44,
     borderRadius: 14,
+    justifyContent: 'center',
   },
   text: {
     fontSize: scale * 17,
-    marginVertical: height * 11,
     marginLeft: width * 16,
+    justifyContent: 'center',
   },
   chevronIcon: {
     color: '#c4c4c6',

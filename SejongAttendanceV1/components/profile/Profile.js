@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text, Image} from 'react-native';
 import Freshman from '../../assets/images/freshman.svg';
 import Sophomore from '../../assets/images/sophomore.svg';
@@ -6,16 +6,76 @@ import Junior from '../../assets/images/junior.svg';
 import Senior from '../../assets/images/senior.svg';
 import {height, width, scale} from '../../config/globalStyles';
 
+import Config from 'react-native-config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const getStudentId = async setId => {
+  try {
+    const value = await AsyncStorage.getItem(Config.STUDENT_ID_KEY);
+    if (value !== null) {
+      const data = JSON.parse(value);
+      setId(data.id);
+    }
+  } catch (e) {
+    console.log(e.message);
+  }
+};
+
 const Profile = () => {
+  const [id, setId] = useState('');
+  const time = new Date();
+  const year = time.getFullYear();
+  const month = time.getMonth();
+  const day = time.getDay();
+  let semester = '';
+
+  if (month >= 3 && month <= 6) {
+    if (month === 6) {
+      if (day <= 22) {
+        semester = '1';
+      } else {
+        semester = '여름';
+      }
+    } else {
+      semester = '1';
+    }
+  } else if (month >= 7 && month < 9) {
+    semester = '여름';
+  } else if (month >= 9 && month <= 12) {
+    if (month === 12) {
+      if (day <= 22) {
+        semester = '2';
+      } else {
+        semester = '겨울';
+      }
+    } else {
+      semester = '2';
+    }
+  } else if (month >= 1 && month < 3) {
+    semester = '겨울';
+  }
+
+  useEffect(() => {
+    getStudentId(setId);
+  }, []);
+
   return (
     <View style={styles.component}>
       <View style={styles.row}>
         <View style={styles.profileImg}>
-          <Senior width={40} height={40} />
+          {id.substring(0, 2) === String(year).substring(2, 4) ? (
+            <Freshman width={width * 40} height={height * 40} />
+          ) : id.substring(0, 2) === String(year - 1).substring(2, 4) ? (
+            <Sophomore width={width * 40} height={height * 40} />
+          ) : id.substring(0, 2) === String(year - 2).substring(2, 4) ? (
+            <Junior width={width * 40} height={height * 40} />
+          ) : (
+            <Senior width={width * 40} height={height * 40} />
+          )}
         </View>
         <View style={styles.studentInfoContainer}>
-          <Text style={styles.studentID}>18011480</Text>
-          <Text style={styles.semester}>2022학년도 2학기</Text>
+          <Text style={styles.studentID}>{id}</Text>
+          <Text style={styles.semester}>{`${year}학년도 ${semester}학기`}</Text>
         </View>
       </View>
     </View>
@@ -27,24 +87,26 @@ const styles = StyleSheet.create({
     marginHorizontal: width * 16,
     height: height * 77,
     borderRadius: 14,
-    backgroundColor: 'white',
+    backgroundColor: '#ffffff',
     shadowRadius: 4,
     shadowColor: '#000',
     shadowOpacity: 0.05,
     shadowOffset: {height: 2},
+    justifyContent: 'center',
   },
   row: {
     flexDirection: 'row',
-    marginVertical: height * 8.5,
+    alignItems: 'center',
   },
   profileImg: {
     backgroundColor: '#d9d9d9',
-    width: width * 60,
-    height: height * 60,
-    borderRadius: 30,
+    width: scale * 60,
+    height: scale * 60,
+    borderRadius: scale * 50,
     marginLeft: width * 16,
     marginRight: width * 13,
-    padding: scale * 10,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   studentInfoContainer: {
     justifyContent: 'center',
