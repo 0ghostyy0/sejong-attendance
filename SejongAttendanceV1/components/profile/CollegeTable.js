@@ -1,11 +1,12 @@
 import React from 'react';
 import {StyleSheet, ActionSheetIOS} from 'react-native';
-import {Cell} from 'react-native-tableview-simple';
+// import {Cell} from 'react-native-tableview-simple';
+import {Section, Cell} from 'react-native-js-table';
 import {height, width, scale} from '../../config/globalStyles';
 
 const CollegeTable = ({college}) => {
   return (
-    <Cell
+    <Section
       contentContainerStyle={styles.cell}
       cellStyle="Default"
       accessory="None"

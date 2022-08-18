@@ -7,9 +7,12 @@ import {
   StatusBar,
   ScrollView,
 } from 'react-native';
-import {Section, TableView} from 'react-native-tableview-simple';
+//import {Section, TableView} from 'react-native-tableview-simple';
+import Table, {Section} from 'react-native-js-table';
 import CollegeTable from '../../components/profile/CollegeTable';
 import {height, width, scale} from '../../config/globalStyles';
+
+//import colleges from '../../data/college.json';
 
 const AddCollegeScreen = () => {
   const [colleges, setColleges] = useState([]);
@@ -29,13 +32,14 @@ const AddCollegeScreen = () => {
       style={styles.container}>
       <StatusBar barStyle={'light-content'} />
       <View style={styles.innerContainer}>
-        <TableView style={styles.tableview}>
-          <Section roundedCorners={true} hideSurroundingSeparators={true}>
-            {colleges.map(college => (
-              <CollegeTable key={college.id} college={college.college} />
-            ))}
-          </Section>
-        </TableView>
+        <Table
+          style={styles.tableview}
+          // json="colleges"
+          // selectedValue="ES53"
+          // //filter={`country=='${colleges}'`}
+          //tableViewCellStyle={TableView.Consts.CellStyle.Subtitle}
+          //onPress={event => alert(JSON.stringify(event))}
+        />
       </View>
     </ScrollView>
   );

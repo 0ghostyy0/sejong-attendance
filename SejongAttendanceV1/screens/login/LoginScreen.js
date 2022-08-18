@@ -58,7 +58,7 @@ const LoginScreen = ({navigation}) => {
       ]);
     } finally {
       setLoading(false);
-      // navigation.navigate('home');
+      navigation.navigate('home');
     }
   };
 
