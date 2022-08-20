@@ -1,20 +1,35 @@
 import React from 'react';
-import {StyleSheet, ActionSheetIOS} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {Cell} from 'react-native-tableview-simple';
 import {height, width, scale} from '../../config/globalStyles';
 
-const CollegeTable = ({college}) => {
+const CollegeTable = ({id, college, selectedCollege, setSelectedCollege}) => {
   return (
-    <Cell
-      contentContainerStyle={styles.cell}
-      cellStyle="Default"
-      accessory="None"
-      title={college}
-      titleTextStyle={styles.titleText}
-      onPress={() => {
-        <Cell accessory="Checkmark" />;
-      }}
-    />
+    <View>
+      {selectedCollege === id ? (
+        <Cell
+          accessory="Checkmark"
+          contentContainerStyle={styles.cell}
+          cellStyle="Default"
+          title={college}
+          titleTextStyle={styles.titleText}
+          onPress={() => {
+            setSelectedCollege(id);
+          }}
+        />
+      ) : (
+        <Cell
+          accessory="none"
+          contentContainerStyle={styles.cell}
+          cellStyle="Default"
+          title={college}
+          titleTextStyle={styles.titleText}
+          onPress={() => {
+            setSelectedCollege(id);
+          }}
+        />
+      )}
+    </View>
   );
 };
 
