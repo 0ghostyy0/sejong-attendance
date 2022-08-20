@@ -1,30 +1,16 @@
-import React, {useEffect, useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  TouchableOpacity,
-  StatusBar,
-  ScrollView,
-} from 'react-native';
-//import {Section, TableView} from 'react-native-tableview-simple';
-import Table, {Section} from 'react-native-js-table';
+import React, {useState} from 'react';
+import {StyleSheet, View, StatusBar, ScrollView} from 'react-native';
+
+import {TableView, Section} from 'react-native-tableview-simple';
 import CollegeTable from '../../components/profile/CollegeTable';
 import {height, width, scale} from '../../config/globalStyles';
 
-//import colleges from '../../data/college.json';
+import collegesData from '../../data/colleges.json';
 
 const AddCollegeScreen = () => {
-  const [colleges, setColleges] = useState([]);
-  useEffect(() => {
-    setColleges([
-      {id: 0, college: '인문과학대학'},
-      {id: 1, college: '소프트웨어융합대학'},
-      {id: 2, college: '인문과학대학'},
-      {id: 3, college: '소프트웨어융합대학'},
-      {id: 4, college: '인문과학대학'},
-    ]);
-  }, []);
+  const [selectedCollege, setSelectedCollege] = useState(-1);
+  const colleges = collegesData.colleges;
+
   return (
     <ScrollView
       showsVerticalScrollIndicator={false}
@@ -32,14 +18,19 @@ const AddCollegeScreen = () => {
       style={styles.container}>
       <StatusBar barStyle={'light-content'} />
       <View style={styles.innerContainer}>
-        <Table
-          style={styles.tableview}
-          // json="colleges"
-          // selectedValue="ES53"
-          // //filter={`country=='${colleges}'`}
-          //tableViewCellStyle={TableView.Consts.CellStyle.Subtitle}
-          //onPress={event => alert(JSON.stringify(event))}
-        />
+        <TableView style={styles.tableview}>
+          <Section roundedCorners={true} hideSurroundingSeparators={true}>
+            {colleges.map(college => (
+              <CollegeTable
+                key={college.id}
+                id={college.id}
+                college={college.college}
+                selectedCollege={selectedCollege}
+                setSelectedCollege={setSelectedCollege}
+              />
+            ))}
+          </Section>
+        </TableView>
       </View>
     </ScrollView>
   );
