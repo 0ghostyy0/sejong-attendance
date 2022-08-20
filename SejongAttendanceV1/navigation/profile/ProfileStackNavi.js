@@ -1,12 +1,15 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {Button} from 'react-native';
+import {scale} from '../../config/globalStyles';
+
 import AddCourseScreen from '../../screens/profile/AddCourseScreen';
 import ProfileScreen from '../../screens/profile/ProfileScreen';
 import AddCollegeScreen from '../../screens/profile/AddCollegeScreen';
 import AddDeptScreen from '../../screens/profile/AddDeptScreen';
 import CreditScreen from '../../screens/profile/CreditScreen';
-import {Button} from 'react-native';
-import {scale} from '../../config/globalStyles';
+
+import CourseAddStorage from '../../components/profile/CourseAddStorage';
 
 const Stack = createNativeStackNavigator();
 
@@ -41,7 +44,15 @@ const ProfileStackNavi = ({navigation}) => {
                 }}
               />
             ),
-            headerRight: () => <Button title="추가" />,
+            headerRight: () => (
+              <Button
+                title="추가"
+                onPress={() => {
+                  CourseAddStorage();
+                  navigation.navigate('마이페이지');
+                }}
+              />
+            ),
           }}
         />
         <Stack.Screen

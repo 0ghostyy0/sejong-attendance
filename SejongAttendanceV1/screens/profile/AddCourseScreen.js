@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {
   StyleSheet,
   View,
@@ -7,11 +7,16 @@ import {
   ScrollView,
   ScrollViewBase,
   TouchableOpacity,
+  Button,
 } from 'react-native';
 import CourseAddSelect from '../../components/profile/CourseAddSelect';
 import CourseAddView from '../../components/profile/CourseAddView';
 
 const AddCourseScreen = ({navigation}) => {
+  const [courseName, setCourseName] = useState('');
+  const [courseNum, setCourseNum] = useState('');
+  const [courseClass, setCourseClass] = useState('');
+
   return (
     <ScrollView
       style={{backgroundColor: '#f2f2f6'}}
@@ -24,18 +29,21 @@ const AddCourseScreen = ({navigation}) => {
           containerName={'과목명'}
           containerPlaceholder={'과목 이름'}
           footer={null}
+          inputOnChange={setCourseName}
         />
         <CourseAddView
           header={'학수번호'}
           containerName={'학수번호'}
           containerPlaceholder={'012345'}
           footer={'여섯자리 학수번호를 입력해주세요.'}
+          inputOnChange={setCourseNum}
         />
         <CourseAddView
           header={'분반'}
           containerName={'분반'}
-          containerPlaceholder={'012'}
+          containerPlaceholder={'001'}
           footer={'세자리 분반 번호를 입력해주세요.'}
+          inputOnChange={setCourseClass}
         />
         <CourseAddSelect
           header={'단과대학'}
