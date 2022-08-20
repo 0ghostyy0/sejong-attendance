@@ -58,14 +58,14 @@ const LoginScreen = ({navigation}) => {
       ]);
     } finally {
       setLoading(false);
-      // navigation.navigate('home');
+      navigation.navigate('home'); // todo: disable on release
     }
   };
 
-  const storeStudentId = () => {
+  const storeStudentId = async () => {
     try {
       const value = JSON.stringify({id: id});
-      AsyncStorage.setItem(Config.STUDENT_ID_KEY, value);
+      await AsyncStorage.setItem(Config.STUDENT_ID_KEY, value);
     } catch (error) {
       Alert.alert('내부 오류', '죄송합니다.\n로그인을 다시 시도해주세요.', [
         {
