@@ -15,7 +15,6 @@ const CourseAddSelect = ({header, collegeName, footer, navi, navigation}) => {
         <Text style={styles.collegeName}>{collegeName}</Text>
         <Entypo name={'chevron-thin-right'} style={styles.chevronIcon} />
       </TouchableOpacity>
-      {console.log(footer)}
       {footer === null ? null : <Text style={styles.footer}>{footer}</Text>}
     </View>
   );

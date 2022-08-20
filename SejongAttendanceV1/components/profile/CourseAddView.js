@@ -1,4 +1,5 @@
-import React from 'react';
+import {BottomTabBarHeightCallbackContext} from '@react-navigation/bottom-tabs';
+import React, {useState} from 'react';
 import {StyleSheet, View, Text, TextInput} from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 
@@ -7,7 +8,9 @@ const CourseAddView = ({
   containerName,
   containerPlaceholder,
   footer,
+  inputOnChange,
 }) => {
+  const [inputValue, setInputValue] = useState('');
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{header}</Text>
@@ -17,9 +20,13 @@ const CourseAddView = ({
           style={styles.courseInput}
           autoCapitalize={'false'}
           autoComplete={'false'}
-          placeholder={containerPlaceholder}></TextInput>
+          placeholder={containerPlaceholder}
+          onChangeText={inputValue => {
+            setInputValue(inputValue);
+            inputOnChange(inputValue);
+          }}
+        />
       </View>
-      {console.log(footer)}
       {footer === null ? null : <Text style={styles.footer}>{footer}</Text>}
     </View>
   );
@@ -52,6 +59,7 @@ const styles = StyleSheet.create({
   courseInput: {
     marginLeft: width * 10,
     fontSize: scale * 17,
+    width: width * 250,
   },
   footer: {
     fontSize: scale * 12,
