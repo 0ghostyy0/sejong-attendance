@@ -18,7 +18,7 @@ const CourseAddView = ({
         <Text style={styles.courseName}>{containerName}</Text>
         <TextInput
           style={styles.courseInput}
-          autoCapitalize={'false'}
+          autoCapitalize="none"
           autoComplete={'false'}
           placeholder={containerPlaceholder}
           onChangeText={inputValue => {
