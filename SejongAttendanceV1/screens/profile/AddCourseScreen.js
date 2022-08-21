@@ -29,7 +29,7 @@ const AddCourseScreen = ({navigation}) => {
       style={{backgroundColor: '#f2f2f6'}}
       showsVerticalScrollIndicator={false}
       alwaysBounceVertical={false}>
-      <StatusBar barStyle={'light-content'}></StatusBar>
+      <StatusBar barStyle={'light-content'} />
       <View style={styles.container}>
         <CourseAddView
           header={'과목이름'}

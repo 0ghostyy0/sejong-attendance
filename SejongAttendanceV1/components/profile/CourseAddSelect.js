@@ -3,16 +3,33 @@ import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 import Entypo from 'react-native-vector-icons/Entypo';
 
-const CourseAddSelect = ({header, collegeName, footer, navi, navigation}) => {
+const CourseAddSelect = ({
+  header,
+  collegeName,
+  footer,
+  navi,
+  navigation,
+  selected,
+  selectedCollegeId,
+  setSelectedCollegeId,
+}) => {
   return (
     <View style={styles.container}>
       <Text style={styles.header}>{header}</Text>
       <TouchableOpacity
         style={styles.boxContainer}
         onPress={() => {
-          navigation.navigate(navi);
+          navigation.navigate(navi, {
+            name: [selected, selectedCollegeId, setSelectedCollegeId],
+          });
         }}>
-        <Text style={styles.collegeName}>{collegeName}</Text>
+        {collegeName === '선택하기...' ? (
+          <Text style={{...styles.collegeNameBefore, ...styles.collegeName}}>
+            {collegeName}
+          </Text>
+        ) : (
+          <Text style={styles.collegeName}>{collegeName}</Text>
+        )}
         <Entypo name={'chevron-thin-right'} style={styles.chevronIcon} />
       </TouchableOpacity>
       {footer === null ? null : <Text style={styles.footer}>{footer}</Text>}
@@ -43,6 +60,8 @@ const styles = StyleSheet.create({
   collegeName: {
     marginLeft: width * 16,
     fontSize: scale * 17,
+  },
+  collegeNameBefore: {
     color: '#007afe',
   },
   courseInput: {

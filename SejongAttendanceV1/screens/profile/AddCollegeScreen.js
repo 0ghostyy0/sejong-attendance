@@ -7,7 +7,7 @@ import {height, width, scale} from '../../config/globalStyles';
 
 import collegesData from '../../data/colleges.json';
 
-const AddCollegeScreen = () => {
+const AddCollegeScreen = ({navigation, route}) => {
   const [selectedCollege, setSelectedCollege] = useState(-1);
   const colleges = collegesData.colleges;
 
@@ -39,14 +39,15 @@ const AddCollegeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f2f2f6',
+    marginTop: height * 18,
+    marginBottom: height * 20,
   },
   innerContainer: {
     alignItems: 'center',
   },
   tableview: {
     width: width * 358,
-    // alignSelf: 'center',
-    marginTop: height * 18,
+    alignSelf: 'center',
   },
 });
 
