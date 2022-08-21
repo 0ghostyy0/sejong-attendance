@@ -9,14 +9,21 @@ import {
   TouchableOpacity,
   Button,
 } from 'react-native';
+import {connect} from 'react-redux';
+// import {setCourseName, setCourseNum, setCourseClass} from '../../redux/action';
+
 import CourseAddSelect from '../../components/profile/CourseAddSelect';
 import CourseAddView from '../../components/profile/CourseAddView';
 
-const AddCourseScreen = ({navigation}) => {
-  const [courseName, setCourseName] = useState('');
-  const [courseNum, setCourseNum] = useState('');
-  const [courseClass, setCourseClass] = useState('');
+const mapStateToProps = state => ({
+  courseName: state.courseName,
+  courseNum: state.courseNum,
+  courseClass: state.courseClass,
+  // courseCollege: state.courseCollege,
+  // courseDept: state.courseDept,
+});
 
+const AddCourseScreen = ({navigation}) => {
   return (
     <ScrollView
       style={{backgroundColor: '#f2f2f6'}}
@@ -29,21 +36,21 @@ const AddCourseScreen = ({navigation}) => {
           containerName={'과목명'}
           containerPlaceholder={'과목 이름'}
           footer={null}
-          inputOnChange={setCourseName}
+          inputTextType={'name'}
         />
         <CourseAddView
           header={'학수번호'}
           containerName={'학수번호'}
           containerPlaceholder={'012345'}
           footer={'여섯자리 학수번호를 입력해주세요.'}
-          inputOnChange={setCourseNum}
+          inputTextType={'number'}
         />
         <CourseAddView
           header={'분반'}
           containerName={'분반'}
           containerPlaceholder={'001'}
           footer={'세자리 분반 번호를 입력해주세요.'}
-          inputOnChange={setCourseClass}
+          inputTextType={'class'}
         />
         <CourseAddSelect
           header={'단과대학'}
@@ -74,4 +81,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddCourseScreen;
+export default connect(mapStateToProps)(AddCourseScreen);
