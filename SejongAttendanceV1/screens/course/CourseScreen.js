@@ -1,11 +1,12 @@
 import React from 'react';
-import {View, Text, StyleSheet, ScrollView} from 'react-native';
+import {View, Text, StyleSheet, ScrollView, StatusBar} from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 import CourseCard from '../../components/course/CourseCard';
 
 const CourseScreen = () => {
   return (
     <View style={styles.container}>
+      <StatusBar barStyle={'dark-content'} />
       <View>
         <Text style={styles.title}>데이터베이스</Text>
         <Text style={styles.semiTitle}>009959-001</Text>

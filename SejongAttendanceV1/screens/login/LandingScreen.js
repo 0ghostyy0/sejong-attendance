@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, TouchableOpacity, Image} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  Image,
+  StatusBar,
+} from 'react-native';
 import LandingLogo from '../../assets/images/landing_logo.svg';
 import LogoText from '../../assets/images/logo_text.svg';
 import SejongLogo from '../../assets/images/sejong_logo.png';
@@ -8,6 +15,7 @@ import {height, width, scale} from '../../config/globalStyles';
 const LandingScreen = ({navigation}) => {
   return (
     <View styles={styles.container}>
+      <StatusBar barStyle={'dark-content'} />
       <View style={styles.logo}>
         <LandingLogo
           style={styles.landing_logo}

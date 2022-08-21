@@ -16,7 +16,7 @@ const AddCollegeScreen = () => {
       showsVerticalScrollIndicator={false}
       alwaysBounceVertical={false}
       style={styles.container}>
-      <StatusBar barStyle={'light-content'} />
+      <StatusBar barStyle={'dark-content'} />
       <View style={styles.innerContainer}>
         <TableView style={styles.tableview}>
           <Section roundedCorners={true} hideSurroundingSeparators={true}>
