@@ -6,14 +6,19 @@ import {
   TouchableOpacity,
   ScrollView,
   SafeAreaView,
+  ActionSheetIOS,
 } from 'react-native';
 import {Section, TableView} from 'react-native-tableview-simple';
+import RNExitApp from 'react-native-exit-app';
 import Profile from '../../components/profile/Profile';
 import {height, width, scale} from '../../config/globalStyles';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
 import CourseTable from '../../components/profile/CourseTable';
+
+import Config from 'react-native-config';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ProfileScreen = ({navigation}) => {
   const [courses, setCourses] = useState([]);
@@ -29,6 +34,15 @@ const ProfileScreen = ({navigation}) => {
       {course: '무선통신', course_num: '009959-001'},
     ]);
   }, []);
+
+  const removeStudent = async () => {
+    try {
+      await AsyncStorage.removeItem(Config.STUDENT_ID_KEY);
+      console.log('삭제 완료');
+    } catch (e) {
+      console.log('삭제 실패');
+    }
+  };
 
   return (
     <SafeAreaView>
@@ -77,7 +91,24 @@ const ProfileScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
           <View style={styles.margin2}>
-            <TouchableOpacity style={styles.btn}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => {
+                ActionSheetIOS.showActionSheetWithOptions(
+                  {
+                    options: ['취소', '계정 삭제하기'],
+                    destructiveButtonIndex: 1,
+                    cancelButtonIndex: 0,
+                    title: `저장된 데이터가 모두 삭제됩니다.\n계정을 삭제하시겠습니까?`,
+                  },
+                  buttonIndex => {
+                    if (buttonIndex === 1) {
+                      removeStudent();
+                      RNExitApp.exitApp();
+                    }
+                  },
+                );
+              }}>
               <Text style={{...styles.text, color: '#eb5828'}}>
                 계정 삭제하기
               </Text>
