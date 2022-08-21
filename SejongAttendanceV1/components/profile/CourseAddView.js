@@ -49,7 +49,8 @@ const CourseAddView = ({
         <TextInput
           style={styles.courseInput}
           autoCapitalize="none"
-          autoComplete={'false'}
+          autoComplete="off"
+          autoCorrect={false}
           placeholder={containerPlaceholder}
           onChangeText={inputValue => {
             setInputValue(inputValue);
