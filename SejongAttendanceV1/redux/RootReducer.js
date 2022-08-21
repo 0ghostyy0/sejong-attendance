@@ -2,8 +2,10 @@ const initialState = {
   courseName: '',
   courseNum: '',
   courseClass: '',
-  courseCollege: '',
-  courseDept: '',
+  courseCollege: -1,
+  courseDept: -1,
+  courseCollegeName: '선택하기...',
+  courseDeptName: '선택하기...',
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -26,12 +28,22 @@ const rootReducer = (state = initialState, action) => {
     case 'SET_COURSE_COLLEGE':
       return {
         ...state,
-        courseCollege: state.courseCollege,
+        courseCollege: action.payload,
       };
     case 'SET_COURSE_DEPT':
       return {
         ...state,
-        courseDept: state.courseDept,
+        courseDept: action.payload,
+      };
+    case 'SET_COURSE_COLLEGE_NAME':
+      return {
+        ...state,
+        courseCollegeName: action.payload,
+      };
+    case 'SET_COURSE_DEPT_NAME':
+      return {
+        ...state,
+        courseDeptName: action.payload,
       };
     default:
       return state;

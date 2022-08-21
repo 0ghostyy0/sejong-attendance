@@ -22,3 +22,13 @@ export const setCourseDept = data => ({
   type: 'SET_COURSE_DEPT',
   payload: data,
 });
+
+export const setCourseCollegeName = data => ({
+  type: 'SET_COURSE_COLLEGE_NAME',
+  payload: data,
+});
+
+export const setCourseDeptName = data => ({
+  type: 'SET_COURSE_DEPT_NAME',
+  payload: data,
+});
