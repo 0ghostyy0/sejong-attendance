@@ -1,15 +1,40 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, StatusBar, ScrollView} from 'react-native';
 
 import {TableView, Section} from 'react-native-tableview-simple';
 import CollegeTable from '../../components/profile/CollegeTable';
-import {height, width, scale} from '../../config/globalStyles';
-
+import {height, width} from '../../config/globalStyles';
+//Redux
+import {connect} from 'react-redux';
+import {setCourseDept, setCourseDeptName} from '../../redux/Actions';
+//Data
 import collegesData from '../../data/colleges.json';
 
-const AddCollegeScreen = ({navigation, route}) => {
-  const [selectedDept, setSelectedDept] = useState(-1);
-  const depts = collegesData.colleges[route.params.name[1]].depts;
+const mapStateToProps = state => ({
+  courseDept: state.courseDept,
+  courseDeptName: state.courseDeptName,
+  courseCollege: state.courseCollege,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setCourseDept: dept => dispatch(setCourseDept(dept)),
+  setCourseDeptName: deptName => dispatch(setCourseDeptName(deptName)),
+});
+
+const AddDeptScreen = ({
+  navigation,
+  route,
+  setCourseDept,
+  setCourseDeptName,
+  courseCollege,
+}) => {
+  const [selectedValue, setSelectedValue] = useState(-1);
+  const [selectedDeptName, setSelectedDeptName] = useState('');
+  const depts = collegesData.colleges[courseCollege].depts;
+  useEffect(() => {
+    setCourseDept(selectedValue);
+    setCourseDeptName(selectedDeptName);
+  }, [setCourseDeptName, setCourseDept, selectedValue, selectedDeptName]);
 
   return (
     <ScrollView
@@ -25,10 +50,9 @@ const AddCollegeScreen = ({navigation, route}) => {
                 key={dept.dept_id}
                 id={dept.dept_id}
                 college={dept.dept}
-                selectedCollege={selectedDept}
-                setSelectedCollege={setSelectedDept}
-                selected={route.params.name[0]}
-                setSelectedCollegeId={route.params.name[2]}
+                selectedCollege={selectedValue}
+                setSelectedCollege={setSelectedValue}
+                setSelectedCollegeName={setSelectedDeptName}
               />
             ))}
           </Section>
@@ -53,4 +77,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddCollegeScreen;
+export default connect(mapStateToProps, mapDispatchToProps)(AddDeptScreen);

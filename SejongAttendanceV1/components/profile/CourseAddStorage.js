@@ -1,7 +1,16 @@
 import React, {useState} from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {connect} from 'react-redux';
 
 let courseData = [];
+
+const mapStateToProps = state => ({
+  courseName: state.courseName,
+  courseNum: state.courseNum,
+  courseClass: state.courseClass,
+  // courseCollege: state.courseCollege,
+  // courseDept: state.courseDept,
+});
 
 const pushCourseToStorage = (courseName, courseClass, courseNum) => {
   let singleCourseData = `{"name": "${courseName}", "courseid": "${courseNum}", "classid": "${courseClass}"}`;
@@ -21,4 +30,4 @@ const CourseAddStorage = async () => {
   }
 };
 
-export default CourseAddStorage;
+export default connect(mapStateToProps)(CourseAddStorage);

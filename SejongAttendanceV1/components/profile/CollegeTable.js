@@ -8,8 +8,8 @@ const CollegeTable = ({
   college,
   selectedCollege,
   setSelectedCollege,
-  selected,
   setSelectedCollegeId,
+  setSelectedCollegeName,
 }) => {
   return (
     <View>
@@ -22,9 +22,10 @@ const CollegeTable = ({
           titleTextStyle={styles.titleText}
           onPress={() => {
             setSelectedCollege(id);
-            selected(college);
+            setSelectedCollegeName(college);
             if (setSelectedCollegeId != null) {
               setSelectedCollegeId(id);
+              setSelectedCollegeName(college);
             }
           }}
           ItemSeparatorComponent={({highlighted}) => (
@@ -40,9 +41,10 @@ const CollegeTable = ({
           titleTextStyle={styles.titleText}
           onPress={() => {
             setSelectedCollege(id);
-            selected(college);
+            setSelectedCollegeName(college);
             if (setSelectedCollegeId != null) {
               setSelectedCollegeId(id);
+              setSelectedCollegeName(college);
             }
           }}
           ItemSeparatorComponent={() => <Separator />}

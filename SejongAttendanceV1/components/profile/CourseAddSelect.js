@@ -3,38 +3,71 @@ import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 import Entypo from 'react-native-vector-icons/Entypo';
 
+import {connect} from 'react-redux';
+
+const mapStateToProps = state => ({
+  courseCollege: state.courseCollege,
+  courseDept: state.courseDept,
+  courseCollegeName: state.courseCollegeName,
+  courseDeptName: state.courseDeptName,
+});
+
 const CourseAddSelect = ({
   header,
   collegeName,
   footer,
   navi,
   navigation,
-  selected,
-  selectedCollegeId,
-  setSelectedCollegeId,
+  selectType,
+  courseCollege,
+  courseDept,
+  courseCollegeName,
+  courseDeptName,
 }) => {
-  return (
-    <View style={styles.container}>
-      <Text style={styles.header}>{header}</Text>
-      <TouchableOpacity
-        style={styles.boxContainer}
-        onPress={() => {
-          navigation.navigate(navi, {
-            name: [selected, selectedCollegeId, setSelectedCollegeId],
-          });
-        }}>
-        {collegeName === '선택하기...' ? (
-          <Text style={{...styles.collegeNameBefore, ...styles.collegeName}}>
-            {collegeName}
-          </Text>
-        ) : (
-          <Text style={styles.collegeName}>{collegeName}</Text>
-        )}
-        <Entypo name={'chevron-thin-right'} style={styles.chevronIcon} />
-      </TouchableOpacity>
-      {footer === null ? null : <Text style={styles.footer}>{footer}</Text>}
-    </View>
-  );
+  if (selectType === 'college') {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.header}>{header}</Text>
+        <TouchableOpacity
+          style={styles.boxContainer}
+          onPress={() => {
+            navigation.navigate(navi);
+          }}>
+          {courseCollegeName === '선택하기...' ? (
+            <Text style={{...styles.collegeNameBefore, ...styles.collegeName}}>
+              {courseCollegeName}
+            </Text>
+          ) : (
+            <Text style={styles.collegeName}>{courseCollegeName}</Text>
+          )}
+          <Entypo name={'chevron-thin-right'} style={styles.chevronIcon} />
+        </TouchableOpacity>
+        {footer === null ? null : <Text style={styles.footer}>{footer}</Text>}
+      </View>
+    );
+  } else {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.header}>{header}</Text>
+        <TouchableOpacity
+          style={styles.boxContainer}
+          onPress={() => {
+            navigation.navigate(navi);
+          }}
+          disabled={courseCollege === -1 ? true : false}>
+          {courseDeptName === '선택하기...' ? (
+            <Text style={{...styles.collegeNameBefore, ...styles.collegeName}}>
+              {courseDeptName}
+            </Text>
+          ) : (
+            <Text style={styles.collegeName}>{courseDeptName}</Text>
+          )}
+          <Entypo name={'chevron-thin-right'} style={styles.chevronIcon} />
+        </TouchableOpacity>
+        {footer === null ? null : <Text style={styles.footer}>{footer}</Text>}
+      </View>
+    );
+  }
 };
 const styles = StyleSheet.create({
   container: {
@@ -82,4 +115,4 @@ const styles = StyleSheet.create({
     marginRight: width * 16,
   },
 });
-export default CourseAddSelect;
+export default connect(mapStateToProps)(CourseAddSelect);

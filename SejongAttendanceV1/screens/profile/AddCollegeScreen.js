@@ -1,15 +1,43 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, StatusBar, ScrollView} from 'react-native';
-
 import {TableView, Section} from 'react-native-tableview-simple';
 import CollegeTable from '../../components/profile/CollegeTable';
 import {height, width, scale} from '../../config/globalStyles';
-
+//Redux
+import {connect} from 'react-redux';
+import {setCourseCollege, setCourseCollegeName} from '../../redux/Actions';
+//Data
 import collegesData from '../../data/colleges.json';
 
-const AddCollegeScreen = ({navigation, route}) => {
-  const [selectedCollege, setSelectedCollege] = useState(-1);
+const mapStateToProps = state => ({
+  courseCollege: state.courseCollege,
+  courseCollegeName: state.courseCollegeName,
+});
+
+const mapDispatchToProps = dispatch => ({
+  setCourseCollege: college => dispatch(setCourseCollege(college)),
+  setCourseCollegeName: collegeName =>
+    dispatch(setCourseCollegeName(collegeName)),
+});
+
+const AddCollegeScreen = ({
+  navigation,
+  route,
+  setCourseCollege,
+  setCourseCollegeName,
+}) => {
+  const [selectedValue, setSelectedValue] = useState(-1);
+  const [selectedCollegeName, setSelectedCollegeName] = useState('');
   const colleges = collegesData.colleges;
+  useEffect(() => {
+    setCourseCollege(selectedValue);
+    setCourseCollegeName(selectedCollegeName);
+  }, [
+    setCourseCollegeName,
+    selectedCollegeName,
+    setCourseCollege,
+    selectedValue,
+  ]);
 
   return (
     <ScrollView
@@ -25,8 +53,9 @@ const AddCollegeScreen = ({navigation, route}) => {
                 key={college.id}
                 id={college.id}
                 college={college.college}
-                selectedCollege={selectedCollege}
-                setSelectedCollege={setSelectedCollege}
+                selectedCollege={selectedValue}
+                setSelectedCollege={setSelectedValue}
+                setSelectedCollegeName={setSelectedCollegeName}
               />
             ))}
           </Section>
@@ -51,4 +80,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddCollegeScreen;
+export default connect(mapStateToProps, mapDispatchToProps)(AddCollegeScreen);
