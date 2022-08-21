@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
   SafeAreaView,
+  StatusBar,
   ActionSheetIOS,
 } from 'react-native';
 import {Section, TableView} from 'react-native-tableview-simple';
@@ -49,6 +50,7 @@ const ProfileScreen = ({navigation}) => {
       <ScrollView
         showsVerticalScrollIndicator={false}
         alwaysBounceVertical={false}>
+        <StatusBar barStyle={'dark-content'} />
         <View style={styles.container}>
           <Profile />
           <View style={styles.row1}>

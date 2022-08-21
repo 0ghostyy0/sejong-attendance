@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Linking,
   Alert,
+  StatusBar,
 } from 'react-native';
 import LoginText from '../../components/login/LoginText';
 import axios from 'axios';
@@ -78,6 +79,7 @@ const LoginScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle={'dark-content'} />
       <Text style={styles.title}>포탈 계정으로 로그인</Text>
       <LoginText
         header={'학번'}

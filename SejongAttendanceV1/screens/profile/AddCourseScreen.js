@@ -1,16 +1,29 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, StatusBar, ScrollView} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  StatusBar,
+  ScrollView,
+  ScrollViewBase,
+  TouchableOpacity,
+  Button,
+} from 'react-native';
+import {connect} from 'react-redux';
+// import {setCourseName, setCourseNum, setCourseClass} from '../../redux/action';
+
 import CourseAddSelect from '../../components/profile/CourseAddSelect';
 import CourseAddView from '../../components/profile/CourseAddView';
 
-const AddCourseScreen = ({navigation}) => {
-  const [courseName, setCourseName] = useState('');
-  const [courseNum, setCourseNum] = useState('');
-  const [courseClass, setCourseClass] = useState('');
-  const [courseCollege, setCourseCollege] = useState('선택하기...');
-  const [courseDept, setCourseDept] = useState('선택하기...');
-  const [courseCollegeId, setCourseCollegeId] = useState(-1);
+const mapStateToProps = state => ({
+  courseName: state.courseName,
+  courseNum: state.courseNum,
+  courseClass: state.courseClass,
+  // courseCollege: state.courseCollege,
+  // courseDept: state.courseDept,
+});
 
+const AddCourseScreen = ({navigation}) => {
   return (
     <ScrollView
       style={{backgroundColor: '#f2f2f6'}}
@@ -23,45 +36,39 @@ const AddCourseScreen = ({navigation}) => {
           containerName={'과목명'}
           containerPlaceholder={'과목 이름'}
           footer={null}
-          inputOnChange={setCourseName}
+          inputTextType={'name'}
         />
         <CourseAddView
           header={'학수번호'}
           containerName={'학수번호'}
           containerPlaceholder={'012345'}
           footer={'여섯자리 학수번호를 입력해주세요.'}
-          inputOnChange={setCourseNum}
+          inputTextType={'number'}
         />
         <CourseAddView
           header={'분반'}
           containerName={'분반'}
           containerPlaceholder={'001'}
           footer={'세자리 분반 번호를 입력해주세요.'}
-          inputOnChange={setCourseClass}
+          inputTextType={'class'}
         />
         <CourseAddSelect
           header={'단과대학'}
-          collegeName={courseCollege}
+          collegeName={'선택하기...'}
           footer={
             '해당 과목의 주관 단과대학을 입력해주세요.\n예) 동양고전강독 - 대양휴머니티칼리지'
           }
           navi={'addcollege'}
           navigation={navigation}
-          selected={setCourseCollege}
-          selectedCollegeId={null}
-          setSelectedCollegeId={setCourseCollegeId}
         />
         <CourseAddSelect
           header={'학과'}
-          collegeName={courseDept}
+          collegeName={'선택하기...'}
           footer={
             '해당 과목의 주관 학과를 입력해주세요.\n예) C프로그래밍 - 컴퓨터공학과\n*대양휴머니티칼리지는 단과대학과 학과의 명칭이 동일합니다.'
           }
           navi={'adddept'}
           navigation={navigation}
-          selected={setCourseDept}
-          selectedCollegeId={courseCollegeId}
-          setSelectedCollegeId={null}
         />
       </View>
     </ScrollView>
@@ -74,4 +81,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddCourseScreen;
+export default connect(mapStateToProps)(AddCourseScreen);

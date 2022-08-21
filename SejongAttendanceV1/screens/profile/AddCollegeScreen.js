@@ -16,8 +16,8 @@ const AddCollegeScreen = ({navigation, route}) => {
       showsVerticalScrollIndicator={false}
       alwaysBounceVertical={false}
       style={styles.container}>
-      <StatusBar barStyle={'light-content'} />
-      <View>
+      <StatusBar barStyle={'dark-content'} />
+      <View style={styles.innerContainer}>
         <TableView style={styles.tableview}>
           <Section roundedCorners={true} hideSurroundingSeparators={true}>
             {colleges.map(college => (
@@ -27,8 +27,6 @@ const AddCollegeScreen = ({navigation, route}) => {
                 college={college.college}
                 selectedCollege={selectedCollege}
                 setSelectedCollege={setSelectedCollege}
-                selected={route.params.name[0]}
-                setSelectedCollegeId={route.params.name[2]}
               />
             ))}
           </Section>

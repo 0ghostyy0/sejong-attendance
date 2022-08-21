@@ -50,6 +50,7 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   // UIView *rootView = RCTAppSetupDefaultRootView(bridge, @"SejongAttendanceV1", initProps);
   UIView *rootView = [self.reactDelegate createRootViewWithBridge:bridge moduleName:@"SejongAttendanceV1" initialProperties:nil];
   if (@available(iOS 13.0, *)) {
+    rootView.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     rootView.backgroundColor = [UIColor systemBackgroundColor];
   } else {
     rootView.backgroundColor = [UIColor whiteColor];
