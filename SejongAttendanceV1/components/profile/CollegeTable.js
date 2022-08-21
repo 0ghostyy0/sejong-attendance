@@ -1,9 +1,16 @@
-import React from 'react';
-import {StyleSheet, View} from 'react-native';
-import {Cell} from 'react-native-tableview-simple';
+import React, {useState} from 'react';
+import {ScrollView, StyleSheet, View} from 'react-native';
+import {Cell, Separator} from 'react-native-tableview-simple';
 import {height, width, scale} from '../../config/globalStyles';
 
-const CollegeTable = ({id, college, selectedCollege, setSelectedCollege}) => {
+const CollegeTable = ({
+  id,
+  college,
+  selectedCollege,
+  setSelectedCollege,
+  selected,
+  setSelectedCollegeId,
+}) => {
   return (
     <View>
       {selectedCollege === id ? (
@@ -15,7 +22,14 @@ const CollegeTable = ({id, college, selectedCollege, setSelectedCollege}) => {
           titleTextStyle={styles.titleText}
           onPress={() => {
             setSelectedCollege(id);
+            selected(college);
+            if (setSelectedCollegeId != null) {
+              setSelectedCollegeId(id);
+            }
           }}
+          ItemSeparatorComponent={({highlighted}) => (
+            <Separator isHidden={highlighted} />
+          )}
         />
       ) : (
         <Cell
@@ -26,7 +40,12 @@ const CollegeTable = ({id, college, selectedCollege, setSelectedCollege}) => {
           titleTextStyle={styles.titleText}
           onPress={() => {
             setSelectedCollege(id);
+            selected(college);
+            if (setSelectedCollegeId != null) {
+              setSelectedCollegeId(id);
+            }
           }}
+          ItemSeparatorComponent={() => <Separator />}
         />
       )}
     </View>
@@ -35,7 +54,8 @@ const CollegeTable = ({id, college, selectedCollege, setSelectedCollege}) => {
 
 const styles = StyleSheet.create({
   cell: {
-    marginVertical: height * 2,
+    //marginVertical: height * 2,
+    //height: height * 47,
   },
   titleText: {
     fontSize: scale * 17,

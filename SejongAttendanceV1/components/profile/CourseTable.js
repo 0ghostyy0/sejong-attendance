@@ -37,6 +37,7 @@ const CourseTable = ({course, course_num}) => {
 const styles = StyleSheet.create({
   cell: {
     marginVertical: height * 8,
+    //height: height * 59,
   },
   titleText: {
     fontSize: scale * 17,

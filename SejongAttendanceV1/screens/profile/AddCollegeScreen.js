@@ -7,7 +7,7 @@ import {height, width, scale} from '../../config/globalStyles';
 
 import collegesData from '../../data/colleges.json';
 
-const AddCollegeScreen = () => {
+const AddCollegeScreen = ({navigation, route}) => {
   const [selectedCollege, setSelectedCollege] = useState(-1);
   const colleges = collegesData.colleges;
 
@@ -17,7 +17,7 @@ const AddCollegeScreen = () => {
       alwaysBounceVertical={false}
       style={styles.container}>
       <StatusBar barStyle={'light-content'} />
-      <View style={styles.innerContainer}>
+      <View>
         <TableView style={styles.tableview}>
           <Section roundedCorners={true} hideSurroundingSeparators={true}>
             {colleges.map(college => (
@@ -27,6 +27,8 @@ const AddCollegeScreen = () => {
                 college={college.college}
                 selectedCollege={selectedCollege}
                 setSelectedCollege={setSelectedCollege}
+                selected={route.params.name[0]}
+                setSelectedCollegeId={route.params.name[2]}
               />
             ))}
           </Section>
@@ -39,14 +41,15 @@ const AddCollegeScreen = () => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f2f2f6',
+    marginTop: height * 18,
+    marginBottom: height * 20,
   },
   innerContainer: {
     alignItems: 'center',
   },
   tableview: {
     width: width * 358,
-    // alignSelf: 'center',
-    marginTop: height * 18,
+    alignSelf: 'center',
   },
 });
 

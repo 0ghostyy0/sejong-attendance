@@ -1,14 +1,5 @@
 import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  StatusBar,
-  ScrollView,
-  ScrollViewBase,
-  TouchableOpacity,
-  Button,
-} from 'react-native';
+import {StyleSheet, View, StatusBar, ScrollView} from 'react-native';
 import CourseAddSelect from '../../components/profile/CourseAddSelect';
 import CourseAddView from '../../components/profile/CourseAddView';
 
@@ -16,13 +7,16 @@ const AddCourseScreen = ({navigation}) => {
   const [courseName, setCourseName] = useState('');
   const [courseNum, setCourseNum] = useState('');
   const [courseClass, setCourseClass] = useState('');
+  const [courseCollege, setCourseCollege] = useState('선택하기...');
+  const [courseDept, setCourseDept] = useState('선택하기...');
+  const [courseCollegeId, setCourseCollegeId] = useState(-1);
 
   return (
     <ScrollView
       style={{backgroundColor: '#f2f2f6'}}
       showsVerticalScrollIndicator={false}
       alwaysBounceVertical={false}>
-      <StatusBar barStyle={'light-content'}></StatusBar>
+      <StatusBar barStyle={'light-content'} />
       <View style={styles.container}>
         <CourseAddView
           header={'과목이름'}
@@ -47,21 +41,27 @@ const AddCourseScreen = ({navigation}) => {
         />
         <CourseAddSelect
           header={'단과대학'}
-          collegeName={'선택하기...'}
+          collegeName={courseCollege}
           footer={
             '해당 과목의 주관 단과대학을 입력해주세요.\n예) 동양고전강독 - 대양휴머니티칼리지'
           }
           navi={'addcollege'}
           navigation={navigation}
+          selected={setCourseCollege}
+          selectedCollegeId={null}
+          setSelectedCollegeId={setCourseCollegeId}
         />
         <CourseAddSelect
           header={'학과'}
-          collegeName={'선택하기...'}
+          collegeName={courseDept}
           footer={
             '해당 과목의 주관 학과를 입력해주세요.\n예) C프로그래밍 - 컴퓨터공학과\n*대양휴머니티칼리지는 단과대학과 학과의 명칭이 동일합니다.'
           }
           navi={'adddept'}
           navigation={navigation}
+          selected={setCourseDept}
+          selectedCollegeId={courseCollegeId}
+          setSelectedCollegeId={null}
         />
       </View>
     </ScrollView>
