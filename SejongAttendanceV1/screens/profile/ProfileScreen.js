@@ -9,32 +9,41 @@ import {
   StatusBar,
   ActionSheetIOS,
 } from 'react-native';
-import {Section, TableView} from 'react-native-tableview-simple';
 import RNExitApp from 'react-native-exit-app';
 import Profile from '../../components/profile/Profile';
 import {height, width, scale} from '../../config/globalStyles';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Entypo from 'react-native-vector-icons/Entypo';
-import CourseTable from '../../components/profile/CourseTable';
+
+import MapCourseTable from '../../components/profile/MapCourseTable';
 
 import Config from 'react-native-config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useIsFocused} from '@react-navigation/native';
 
 const ProfileScreen = ({navigation}) => {
   const [courses, setCourses] = useState([]);
+  const isFocused = useIsFocused();
 
   useEffect(() => {
-    setCourses([
-      {course: '데이터베이스', course_num: '009959-001'},
-      {course: '기계학습', course_num: '009959-001'},
-      {course: '운영체제', course_num: '009959-001'},
-      {course: '컴퓨터네트워크', course_num: '009959-001'},
-      {course: '알고리즘', course_num: '009959-001'},
-      {course: '자료구조', course_num: '009959-001'},
-      {course: '무선통신', course_num: '009959-001'},
-    ]);
-  }, []);
+    console.log('프로필스크린');
+    getAsyncCourses();
+  }, [isFocused]);
+
+  const getAsyncCourses = async () => {
+    try {
+      const value = await AsyncStorage.getItem(Config.COURSES_KEY);
+      console.log(value);
+      if (value !== null) {
+        const data = JSON.parse(value);
+        setCourses(data.courses);
+      } else {
+      }
+    } catch (e) {
+      console.log('과목 불러오기 실패');
+    }
+  };
 
   const removeStudent = async () => {
     try {
@@ -49,7 +58,7 @@ const ProfileScreen = ({navigation}) => {
     <SafeAreaView>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        alwaysBounceVertical={false}>
+        alwaysBounceVertical={true}>
         <StatusBar barStyle={'dark-content'} />
         <View style={styles.container}>
           <Profile />
@@ -62,25 +71,7 @@ const ProfileScreen = ({navigation}) => {
               <Ionicons name="add-circle-outline" style={styles.addIcon} />
             </TouchableOpacity>
           </View>
-          <View style={styles.shadow}>
-            {courses.length > 0 ? (
-              <TableView style={styles.tableview}>
-                <Section roundedCorners={true} hideSurroundingSeparators={true}>
-                  {courses.map(course => (
-                    <CourseTable
-                      key={course.course}
-                      course={course.course}
-                      course_num={course.course_num}
-                    />
-                  ))}
-                </Section>
-              </TableView>
-            ) : (
-              <Text style={styles.addCourseText}>
-                오른쪽 위의 + 버튼을 눌러 과목을 추가해주세요.
-              </Text>
-            )}
-          </View>
+          <MapCourseTable navigation={navigation} courses={courses} />
           <Text style={styles.subtitle}>문의하기</Text>
           <View style={styles.margin1}>
             <TouchableOpacity
