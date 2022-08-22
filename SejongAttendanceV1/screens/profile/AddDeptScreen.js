@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, StatusBar, ScrollView} from 'react-native';
 
 import {TableView, Section} from 'react-native-tableview-simple';
-import CollegeTable from '../../components/profile/CollegeTable';
+import SelectTable from '../../components/profile/SelectTable';
 import {height, width} from '../../config/globalStyles';
 //Redux
 import {connect} from 'react-redux';
@@ -22,19 +22,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const AddDeptScreen = ({
-  navigation,
-  route,
+  courseCollege,
+  courseDept,
   setCourseDept,
   setCourseDeptName,
-  courseCollege,
 }) => {
-  const [selectedValue, setSelectedValue] = useState(-1);
-  const [selectedDeptName, setSelectedDeptName] = useState('');
   const depts = collegesData.colleges[courseCollege].depts;
-  useEffect(() => {
-    setCourseDept(selectedValue);
-    setCourseDeptName(selectedDeptName);
-  }, [setCourseDeptName, setCourseDept, selectedValue, selectedDeptName]);
 
   return (
     <ScrollView
@@ -46,13 +39,16 @@ const AddDeptScreen = ({
         <TableView style={styles.tableview}>
           <Section roundedCorners={true} hideSurroundingSeparators={true}>
             {depts.map(dept => (
-              <CollegeTable
+              <SelectTable
                 key={dept.dept_id}
                 id={dept.dept_id}
-                college={dept.dept}
-                selectedCollege={selectedValue}
-                setSelectedCollege={setSelectedValue}
-                setSelectedCollegeName={setSelectedDeptName}
+                value={dept.dept}
+                selectedValue={courseDept}
+                setSelectedValue={setCourseDept}
+                setSelectedValueName={setCourseDeptName}
+                selectType={'dept'}
+                setSelectedDeptForCol={null}
+                setCourseDeptNameForCol={null}
               />
             ))}
           </Section>

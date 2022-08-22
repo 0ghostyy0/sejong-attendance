@@ -1,43 +1,42 @@
 import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, StatusBar, ScrollView} from 'react-native';
 import {TableView, Section} from 'react-native-tableview-simple';
-import CollegeTable from '../../components/profile/CollegeTable';
+import SelectTable from '../../components/profile/SelectTable';
 import {height, width, scale} from '../../config/globalStyles';
 //Redux
 import {connect} from 'react-redux';
-import {setCourseCollege, setCourseCollegeName} from '../../redux/Actions';
+import {
+  setCourseCollege,
+  setCourseCollegeName,
+  setCourseDept,
+  setCourseDeptName,
+} from '../../redux/Actions';
 //Data
 import collegesData from '../../data/colleges.json';
 
 const mapStateToProps = state => ({
   courseCollege: state.courseCollege,
   courseCollegeName: state.courseCollegeName,
+  courseDept: state.courseDept,
+  courseDeptName: state.courseDeptName,
 });
 
 const mapDispatchToProps = dispatch => ({
   setCourseCollege: college => dispatch(setCourseCollege(college)),
   setCourseCollegeName: collegeName =>
     dispatch(setCourseCollegeName(collegeName)),
+  setCourseDept: dept => dispatch(setCourseDept(dept)),
+  setCourseDeptName: deptName => dispatch(setCourseDeptName(deptName)),
 });
 
 const AddCollegeScreen = ({
-  navigation,
-  route,
+  courseCollege,
   setCourseCollege,
   setCourseCollegeName,
+  setCourseDept,
+  setCourseDeptName,
 }) => {
-  const [selectedValue, setSelectedValue] = useState(-1);
-  const [selectedCollegeName, setSelectedCollegeName] = useState('');
   const colleges = collegesData.colleges;
-  useEffect(() => {
-    setCourseCollege(selectedValue);
-    setCourseCollegeName(selectedCollegeName);
-  }, [
-    setCourseCollegeName,
-    selectedCollegeName,
-    setCourseCollege,
-    selectedValue,
-  ]);
 
   return (
     <ScrollView
@@ -49,13 +48,16 @@ const AddCollegeScreen = ({
         <TableView style={styles.tableview}>
           <Section roundedCorners={true} hideSurroundingSeparators={true}>
             {colleges.map(college => (
-              <CollegeTable
+              <SelectTable
                 key={college.id}
                 id={college.id}
-                college={college.college}
-                selectedCollege={selectedValue}
-                setSelectedCollege={setSelectedValue}
-                setSelectedCollegeName={setSelectedCollegeName}
+                value={college.college}
+                selectedValue={courseCollege}
+                setSelectedValue={setCourseCollege}
+                setSelectedValueName={setCourseCollegeName}
+                selectType={'college'}
+                setSelectedDeptForCol={setCourseDept}
+                setCourseDeptNameForCol={setCourseDeptName}
               />
             ))}
           </Section>
