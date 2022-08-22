@@ -14,7 +14,6 @@ const mapStateToProps = state => ({
 
 const CourseAddSelect = ({
   header,
-  collegeName,
   footer,
   navi,
   navigation,
@@ -33,9 +32,9 @@ const CourseAddSelect = ({
           onPress={() => {
             navigation.navigate(navi);
           }}>
-          {courseCollegeName === '선택하기...' ? (
+          {courseCollege === -1 ? (
             <Text style={{...styles.collegeNameBefore, ...styles.collegeName}}>
-              {courseCollegeName}
+              선택하기...
             </Text>
           ) : (
             <Text style={styles.collegeName}>{courseCollegeName}</Text>
@@ -55,9 +54,9 @@ const CourseAddSelect = ({
             navigation.navigate(navi);
           }}
           disabled={courseCollege === -1 ? true : false}>
-          {courseDeptName === '선택하기...' ? (
+          {courseDept === -1 ? (
             <Text style={{...styles.collegeNameBefore, ...styles.collegeName}}>
-              {courseDeptName}
+              선택하기...
             </Text>
           ) : (
             <Text style={styles.collegeName}>{courseDeptName}</Text>

@@ -4,8 +4,8 @@ const initialState = {
   courseClass: '',
   courseCollege: -1,
   courseDept: -1,
-  courseCollegeName: '선택하기...',
-  courseDeptName: '선택하기...',
+  courseCollegeName: '',
+  courseDeptName: '',
 };
 
 const rootReducer = (state = initialState, action) => {

@@ -1,5 +1,6 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {CommonActions} from '@react-navigation/native';
 import {Button, Alert} from 'react-native';
 import {scale} from '../../config/globalStyles';
 import Config from 'react-native-config';
@@ -9,8 +10,8 @@ import ProfileScreen from '../../screens/profile/ProfileScreen';
 import AddCollegeScreen from '../../screens/profile/AddCollegeScreen';
 import AddDeptScreen from '../../screens/profile/AddDeptScreen';
 import CreditScreen from '../../screens/profile/CreditScreen';
-//Redux
 import AsyncStorage from '@react-native-async-storage/async-storage';
+//Redux
 import {useSelector} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
@@ -92,7 +93,15 @@ const ProfileStackNavi = ({navigation}) => {
                 title="추가"
                 onPress={() => {
                   courseAddStorage();
-                  navigation.navigate('마이페이지');
+                  Alert.alert('과목 추가', '과목 추가 완료', [
+                    {
+                      text: '확인',
+                      onPress: () => navigation.navigate('마이페이지'),
+                    },
+                  ]);
+                  setTimeout(() => {
+                    navigation.navigate('마이페이지');
+                  }, 10);
                 }}
               />
             ),
