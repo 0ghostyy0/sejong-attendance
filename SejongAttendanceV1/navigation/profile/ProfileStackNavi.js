@@ -1,19 +1,62 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Button} from 'react-native';
+import {Button, Alert} from 'react-native';
 import {scale} from '../../config/globalStyles';
-
+import Config from 'react-native-config';
+//Screens
 import AddCourseScreen from '../../screens/profile/AddCourseScreen';
 import ProfileScreen from '../../screens/profile/ProfileScreen';
 import AddCollegeScreen from '../../screens/profile/AddCollegeScreen';
 import AddDeptScreen from '../../screens/profile/AddDeptScreen';
 import CreditScreen from '../../screens/profile/CreditScreen';
-
-import CourseAddStorage from '../../components/profile/CourseAddStorage';
+//Redux
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useSelector} from 'react-redux';
 
 const Stack = createNativeStackNavigator();
 
 const ProfileStackNavi = ({navigation}) => {
+  const courseName = useSelector(state => state.courseName);
+  const courseNum = useSelector(state => state.courseNum);
+  const courseClass = useSelector(state => state.courseClass);
+  const courseDept = useSelector(state => state.courseDept);
+  let courseData = [];
+
+  const pushCourseToStorage = (
+    courseName,
+    courseNum,
+    courseClass,
+    courseDept,
+  ) => {
+    let singleCourseData = `{"name": "${courseName}", "course_id": "${courseNum}", "class_id": "${courseClass}", "dept_id": "${courseDept}"}`;
+    let jsonSingleData = JSON.parse(singleCourseData);
+    courseData.push(jsonSingleData);
+  };
+
+  const courseAddStorage = async () => {
+    try {
+      pushCourseToStorage(courseName, courseNum, courseClass, courseDept);
+      const oldValue = await AsyncStorage.getItem(Config.COURSES_KEY);
+      let curValue;
+      if (oldValue == null) {
+        curValue = courseData;
+      } else {
+        curValue = JSON.parse(oldValue).courses;
+        curValue.push(courseData[0]);
+      }
+      const courses = JSON.stringify({courses: curValue});
+      await AsyncStorage.setItem(Config.COURSES_KEY, courses);
+    } catch (error) {
+      console.log('저장 실패');
+      Alert.alert('저장 실패', '죄송합니다.\n다시 시도해주세요...죄송', [
+        {
+          text: '확인',
+          onPress: () => navigation.navigate('landing'),
+        },
+      ]);
+    }
+  };
+
   return (
     <Stack.Navigator>
       <Stack.Screen
@@ -48,7 +91,7 @@ const ProfileStackNavi = ({navigation}) => {
               <Button
                 title="추가"
                 onPress={() => {
-                  CourseAddStorage();
+                  courseAddStorage();
                   navigation.navigate('마이페이지');
                 }}
               />
