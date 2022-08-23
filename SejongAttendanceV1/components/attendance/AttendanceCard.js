@@ -4,12 +4,12 @@ import {height, width, scale} from '../../config/globalStyles';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const AttendanceCard = ({navigation}) => {
+const AttendanceCard = ({course, courseId, classId, deptId, navigation}) => {
   return (
     <View style={styles.component}>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('single');
+          navigation.navigate('single', {names: [course, courseId, classId]});
         }}
         style={styles.card}>
         <View flexDirection="row" style={styles.row1}>
@@ -24,7 +24,7 @@ const AttendanceCard = ({navigation}) => {
               style={styles.classNameText}
               numberOfLines={1}
               ellipsizeMode={'tail'}>
-              데이터베이스
+              {course}
             </Text>
           </View>
           <View style={styles.attendanceNumberContainer}>
