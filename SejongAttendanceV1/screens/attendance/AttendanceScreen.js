@@ -5,6 +5,8 @@ import {
   Text,
   ScrollView,
   TouchableOpacity,
+  StatusBar,
+  Button,
 } from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 import AttendanceCard from '../../components/attendance/AttendanceCard';
@@ -12,17 +14,23 @@ import SegmentedControl from '@react-native-segmented-control/segmented-control'
 import Config from 'react-native-config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useIsFocused} from '@react-navigation/native';
+import parseXlsxData from '../../utils/parseXlsxData';
+import checkStatusCounter from '../../utils/checkStatusCounter';
 
 const AttendanceScreen = ({navigation}) => {
-  const [thisWeek, setThisWeek] = useState(0);
-  const [isCourse, setIsCourse] = useState(false);
   const time = new Date();
   const month = time.getMonth() + 1;
   const date = time.getDate();
   let week_array = new Array('일', '월', '화', '수', '목', '금', '토');
   let today_num = time.getDay();
-  const [courses, setCourses] = useState([]);
+  // let lectureData = [];
+
   const isFocused = useIsFocused();
+  const [thisWeek, setThisWeek] = useState(0);
+  const [isCourse, setIsCourse] = useState(false);
+  const [courses, setCourses] = useState([]);
+  const [unpassCount, setUnpassCount] = useState(0);
+  const [lectureData, setLectureData] = useState([]);
 
   useEffect(() => {
     getAsyncCourses();
@@ -43,6 +51,7 @@ const AttendanceScreen = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <StatusBar barStyle={'dark-content'} />
       <Text style={styles.title}>출석 확인하기</Text>
       <Text style={styles.week}>
         2주차, {month}월 {date}일 {week_array[today_num]}요일
@@ -58,16 +67,33 @@ const AttendanceScreen = ({navigation}) => {
       {!thisWeek ? (
         courses.length > 0 ? (
           <ScrollView showsVerticalScrollIndicator={false}>
-            {courses.map((course, idx) => (
-              <AttendanceCard
-                key={idx}
-                course={course.name}
-                courseId={course.course_id}
-                classId={course.class_id}
-                deptId={course.dept_id}
-                navigation={navigation}
-              />
-            ))}
+            {courses.map((course, idx) => {
+              parseXlsxData(
+                // course.dept_id,
+                // course.course_id,
+                // course.class_id,
+                '3232',
+                '010000',
+                '001',
+                '18011480',
+              ).then(data => {
+                // lectureData = data;
+                // setLectureData(data);
+                setUnpassCount(checkStatusCounter(data)[1]);
+                // setUnpassCount()
+              });
+              return (
+                <AttendanceCard
+                  key={idx}
+                  course={course.name}
+                  courseId={course.course_id}
+                  classId={course.class_id}
+                  deptId={course.dept_id}
+                  unpassCount={unpassCount}
+                  navigation={navigation}
+                />
+              );
+            })}
           </ScrollView>
         ) : (
           <View style={styles.emptyAttendanceContainer}>

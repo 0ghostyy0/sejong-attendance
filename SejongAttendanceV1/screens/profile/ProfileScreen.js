@@ -33,6 +33,7 @@ const ProfileScreen = ({navigation}) => {
   const getAsyncCourses = async () => {
     try {
       const value = await AsyncStorage.getItem(Config.COURSES_KEY);
+      // console.log(value);
       if (value !== null) {
         const data = JSON.parse(value);
         setCourses(data.courses);
