@@ -33,7 +33,6 @@ const ProfileScreen = ({navigation}) => {
   const getAsyncCourses = async () => {
     try {
       const value = await AsyncStorage.getItem(Config.COURSES_KEY);
-      // console.log(value);
       if (value !== null) {
         const data = JSON.parse(value);
         setCourses(data.courses);
@@ -44,12 +43,22 @@ const ProfileScreen = ({navigation}) => {
     }
   };
 
+  const removeCourses = async () => {
+    try {
+      await AsyncStorage.removeItem(Config.COURSES_KEY);
+      setCourses([]);
+      console.log('과목 삭제 완료');
+    } catch (e) {
+      console.log('과목 삭제 실패');
+    }
+  };
+
   const removeStudent = async () => {
     try {
       await AsyncStorage.removeItem(Config.STUDENT_ID_KEY);
-      console.log('삭제 완료');
+      console.log('학번 삭제 완료');
     } catch (e) {
-      console.log('삭제 실패');
+      console.log('학번 삭제 실패');
     }
   };
 
@@ -96,7 +105,7 @@ const ProfileScreen = ({navigation}) => {
                   },
                   buttonIndex => {
                     if (buttonIndex === 1) {
-                      //todo:async 과목정보 비우기
+                      removeCourses();
                     }
                   },
                 );
@@ -120,6 +129,7 @@ const ProfileScreen = ({navigation}) => {
                   buttonIndex => {
                     if (buttonIndex === 1) {
                       removeStudent();
+                      removeCourses();
                       RNExitApp.exitApp();
                     }
                   },
@@ -143,7 +153,7 @@ const ProfileScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f2f2f6',
-    height: height * 760,
+    //height: height * 760,
   },
   subtitle: {
     marginLeft: width * 16,
