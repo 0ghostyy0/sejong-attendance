@@ -25,8 +25,12 @@ const AttendanceScreen = ({navigation}) => {
 
   const isFocused = useIsFocused();
   const [thisWeek, setThisWeek] = useState(0);
-  const [isCourse, setIsCourse] = useState(false);
+  const [id, setId] = useState('');
   const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    getAsyncStudendtId();
+  }, []);
 
   useEffect(() => {
     getAsyncCourses();
@@ -38,10 +42,21 @@ const AttendanceScreen = ({navigation}) => {
       if (value !== null) {
         const data = JSON.parse(value);
         setCourses(data.courses);
-      } else {
       }
     } catch (e) {
       console.log('과목 불러오기 실패');
+    }
+  };
+
+  const getAsyncStudendtId = async () => {
+    try {
+      const value = await AsyncStorage.getItem(Config.STUDENT_ID_KEY);
+      if (value !== null) {
+        const data = JSON.parse(value);
+        setId(data.id);
+      }
+    } catch (e) {
+      console.log('학번 불러오기 실패');
     }
   };
 
@@ -61,41 +76,24 @@ const AttendanceScreen = ({navigation}) => {
           setThisWeek(event.nativeEvent.selectedSegmentIndex);
         }}
       />
-      {!thisWeek ? (
-        courses.length > 0 ? (
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {/* {getLectureData()} */}
-            {courses.map((course, idx) => {
-              return (
-                <AttendanceCard
-                  key={idx}
-                  course={course.name}
-                  deptId={course.dept_id}
-                  courseId={course.course_id}
-                  classId={course.class_id}
-                  thisWeek={thisWeek}
-                  navigation={navigation}
-                />
-              );
-            })}
-          </ScrollView>
-        ) : (
-          <View style={styles.emptyAttendanceContainer}>
-            <Text style={styles.emptyAttendanceText}>
-              추가된 강의가 없어요.
-            </Text>
-            <Text style={styles.emptyAttendanceText}>
-              마이페이지에서 강의를 추가해주세요.😥
-            </Text>
-            <TouchableOpacity
-              style={{marginTop: height * 14}}
-              onPress={() => {
-                navigation.navigate('profile');
-              }}>
-              <Text style={styles.goToProfileButtonText}>이동하기...</Text>
-            </TouchableOpacity>
-          </View>
-        )
+
+      {courses.length > 0 ? (
+        <ScrollView showsVerticalScrollIndicator={false}>
+          {courses.map((course, idx) => {
+            return (
+              <AttendanceCard
+                key={idx}
+                course={course.name}
+                deptId={course.dept_id}
+                courseId={course.course_id}
+                classId={course.class_id}
+                studentId={id}
+                thisWeek={thisWeek}
+                navigation={navigation}
+              />
+            );
+          })}
+        </ScrollView>
       ) : (
         <View style={styles.emptyAttendanceContainer}>
           <Text style={styles.emptyAttendanceText}>추가된 강의가 없어요.</Text>
