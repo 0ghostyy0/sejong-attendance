@@ -88,6 +88,29 @@ const ProfileScreen = ({navigation}) => {
               onPress={() => {
                 ActionSheetIOS.showActionSheetWithOptions(
                   {
+                    options: ['취소', '과목 초기화하기'],
+                    destructiveButtonIndex: 1,
+                    cancelButtonIndex: 0,
+                    title: `저장된 데이터가 모두 삭제됩니다.\n과목 정보를 삭제하시겠습니까?`,
+                  },
+                  buttonIndex => {
+                    if (buttonIndex === 1) {
+                      //todo:async 과목정보 비우기
+                    }
+                  },
+                );
+              }}>
+              <Text style={{...styles.text, color: '#eb5828'}}>
+                모든 과목 정보 초기화
+              </Text>
+            </TouchableOpacity>
+          </View>
+          <View style={styles.margin3}>
+            <TouchableOpacity
+              style={styles.btn}
+              onPress={() => {
+                ActionSheetIOS.showActionSheetWithOptions(
+                  {
                     options: ['취소', '계정 삭제하기'],
                     destructiveButtonIndex: 1,
                     cancelButtonIndex: 0,
@@ -160,6 +183,9 @@ const styles = StyleSheet.create({
   },
   margin2: {
     marginTop: height * 44,
+  },
+  margin3: {
+    marginTop: height * 14,
   },
   btn: {
     backgroundColor: '#ffffff',
