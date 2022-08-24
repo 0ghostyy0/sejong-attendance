@@ -11,6 +11,7 @@ const AttendanceCard = ({
   deptId,
   courseId,
   classId,
+  studentId,
   thisWeek,
   navigation,
 }) => {
@@ -19,7 +20,7 @@ const AttendanceCard = ({
   const [lectureData, setLectureData] = useState([]);
 
   useEffect(() => {
-    parseXlsxData(deptId, courseId, classId, '18011531')
+    parseXlsxData(deptId, courseId, classId, studentId)
       .then(data => {
         console.log(courseId);
         console.log(data);
