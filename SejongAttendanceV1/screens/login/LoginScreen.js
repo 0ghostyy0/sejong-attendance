@@ -27,9 +27,6 @@ const LoginScreen = ({navigation}) => {
         pw: pwd,
         method: `${Config.LOGIN_METHOD}`,
       });
-      console.log(response.data);
-      console.log(id);
-      console.log(pwd);
       if (!response.data.result.success) {
         Alert.alert('서버 오류', '죄송합니다.\n잠시 후 다시 시도해주세요.', [
           {

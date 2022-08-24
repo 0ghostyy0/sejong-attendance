@@ -130,8 +130,8 @@ const ProfileScreen = ({navigation}) => {
               </Text>
             </TouchableOpacity>
             <Text style={styles.deleteText}>
-              기기에 있는 사용자의 데이터는 서버에 저장되지 않으며 계정 삭제 시
-              등록한 정보가 모두 초기화됩니다.
+              기기에 있는 사용자의 데이터는 서버에 저장되지 않으며, 계정 삭제 시
+              등록한 정보가 모두 초기화 된 후 강제종료 됩니다.
             </Text>
           </View>
         </View>
@@ -197,6 +197,7 @@ const styles = StyleSheet.create({
   deleteText: {
     marginLeft: width * 25,
     marginRight: width * 34,
+    marginBottom: height * 250,
     marginVertical: height * 8,
     fontSize: scale * 10,
     color: '#86858c',
