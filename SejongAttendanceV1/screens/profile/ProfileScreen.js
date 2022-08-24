@@ -27,14 +27,13 @@ const ProfileScreen = ({navigation}) => {
   const isFocused = useIsFocused();
 
   useEffect(() => {
-    console.log('프로필스크린');
     getAsyncCourses();
   }, [isFocused]);
 
   const getAsyncCourses = async () => {
     try {
       const value = await AsyncStorage.getItem(Config.COURSES_KEY);
-      console.log(value);
+      // console.log(value);
       if (value !== null) {
         const data = JSON.parse(value);
         setCourses(data.courses);

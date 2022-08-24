@@ -4,7 +4,14 @@ import {height, width, scale} from '../../config/globalStyles';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-const AttendanceCard = ({course, courseId, classId, deptId, navigation}) => {
+const AttendanceCard = ({
+  course,
+  courseId,
+  classId,
+  deptId,
+  unpassCount,
+  navigation,
+}) => {
   return (
     <View style={styles.component}>
       <TouchableOpacity
@@ -29,7 +36,7 @@ const AttendanceCard = ({course, courseId, classId, deptId, navigation}) => {
           </View>
           <View style={styles.attendanceNumberContainer}>
             <Text style={styles.numOfAtendanceCaption}>미수강</Text>
-            <Text style={styles.numOfAttendanceText}>1개</Text>
+            <Text style={styles.numOfAttendanceText}>{unpassCount}개</Text>
           </View>
         </View>
       </TouchableOpacity>
