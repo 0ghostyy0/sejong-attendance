@@ -14,7 +14,7 @@ const SelectTable = ({
   setCourseDeptNameForCol,
 }) => {
   return (
-    <View>
+    <View style={styles.container}>
       {selectedValue === id ? (
         <Cell
           accessory="Checkmark"
@@ -52,6 +52,9 @@ const SelectTable = ({
 };
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: '#f2f2f6',
+  },
   cell: {
     //marginVertical: height * 2,
     //height: height * 47,

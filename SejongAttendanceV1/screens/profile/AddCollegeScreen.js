@@ -39,31 +39,33 @@ const AddCollegeScreen = ({
   const colleges = collegesData.colleges;
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      alwaysBounceVertical={false}
-      style={styles.container}>
-      <StatusBar barStyle={'dark-content'} />
-      <View style={styles.innerContainer}>
-        <TableView style={styles.tableview}>
-          <Section roundedCorners={true} hideSurroundingSeparators={true}>
-            {colleges.map(college => (
-              <SelectTable
-                key={college.id}
-                id={college.id}
-                value={college.college}
-                selectedValue={courseCollege}
-                setSelectedValue={setCourseCollege}
-                setSelectedValueName={setCourseCollegeName}
-                selectType={'college'}
-                setSelectedDeptForCol={setCourseDept}
-                setCourseDeptNameForCol={setCourseDeptName}
-              />
-            ))}
-          </Section>
-        </TableView>
-      </View>
-    </ScrollView>
+    <View style={{backgroundColor: '#f2f2f6'}}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        alwaysBounceVertical={false}
+        style={styles.container}>
+        <StatusBar barStyle={'dark-content'} />
+        <View style={styles.innerContainer}>
+          <TableView style={styles.tableview}>
+            <Section roundedCorners={true} hideSurroundingSeparators={true}>
+              {colleges.map(college => (
+                <SelectTable
+                  key={college.id}
+                  id={college.id}
+                  value={college.college}
+                  selectedValue={courseCollege}
+                  setSelectedValue={setCourseCollege}
+                  setSelectedValueName={setCourseCollegeName}
+                  selectType={'college'}
+                  setSelectedDeptForCol={setCourseDept}
+                  setCourseDeptNameForCol={setCourseDeptName}
+                />
+              ))}
+            </Section>
+          </TableView>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 

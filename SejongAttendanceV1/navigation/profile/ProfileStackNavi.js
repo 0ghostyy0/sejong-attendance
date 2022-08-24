@@ -93,12 +93,16 @@ const ProfileStackNavi = ({navigation}) => {
                 title="추가"
                 onPress={() => {
                   courseAddStorage();
-                  Alert.alert('과목 추가', '과목 추가 완료', [
-                    {
-                      text: '확인',
-                      onPress: () => navigation.navigate('마이페이지'),
-                    },
-                  ]);
+                  Alert.alert(
+                    '과목 추가',
+                    `${courseName}(${courseNum}-${courseClass})\n과목을 추가했어요👻`,
+                    [
+                      {
+                        text: '오키',
+                        onPress: () => navigation.navigate('마이페이지'),
+                      },
+                    ],
+                  );
                   setTimeout(() => {
                     navigation.navigate('마이페이지');
                   }, 10);
