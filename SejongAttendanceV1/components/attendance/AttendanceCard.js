@@ -43,7 +43,7 @@ const AttendanceCard = ({
         }}
         style={styles.card}>
         <View flexDirection="row" style={styles.row1}>
-          {unpassCount ? (
+          {(!thisWeek ? unpassCount[0] : unpassCount[1]) ? (
             <View style={styles.badgeUnpass}>
               <Text style={styles.badgeTextUnpass}>미완료</Text>
             </View>
