@@ -54,8 +54,8 @@ const parseLectureStatus = (startDate, endDate, currentDate, isPass) => {
 };
 
 const downloadXlsx = async (deptId, courseId, classId, studentId) => {
-  const semester = '20221020';
-  //studentId = '18011547';
+  const semester = getCurrentDate() < '0901000' ? '20221020' : '20222020';
+  // studentId = '18011547';
   const ApiUrl = `https://blackboard.sejong.ac.kr/webapps/bbgs-OnlineAttendance-BB5cf774ff89eaf/excel?selectedUserId=${studentId}&crs_batch_uid=${semester}${deptId}${courseId}${classId}&title=${studentId}&column=사용자명,위치,컨텐츠명,학습한시간,학습인정시간,컨텐츠시간,온라인출석진도율,온라인출석상태(P/F)`;
 
   try {

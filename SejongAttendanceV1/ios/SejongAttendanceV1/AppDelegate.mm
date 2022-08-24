@@ -65,7 +65,7 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   [self.window makeKeyAndVisible];
   [super application:application didFinishLaunchingWithOptions:launchOptions];
 
-  [RNSplashScreen show];
+   [RNSplashScreen show];
   return YES;
 }
 
