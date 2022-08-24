@@ -169,8 +169,9 @@ const ProfileStackNavi = ({navigation}) => {
         name="credit"
         component={CreditScreen}
         options={{
-          headerLargeTitle: true,
-          headerLargeTitleStyle: {fontSize: scale * 28},
+          headerShown: true,
+          headerLargeTitle: false,
+          headerTitle: '',
           headerStyle: {backgroundColor: '#f2f2f6'},
           headerShadowVisible: false,
         }}
