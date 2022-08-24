@@ -6,7 +6,6 @@ import {
   ScrollView,
   TouchableOpacity,
   StatusBar,
-  Button,
 } from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 import AttendanceCard from '../../components/attendance/AttendanceCard';
