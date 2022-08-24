@@ -2,7 +2,7 @@ import XLSX from 'xlsx';
 import * as FileSystem from 'expo-file-system';
 import {executeNativeBackPress} from 'react-native-screens';
 
-const getCurrentDate = () => {
+export const getCurrentDate = () => {
   let time = new Date();
   let month, date, hour, min;
   time.getMonth() + 1 < 10

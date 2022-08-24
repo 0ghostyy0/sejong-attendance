@@ -13,13 +13,15 @@ import SegmentedControl from '@react-native-segmented-control/segmented-control'
 import Config from 'react-native-config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useIsFocused} from '@react-navigation/native';
+import weekNumberCounter from '../../utils/weekNumberCounter';
 
 const AttendanceScreen = ({navigation}) => {
   const time = new Date();
   const month = time.getMonth() + 1;
   const date = time.getDate();
-  let week_array = new Array('일', '월', '화', '수', '목', '금', '토');
+  let week_array = ['일', '월', '화', '수', '목', '금', '토'];
   let today_num = time.getDay();
+  let weekNumber = weekNumberCounter();
 
   const isFocused = useIsFocused();
   const [thisWeek, setThisWeek] = useState(0);
@@ -48,7 +50,8 @@ const AttendanceScreen = ({navigation}) => {
       <StatusBar barStyle={'dark-content'} />
       <Text style={styles.title}>출석 확인하기</Text>
       <Text style={styles.week}>
-        2주차, {month}월 {date}일 {week_array[today_num]}요일
+        {weekNumber}주차, {month}월 {date}일 {week_array[today_num]}
+        요일
       </Text>
       <SegmentedControl
         style={styles.SegmentedControl}
