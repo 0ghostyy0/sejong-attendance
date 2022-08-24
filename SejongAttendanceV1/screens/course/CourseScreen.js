@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, StyleSheet, ScrollView, StatusBar} from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 import CourseCard from '../../components/course/CourseCard';
 
 const CourseScreen = ({route}) => {
+  let lectures = route.params.names[3];
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
@@ -15,13 +17,13 @@ const CourseScreen = ({route}) => {
           }>{`${route.params.names[1]}-${route.params.names[2]}`}</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <CourseCard />
-        <CourseCard />
-        <CourseCard />
-        <CourseCard />
-        <CourseCard />
-        <CourseCard />
-        <CourseCard />
+        {lectures.length > 0 ? (
+          lectures.map((lectureData, idx) => {
+            return <CourseCard key={idx} lectureData={lectureData} />;
+          })
+        ) : (
+          <Text>강의 데이터 없음</Text>
+        )}
       </ScrollView>
     </View>
   );

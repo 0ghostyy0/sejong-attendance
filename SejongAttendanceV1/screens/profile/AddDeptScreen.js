@@ -30,31 +30,33 @@ const AddDeptScreen = ({
   const depts = collegesData.colleges[courseCollege].depts;
 
   return (
-    <ScrollView
-      showsVerticalScrollIndicator={false}
-      alwaysBounceVertical={false}
-      style={styles.container}>
-      <StatusBar barStyle={'light-content'} />
-      <View>
-        <TableView style={styles.tableview}>
-          <Section roundedCorners={true} hideSurroundingSeparators={true}>
-            {depts.map(dept => (
-              <SelectTable
-                key={dept.dept_id}
-                id={dept.dept_id}
-                value={dept.dept}
-                selectedValue={courseDept}
-                setSelectedValue={setCourseDept}
-                setSelectedValueName={setCourseDeptName}
-                selectType={'dept'}
-                setSelectedDeptForCol={null}
-                setCourseDeptNameForCol={null}
-              />
-            ))}
-          </Section>
-        </TableView>
-      </View>
-    </ScrollView>
+    <View style={{backgroundColor: '#f2f2f6'}}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        alwaysBounceVertical={false}
+        style={styles.container}>
+        <StatusBar barStyle={'light-content'} />
+        <View>
+          <TableView style={styles.tableview}>
+            <Section roundedCorners={true} hideSurroundingSeparators={true}>
+              {depts.map(dept => (
+                <SelectTable
+                  key={dept.dept_id}
+                  id={dept.dept_id}
+                  value={dept.dept}
+                  selectedValue={courseDept}
+                  setSelectedValue={setCourseDept}
+                  setSelectedValueName={setCourseDeptName}
+                  selectType={'dept'}
+                  setSelectedDeptForCol={null}
+                  setCourseDeptNameForCol={null}
+                />
+              ))}
+            </Section>
+          </TableView>
+        </View>
+      </ScrollView>
+    </View>
   );
 };
 

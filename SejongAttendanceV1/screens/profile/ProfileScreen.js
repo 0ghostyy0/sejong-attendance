@@ -57,9 +57,10 @@ const ProfileScreen = ({navigation}) => {
     <SafeAreaView>
       <ScrollView
         showsVerticalScrollIndicator={false}
-        alwaysBounceVertical={true}>
+        alwaysBounceVertical={true}
+        style={styles.container}>
         <StatusBar barStyle={'dark-content'} />
-        <View style={styles.container}>
+        <View>
           <Profile />
           <View style={styles.row1}>
             <Text style={styles.subtitle}>과목 설정</Text>
@@ -142,6 +143,7 @@ const ProfileScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f2f2f6',
+    height: height * 760,
   },
   subtitle: {
     marginLeft: width * 16,
@@ -159,24 +161,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.05,
     shadowOffset: {height: 2},
   },
-  tableview: {
-    marginHorizontal: width * 16,
-  },
   addIcon: {
     fontSize: scale * 20,
     color: '#007aff',
     marginRight: width * 26,
     marginTop: height * 21,
-  },
-  addCourseText: {
-    fontSize: scale * 14,
-    fontWeight: 'bold',
-    color: '#979799',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: width * 60,
-    marginTop: height * 30,
-    marginBottom: height * 14,
   },
   margin1: {
     marginTop: height * 15,

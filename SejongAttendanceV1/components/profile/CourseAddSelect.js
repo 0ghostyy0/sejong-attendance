@@ -72,6 +72,7 @@ const styles = StyleSheet.create({
   container: {
     width: width * 358,
     alignSelf: 'center',
+    backgroundColor: '#f2f2f6',
   },
   header: {
     fontSize: scale * 12,

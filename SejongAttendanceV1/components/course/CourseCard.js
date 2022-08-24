@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 
-const AttendanceCard = ({navigation}) => {
+const AttendanceCard = ({navigation, lectureData}) => {
   return (
     <View style={styles.component}>
       <View style={styles.card}>
@@ -12,7 +12,10 @@ const AttendanceCard = ({navigation}) => {
           </View>
         </View>
         <View style={styles.row2}>
-          <Text style={styles.courseSubTitle}>1주차 · 28분 21초</Text>
+          <Text style={styles.courseSubTitle}>
+            {lectureData.start_date.substr(0, 4)} ~{' '}
+            {lectureData.end_date.substr(0, 4)} | {lectureData.location}
+          </Text>
         </View>
         <View style={styles.row3}>
           <View style={styles.courseNameContainer}>
@@ -20,11 +23,13 @@ const AttendanceCard = ({navigation}) => {
               style={styles.classNameText}
               numberOfLines={1}
               ellipsizeMode={'tail'}>
-              [기계학습][1주차]과목소개 소개소개
+              {lectureData.lecture_name}
             </Text>
           </View>
           <View style={styles.coursePercentContainer}>
-            <Text style={styles.numOfAtendanceCaption}>27</Text>
+            <Text style={styles.numOfAtendanceCaption}>
+              {lectureData.progress}
+            </Text>
             <Text style={styles.numOfAttendanceText}>%</Text>
           </View>
         </View>

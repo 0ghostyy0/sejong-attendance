@@ -1,5 +1,6 @@
 import XLSX from 'xlsx';
 import * as FileSystem from 'expo-file-system';
+import {executeNativeBackPress} from 'react-native-screens';
 
 const getCurrentDate = () => {
   let time = new Date();
@@ -84,6 +85,7 @@ const parseXlsxData = async (deptId, courseId, classId, studentId) => {
   let lectureData = [];
   let parsedResult, lectureStatus;
   let currentDate = getCurrentDate();
+
   await downloadXlsx(deptId, courseId, classId, studentId).then(
     value => (srcXlsFile = value),
   );
@@ -97,7 +99,9 @@ const parseXlsxData = async (deptId, courseId, classId, studentId) => {
     } else {
       console.log('모르는 문제...');
     }
+    throw error;
   }
+
   //@todo : catch error 'TypeError: Cannot read property 'Sheets' of undefined'
   let xlsParsedObjects = XLSX.utils.sheet_to_json(
     xlsRawObjects.Sheets[xlsRawObjects.SheetNames[0]],
@@ -121,7 +125,6 @@ const parseXlsxData = async (deptId, courseId, classId, studentId) => {
         lecture_status: lectureStatus,
       })
     ),
-    console.log(lectureData),
   );
   return lectureData;
 };
