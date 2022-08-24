@@ -1,37 +1,49 @@
 import React from 'react';
+import {Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AnalysisScreen from '../screens/analysis/AnalysisScreen';
 import AttendanceStackNavi from './attendance/AttendanceStackNavi';
 import ProfileStackNavi from './profile/ProfileStackNavi';
-import Ionicons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+
 import AnalysisIcon from '../assets/images/mdi_sign-caution.svg';
+import {scale} from '../config/globalStyles';
 
 const Tab = createBottomTabNavigator();
 
 const BottomTabNavi = () => {
   return (
-    <Tab.Navigator backBehavior="none">
+    <Tab.Navigator
+      backBehavior="none"
+      screenOptions={() => ({
+        tabBarActiveTintColor: '#352214',
+        tabBarInactiveTintColor: '#979799',
+      })}>
       <Tab.Screen
         name="attendance"
         component={AttendanceStackNavi}
         options={{
           title: '출석확인',
           headerShown: false,
-          tabBarIcon: ({size, color}) => (
-            <Ionicons name={'lead-pencil'} size={size} color={color} />
-          ),
+          tabBarIcon: ({name, focused, size, color}) => {
+            name = focused ? 'pencil' : 'pencil-outline';
+            color = focused ? '#352214' : '#979799';
+            return (
+              <MaterialCommunityIcons name={name} size={size} color={color} />
+            );
+          },
         }}
       />
       <Tab.Screen
         name="analysis"
         component={AnalysisScreen}
         options={{
-          title: '통계',
-          tabBarIcon: ({focused, size, color}) => {
-            color = focused ? '#007aff' : '#979799';
-            return (
-              <AnalysisIcon width={30} height={30} style={{color: color}} />
-            );
+          title: '급한거',
+          tabBarIcon: ({name, focused, size, color}) => {
+            name = focused ? 'flash' : 'flash-outline';
+            color = focused ? '#352214' : '#979799';
+            return <Ionicons name={name} size={size} color={color} />;
           },
         }}
       />
@@ -41,9 +53,16 @@ const BottomTabNavi = () => {
         options={{
           title: '마이페이지',
           headerShown: false,
-          tabBarIcon: ({size, color}) => (
-            <Ionicons name={'ghost'} size={size} color={color} />
-          ),
+          tabBarLabelStyle: ({focused, color}) => {
+            color = focused ? '#352214' : '#979799';
+          },
+          tabBarIcon: ({name, focused, size, color}) => {
+            name = focused ? 'ghost' : 'ghost-outline';
+            color = focused ? '#352214' : '#979799';
+            return (
+              <MaterialCommunityIcons name={name} size={size} color={color} />
+            );
+          },
         }}
       />
     </Tab.Navigator>
