@@ -1,22 +1,45 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import parseXlsxData from '../../utils/parseXlsxData';
+import checkStatusCounter from '../../utils/checkStatusCounter';
 
 const AttendanceCard = ({
   course,
+  deptId,
   courseId,
   classId,
-  deptId,
-  unpassCount,
+  thisWeek,
   navigation,
 }) => {
+  const [isParse, setIsParse] = useState(0);
+  const [unpassCount, setUnpassCount] = useState([]);
+  const [lectureData, setLectureData] = useState([]);
+
+  useEffect(() => {
+    parseXlsxData(deptId, courseId, classId, '18011531')
+      .then(data => {
+        console.log(courseId);
+        console.log(data);
+        setLectureData(data);
+      })
+      .then(() => setUnpassCount(checkStatusCounter(lectureData)))
+      .catch(error => {
+        console.log('error');
+        console.log(error);
+        setIsParse(data => data + 1);
+      });
+  }, [setLectureData, setUnpassCount, isParse]);
+
   return (
     <View style={styles.component}>
       <TouchableOpacity
         onPress={() => {
-          navigation.navigate('single', {names: [course, courseId, classId]});
+          navigation.navigate('single', {
+            names: [course, courseId, classId, lectureData],
+          });
         }}
         style={styles.card}>
         <View flexDirection="row" style={styles.row1}>
@@ -36,7 +59,9 @@ const AttendanceCard = ({
           </View>
           <View style={styles.attendanceNumberContainer}>
             <Text style={styles.numOfAtendanceCaption}>미수강</Text>
-            <Text style={styles.numOfAttendanceText}>{unpassCount}개</Text>
+            <Text style={styles.numOfAttendanceText}>
+              {!thisWeek ? unpassCount[0] : unpassCount[1]}개
+            </Text>
           </View>
         </View>
       </TouchableOpacity>

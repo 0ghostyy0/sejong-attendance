@@ -1,5 +1,6 @@
 import XLSX from 'xlsx';
 import * as FileSystem from 'expo-file-system';
+import {executeNativeBackPress} from 'react-native-screens';
 
 const getCurrentDate = () => {
   let time = new Date();
@@ -54,7 +55,7 @@ const parseLectureStatus = (startDate, endDate, currentDate, isPass) => {
 
 const downloadXlsx = async (deptId, courseId, classId, studentId) => {
   const semester = '20221020';
-  studentId = '18011547';
+  //studentId = '18011547';
   const ApiUrl = `https://blackboard.sejong.ac.kr/webapps/bbgs-OnlineAttendance-BB5cf774ff89eaf/excel?selectedUserId=${studentId}&crs_batch_uid=${semester}${deptId}${courseId}${classId}&title=${studentId}&column=사용자명,위치,컨텐츠명,학습한시간,학습인정시간,컨텐츠시간,온라인출석진도율,온라인출석상태(P/F)`;
 
   try {
@@ -84,6 +85,7 @@ const parseXlsxData = async (deptId, courseId, classId, studentId) => {
   let lectureData = [];
   let parsedResult, lectureStatus;
   let currentDate = getCurrentDate();
+
   await downloadXlsx(deptId, courseId, classId, studentId).then(
     value => (srcXlsFile = value),
   );
@@ -97,7 +99,9 @@ const parseXlsxData = async (deptId, courseId, classId, studentId) => {
     } else {
       console.log('모르는 문제...');
     }
+    throw error;
   }
+
   //@todo : catch error 'TypeError: Cannot read property 'Sheets' of undefined'
   let xlsParsedObjects = XLSX.utils.sheet_to_json(
     xlsRawObjects.Sheets[xlsRawObjects.SheetNames[0]],
@@ -121,7 +125,6 @@ const parseXlsxData = async (deptId, courseId, classId, studentId) => {
         lecture_status: lectureStatus,
       })
     ),
-    console.log(lectureData),
   );
   return lectureData;
 };

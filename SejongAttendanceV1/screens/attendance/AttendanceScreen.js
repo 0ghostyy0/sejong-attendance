@@ -14,8 +14,6 @@ import SegmentedControl from '@react-native-segmented-control/segmented-control'
 import Config from 'react-native-config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useIsFocused} from '@react-navigation/native';
-import parseXlsxData from '../../utils/parseXlsxData';
-import checkStatusCounter from '../../utils/checkStatusCounter';
 
 const AttendanceScreen = ({navigation}) => {
   const time = new Date();
@@ -23,14 +21,11 @@ const AttendanceScreen = ({navigation}) => {
   const date = time.getDate();
   let week_array = new Array('일', '월', '화', '수', '목', '금', '토');
   let today_num = time.getDay();
-  // let lectureData = [];
 
   const isFocused = useIsFocused();
   const [thisWeek, setThisWeek] = useState(0);
   const [isCourse, setIsCourse] = useState(false);
   const [courses, setCourses] = useState([]);
-  const [unpassCount, setUnpassCount] = useState(0);
-  const [lectureData, setLectureData] = useState([]);
 
   useEffect(() => {
     getAsyncCourses();
@@ -67,29 +62,16 @@ const AttendanceScreen = ({navigation}) => {
       {!thisWeek ? (
         courses.length > 0 ? (
           <ScrollView showsVerticalScrollIndicator={false}>
+            {/* {getLectureData()} */}
             {courses.map((course, idx) => {
-              parseXlsxData(
-                // course.dept_id,
-                // course.course_id,
-                // course.class_id,
-                '3232',
-                '010000',
-                '001',
-                '18011480',
-              ).then(data => {
-                // lectureData = data;
-                // setLectureData(data);
-                setUnpassCount(checkStatusCounter(data)[1]);
-                // setUnpassCount()
-              });
               return (
                 <AttendanceCard
                   key={idx}
                   course={course.name}
+                  deptId={course.dept_id}
                   courseId={course.course_id}
                   classId={course.class_id}
-                  deptId={course.dept_id}
-                  unpassCount={unpassCount}
+                  thisWeek={thisWeek}
                   navigation={navigation}
                 />
               );
