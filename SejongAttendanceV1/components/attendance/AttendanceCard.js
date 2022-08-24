@@ -20,9 +20,15 @@ const AttendanceCard = ({
         }}
         style={styles.card}>
         <View flexDirection="row" style={styles.row1}>
-          <View style={styles.badge}>
-            <Text style={styles.badgeText}>미완료</Text>
-          </View>
+          {unpassCount ? (
+            <View style={styles.badgeUnpass}>
+              <Text style={styles.badgeTextUnpass}>미완료</Text>
+            </View>
+          ) : (
+            <View style={styles.badgePass}>
+              <Text style={styles.badgeTextPass}>완료</Text>
+            </View>
+          )}
           <Ionicons name={'ios-chevron-forward'} style={styles.chevronIcon} />
         </View>
         <View style={styles.row2}>
@@ -34,10 +40,17 @@ const AttendanceCard = ({
               {course}
             </Text>
           </View>
-          <View style={styles.attendanceNumberContainer}>
-            <Text style={styles.numOfAtendanceCaption}>미수강</Text>
-            <Text style={styles.numOfAttendanceText}>{unpassCount}개</Text>
-          </View>
+          {unpassCount ? (
+            <View style={styles.attendanceNumberContainer}>
+              <Text style={styles.numOfAtendanceCaption}>미수강</Text>
+              <Text style={styles.numOfAttendanceText}>{unpassCount}개</Text>
+            </View>
+          ) : (
+            <View style={styles.attendanceNumberContainer}>
+              <Text style={styles.numOfAtendanceCaption2}>수강완료</Text>
+              <Text style={styles.numOfAtendanceCaptionEmoji}>🙌🏻</Text>
+            </View>
+          )}
         </View>
       </TouchableOpacity>
     </View>
@@ -67,7 +80,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  badge: {
+  badgeUnpass: {
     backgroundColor: '#FCE6DF',
     height: height * 23,
     width: width * 48,
@@ -77,8 +90,23 @@ const styles = StyleSheet.create({
     marginTop: height * 12,
     marginLeft: width * 16,
   },
-  badgeText: {
+  badgeTextUnpass: {
     color: '#EB5828',
+    fontSize: scale * 12,
+    fontWeight: '700',
+  },
+  badgePass: {
+    backgroundColor: '#BFDEFF',
+    height: height * 23,
+    width: width * 37,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: height * 12,
+    marginLeft: width * 16,
+  },
+  badgeTextPass: {
+    color: '#007AFF',
     fontSize: scale * 12,
     fontWeight: '700',
   },
@@ -86,7 +114,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: height * 16,
+    marginTop: height * 14,
   },
   courseNameContainer: {
     width: width * 200,
@@ -110,6 +138,17 @@ const styles = StyleSheet.create({
     marginRight: width * 2,
     color: '#8a8a8d',
     fontWeight: 'bold',
+  },
+  numOfAtendanceCaption2: {
+    color: '#8a8a8d',
+    fontWeight: 'bold',
+    alignItems: 'baseline',
+  },
+  numOfAtendanceCaptionEmoji: {
+    marginRight: width * 16,
+    fontSize: scale * 12,
+    color: '#8a8a8d',
+    alignItems: 'baseline',
   },
   chevronIcon: {
     marginTop: height * 14,

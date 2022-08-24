@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   goToProfileButtonText: {
     fontSize: scale * 14,
     fontWeight: 'bold',
-    color: '#79B6FB',
+    color: '#007AFF',
   },
 });
 
