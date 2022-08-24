@@ -4,15 +4,6 @@ import {height, width, scale} from '../../config/globalStyles';
 import {connect} from 'react-redux';
 import {setCourseName, setCourseNum, setCourseClass} from '../../redux/Actions';
 
-const mapStateToProps = state => ({
-  courseName: state.courseName,
-  courseNum: state.courseNum,
-  courseClass: state.courseClass,
-  courseCollege: state.courseCollege,
-  courseDept: state.courseDept,
-});
-//not needed, only for in case of rendering Course itself.
-
 const mapDispatchToProps = dispatch => ({
   setCourseName: name => dispatch(setCourseName(name)),
   setCourseNum: number => dispatch(setCourseNum(number)),
@@ -52,6 +43,7 @@ const CourseAddView = ({
           autoComplete="off"
           autoCorrect={false}
           placeholder={containerPlaceholder}
+          keyboardType={inputTextType === 'name' ? 'default' : 'number-pad'}
           onChangeText={inputValue => {
             setInputValue(inputValue);
           }}

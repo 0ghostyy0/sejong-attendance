@@ -21,6 +21,8 @@ const ProfileStackNavi = ({navigation}) => {
   const courseNum = useSelector(state => state.courseNum);
   const courseClass = useSelector(state => state.courseClass);
   const courseDept = useSelector(state => state.courseDept);
+  let checkCourseNumber = /^\d{6}$/;
+  let checkClassNumber = /^\d{3}$/;
   let courseData = [];
 
   const pushCourseToStorage = (
@@ -92,20 +94,37 @@ const ProfileStackNavi = ({navigation}) => {
               <Button
                 title="추가"
                 onPress={() => {
-                  courseAddStorage();
-                  Alert.alert(
-                    '과목 추가',
-                    `${courseName}(${courseNum}-${courseClass})\n과목을 추가했어요👻`,
-                    [
-                      {
-                        text: '오키',
-                        onPress: () => navigation.navigate('마이페이지'),
-                      },
-                    ],
-                  );
-                  setTimeout(() => {
-                    navigation.navigate('마이페이지');
-                  }, 10);
+                  if (
+                    !checkCourseNumber.test(courseNum) ||
+                    !checkClassNumber.test(courseClass)
+                  ) {
+                    console.log(courseNum, courseClass);
+                    Alert.alert(
+                      '과목 정보가 잘못됐어요',
+                      `학수번호 숫자 6자리,\n 분반 숫자 3자리인지 확인해주세요.`,
+                      [
+                        {
+                          text: '확인',
+                          onPress: () => {},
+                        },
+                      ],
+                    );
+                  } else {
+                    courseAddStorage();
+                    Alert.alert(
+                      '과목 추가',
+                      `${courseName}(${courseNum}-${courseClass})\n과목을 추가했어요👻`,
+                      [
+                        {
+                          text: '오키',
+                          onPress: () => navigation.navigate('마이페이지'),
+                        },
+                      ],
+                    );
+                    setTimeout(() => {
+                      navigation.navigate('마이페이지');
+                    }, 10);
+                  }
                 }}
               />
             ),
