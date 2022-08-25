@@ -6,6 +6,7 @@ import {
   ScrollView,
   TouchableOpacity,
   StatusBar,
+  RefreshControl,
 } from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 import AttendanceCard from '../../components/attendance/AttendanceCard';
@@ -14,6 +15,10 @@ import Config from 'react-native-config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useIsFocused} from '@react-navigation/native';
 import weekNumberCounter from '../../utils/weekNumberCounter';
+
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
 
 const AttendanceScreen = ({navigation}) => {
   const time = new Date();
@@ -27,6 +32,12 @@ const AttendanceScreen = ({navigation}) => {
   const [thisWeek, setThisWeek] = useState(0);
   const [id, setId] = useState('');
   const [courses, setCourses] = useState([]);
+
+  const [refreshing, setRefreshing] = React.useState(false);
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
 
   useEffect(() => {
     getAsyncStudendtId();
@@ -78,7 +89,11 @@ const AttendanceScreen = ({navigation}) => {
       />
 
       {courses.length > 0 ? (
-        <ScrollView showsVerticalScrollIndicator={false}>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+          }>
           {courses.map((course, idx) => {
             return (
               <AttendanceCard
@@ -90,6 +105,7 @@ const AttendanceScreen = ({navigation}) => {
                 studentId={id}
                 thisWeek={thisWeek}
                 navigation={navigation}
+                refreshing={refreshing}
               />
             );
           })}

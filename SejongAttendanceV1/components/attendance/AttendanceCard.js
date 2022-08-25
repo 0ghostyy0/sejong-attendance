@@ -13,6 +13,7 @@ const AttendanceCard = ({
   classId,
   studentId,
   thisWeek,
+  refreshing,
   navigation,
 }) => {
   const [isParse, setIsParse] = useState(0);
@@ -33,7 +34,7 @@ const AttendanceCard = ({
         setIsParse(data => data + 1);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setLectureData, setUnpassCount, isParse]);
+  }, [setLectureData, setUnpassCount, isParse, refreshing]);
 
   return (
     <View style={styles.component}>

@@ -2,7 +2,7 @@ import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 
-const AttendanceCard = ({navigation, lectureData}) => {
+const CourseCard = ({navigation, lectureData}) => {
   return (
     <View style={styles.component}>
       <View style={styles.card}>
@@ -178,4 +178,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AttendanceCard;
+export default CourseCard;
