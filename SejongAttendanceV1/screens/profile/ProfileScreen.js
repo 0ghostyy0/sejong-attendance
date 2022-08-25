@@ -39,7 +39,7 @@ const ProfileScreen = ({navigation}) => {
       } else {
       }
     } catch (e) {
-      console.log('과목 불러오기 실패');
+      console.log('강의 불러오기 실패');
     }
   };
 
@@ -47,9 +47,9 @@ const ProfileScreen = ({navigation}) => {
     try {
       await AsyncStorage.removeItem(Config.COURSES_KEY);
       setCourses([]);
-      console.log('과목 삭제 완료');
+      console.log('강의 삭제 완료');
     } catch (e) {
-      console.log('과목 삭제 실패');
+      console.log('강의 삭제 실패');
     }
   };
 
@@ -72,7 +72,7 @@ const ProfileScreen = ({navigation}) => {
         <View>
           <Profile />
           <View style={styles.row1}>
-            <Text style={styles.subtitle}>과목 설정</Text>
+            <Text style={styles.subtitle}>강의 설정</Text>
             <TouchableOpacity
               onPress={() => {
                 navigation.navigate('addcourse');
@@ -98,10 +98,10 @@ const ProfileScreen = ({navigation}) => {
               onPress={() => {
                 ActionSheetIOS.showActionSheetWithOptions(
                   {
-                    options: ['취소', '과목 초기화하기'],
+                    options: ['취소', '강의 초기화하기'],
                     destructiveButtonIndex: 1,
                     cancelButtonIndex: 0,
-                    title: `저장된 데이터가 모두 삭제됩니다.\n과목 정보를 삭제하시겠습니까?`,
+                    title: `저장된 데이터가 모두 삭제됩니다.\강의 정보를 삭제하시겠습니까?`,
                   },
                   buttonIndex => {
                     if (buttonIndex === 1) {
@@ -111,7 +111,7 @@ const ProfileScreen = ({navigation}) => {
                 );
               }}>
               <Text style={{...styles.text, color: '#eb5828'}}>
-                모든 과목 정보 초기화
+                모든 강의 정보 초기화
               </Text>
             </TouchableOpacity>
           </View>

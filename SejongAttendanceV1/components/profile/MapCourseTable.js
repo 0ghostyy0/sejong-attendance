@@ -26,9 +26,16 @@ const MapCourseTable = ({navigation, courses}) => {
           </Section>
         </TableView>
       ) : (
-        <Text style={styles.addCourseText}>
-          오른쪽 위의 + 버튼을 눌러 과목을 추가해주세요.
-        </Text>
+        <View style={styles.emptyContainer}>
+          <View>
+            <Text style={styles.addCourseText}>
+              아직 추가된 강의 정보가 없어요.
+            </Text>
+            <Text style={styles.addCourseText}>
+              오른쪽 위의 + 버튼을 눌러 강의를 추가해주세요.
+            </Text>
+          </View>
+        </View>
       )}
     </View>
   );
@@ -50,8 +57,11 @@ const styles = StyleSheet.create({
     color: '#979799',
     alignSelf: 'center',
     marginHorizontal: width * 60,
-    marginTop: height * 30,
-    marginBottom: height * 14,
+    marginTop: height * 4,
+  },
+  emptyContainer: {
+    height: height * 140,
+    justifyContent: 'center',
   },
 });
 

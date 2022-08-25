@@ -48,9 +48,9 @@ const AddCourseScreen = ({
       <StatusBar barStyle={'light-content'} />
       <View style={styles.container}>
         <CourseAddView
-          header={'과목이름'}
-          containerName={'과목명'}
-          containerPlaceholder={'과목 이름'}
+          header={'강의이름'}
+          containerName={'강의명'}
+          containerPlaceholder={'강의 이름'}
           footer={null}
           inputTextType={'name'}
         />
@@ -69,18 +69,18 @@ const AddCourseScreen = ({
           inputTextType={'class'}
         />
         <CourseAddSelect
-          header={'단과대학'}
+          header={'개설 단과대학'}
           footer={
-            '해당 과목의 주관 단과대학을 입력해주세요.\n예) 동양고전강독 - 대양휴머니티칼리지'
+            '해당 강의의 주관 단과대학을 입력해주세요.\n예) 동양고전강독 - 대양휴머니티칼리지'
           }
           navi={'addcollege'}
           navigation={navigation}
           selectType={'college'}
         />
         <CourseAddSelect
-          header={'학과'}
+          header={'개설 학과'}
           footer={
-            '해당 과목의 주관 학과를 입력해주세요.\n예) C프로그래밍 - 컴퓨터공학과\n*대양휴머니티칼리지는 단과대학과 학과의 명칭이 동일합니다.'
+            '해당 강의의 주관 학과를 입력해주세요.\n예) C프로그래밍 - 컴퓨터공학과\n*대양휴머니티칼리지는 단과대학과 학과의 명칭이 동일합니다.'
           }
           navi={'adddept'}
           navigation={navigation}

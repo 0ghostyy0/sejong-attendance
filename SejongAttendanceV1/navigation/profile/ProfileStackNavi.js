@@ -78,7 +78,7 @@ const ProfileStackNavi = ({navigation}) => {
           component={AddCourseScreen}
           options={{
             headerShown: true,
-            headerTitle: '과목 추가',
+            headerTitle: '강의 추가',
             headerBackTitle: '출석 확인하기',
             headerStyle: {backgroundColor: '#f2f2f6'},
             headerShadowVisible: false,
@@ -98,9 +98,8 @@ const ProfileStackNavi = ({navigation}) => {
                     !checkCourseNumber.test(courseNum) ||
                     !checkClassNumber.test(courseClass)
                   ) {
-                    console.log(courseNum, courseClass);
                     Alert.alert(
-                      '과목 정보가 잘못됐어요',
+                      '강의 정보가 잘못됐어요',
                       `학수번호 숫자 6자리,\n 분반 숫자 3자리인지 확인해주세요.`,
                       [
                         {
@@ -112,8 +111,8 @@ const ProfileStackNavi = ({navigation}) => {
                   } else {
                     courseAddStorage();
                     Alert.alert(
-                      '과목 추가',
-                      `${courseName}(${courseNum}-${courseClass})\n과목을 추가했어요👻`,
+                      '강의 추가',
+                      `${courseName}(${courseNum}-${courseClass})\강의를 추가했어요.👻`,
                       [
                         {
                           text: '오키',

@@ -44,7 +44,7 @@ const AttendanceScreen = ({navigation}) => {
         setCourses(data.courses);
       }
     } catch (e) {
-      console.log('과목 불러오기 실패');
+      console.log('강의 불러오기 실패');
     }
   };
 
