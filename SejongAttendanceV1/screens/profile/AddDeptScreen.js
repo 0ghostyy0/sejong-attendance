@@ -63,6 +63,7 @@ const AddDeptScreen = ({
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f2f2f6',
+    height: '100%',
     marginTop: height * 18,
     marginBottom: height * 20,
   },

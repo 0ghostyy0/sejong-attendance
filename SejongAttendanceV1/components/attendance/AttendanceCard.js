@@ -32,6 +32,7 @@ const AttendanceCard = ({
         console.log(error);
         setIsParse(data => data + 1);
       });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setLectureData, setUnpassCount, isParse]);
 
   return (

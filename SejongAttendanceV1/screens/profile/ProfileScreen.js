@@ -153,6 +153,7 @@ const ProfileScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#f2f2f6',
+    height: '100%',
     //height: height * 760,
   },
   subtitle: {
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
   deleteText: {
     marginLeft: width * 25,
     marginRight: width * 34,
-    marginBottom: height * 250,
+    marginBottom: height * 40,
     marginVertical: height * 8,
     fontSize: scale * 10,
     color: '#86858c',
