@@ -26,8 +26,23 @@ const AttendanceCard = ({navigation, lectureData}) => {
             style={styles.courseSubTitle}
             numberOfLines={1}
             ellipsizeMode={'tail'}>
-            {lectureData.start_date.substr(0, 4)} ~{' '}
-            {lectureData.end_date.substr(0, 4)} | {lectureData.location}
+            {lectureData.start_date.substr(0, 2) ===
+            lectureData.end_date.substr(0, 2)
+              ? Number(lectureData.start_date.substr(0, 2)) +
+                '월' +
+                Number(lectureData.start_date.substr(2, 2)) +
+                '일-' +
+                Number(lectureData.end_date.substr(2, 2)) +
+                '일'
+              : Number(lectureData.start_date.substr(0, 2)) +
+                '월 ' +
+                Number(lectureData.start_date.substr(2, 2)) +
+                '일-' +
+                Number(lectureData.end_date.substr(0, 2)) +
+                '월 ' +
+                Number(lectureData.end_date.substr(2, 2)) +
+                '일'}
+            {' | ' + lectureData.location}
           </Text>
         </View>
         <View style={styles.row3}>
