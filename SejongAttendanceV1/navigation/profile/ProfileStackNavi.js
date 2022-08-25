@@ -95,6 +95,22 @@ const ProfileStackNavi = ({navigation}) => {
                 title="추가"
                 onPress={() => {
                   if (
+                    !courseNum.length ||
+                    !courseName.length ||
+                    !courseDept.length ||
+                    !courseName.length
+                  ) {
+                    Alert.alert(
+                      '강의 정보를 완성해주세요.',
+                      `정보를 전부 입력해야\n 데이터를 받아올 수 있어요.`,
+                      [
+                        {
+                          text: '확인',
+                          onPress: () => {},
+                        },
+                      ],
+                    );
+                  } else if (
                     !checkCourseNumber.test(courseNum) ||
                     !checkClassNumber.test(courseClass)
                   ) {
