@@ -152,7 +152,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: height * 14,
+    marginTop: height * 15,
   },
   courseNameContainer: {
     width: width * 200,
@@ -184,6 +184,7 @@ const styles = StyleSheet.create({
   },
   numOfAtendanceCaptionEmoji: {
     marginRight: width * 16,
+    paddingBottom: height * 3,
     fontSize: scale * 12,
     color: '#8a8a8d',
     alignItems: 'baseline',

@@ -13,8 +13,10 @@ const CreditScreen = () => {
       </View>
       <View style={styles.row2}>
         <View Style={styles.profileContainer}>
-          <View style={styles.profileImg}>
-            <Jin width={width * 60} height={height * 60} />
+          <View style={{width: width * 120}}>
+            <View style={styles.profileImg}>
+              <Jin width={width * 60} height={height * 60} />
+            </View>
           </View>
           <Text style={styles.profileTitle}>이진형 · CE 18</Text>
         </View>
@@ -68,6 +70,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   row2: {
+    width: '100%',
     marginTop: height * 24,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -84,22 +87,19 @@ const styles = StyleSheet.create({
   },
   profileContainer: {
     justifyContent: 'center',
-    marginLeft: width * 10,
-    marginRight: width * 10,
+    width: width * 200,
+    height: height * 100,
+    backgroundColor: 'red',
   },
   profileImg: {
     backgroundColor: '#d9d9d9',
     width: scale * 80,
     height: scale * 80,
     borderRadius: scale * 50,
-    marginLeft: width * 18,
-    marginRight: width * 18,
     alignItems: 'center',
     justifyContent: 'center',
   },
   profileTitle: {
-    marginLeft: width * 18,
-    marginRight: width * 18,
     marginTop: height * 6,
     fontSize: scale * 12,
     fontWeight: 'bold',
