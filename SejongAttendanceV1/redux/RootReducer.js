@@ -6,7 +6,17 @@ const initialState = {
   courseDept: -1,
   courseCollegeName: '',
   courseDeptName: '',
-  unPassLectures: [],
+  unPassLectures: [
+    {
+      location: '1주차',
+      progress: 100,
+      is_pass: true,
+      start_date: '02280000',
+      end_date: '03152359',
+      lecture_name: '무통1-1',
+      lecture_status: 2,
+    },
+  ],
 };
 
 const rootReducer = (state = initialState, action) => {
