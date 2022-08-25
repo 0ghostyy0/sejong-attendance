@@ -45,6 +45,12 @@ const styles = StyleSheet.create({
   tableview: {
     marginHorizontal: width * 16,
   },
+  shadow: {
+    shadowRadius: 4,
+    shadowColor: '#000',
+    shadowOpacity: 0.05,
+    shadowOffset: {height: 2},
+  },
   addIcon: {
     fontSize: scale * 20,
     color: '#007aff',
@@ -56,7 +62,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#979799',
     alignSelf: 'center',
-    marginHorizontal: width * 60,
+    marginHorizontal: width * 10,
     marginTop: height * 4,
   },
   emptyContainer: {
