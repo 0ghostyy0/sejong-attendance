@@ -6,6 +6,7 @@ const initialState = {
   courseDept: -1,
   courseCollegeName: '',
   courseDeptName: '',
+  unPassLectures: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -44,6 +45,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         courseDeptName: action.payload,
+      };
+    case 'SET_UNPASS_LECTURES':
+      return {
+        ...state,
+        unPassLectures: state.unPassLectures.concat(action.payload),
       };
     default:
       return state;

@@ -44,6 +44,7 @@ const BottomTabNavi = () => {
         name="analysis"
         component={AnalysisScreen}
         options={{
+          headerShown: false,
           title: '급한거',
           tabBarIcon: ({name, focused, size, color}) => {
             name = focused ? 'flash' : 'flash-outline';

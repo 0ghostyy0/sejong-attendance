@@ -32,3 +32,8 @@ export const setCourseDeptName = data => ({
   type: 'SET_COURSE_DEPT_NAME',
   payload: data,
 });
+
+export const setUnpassLectures = data => ({
+  type: 'SET_UNPASS_LECTURES',
+  payload: data,
+});
