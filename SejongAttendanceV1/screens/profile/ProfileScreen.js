@@ -166,12 +166,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
   },
-  shadow: {
-    shadowRadius: 4,
-    shadowColor: '#000',
-    shadowOpacity: 0.05,
-    shadowOffset: {height: 2},
-  },
   addIcon: {
     fontSize: scale * 20,
     color: '#007aff',

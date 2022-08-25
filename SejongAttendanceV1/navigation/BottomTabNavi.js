@@ -8,7 +8,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import AnalysisIcon from '../assets/images/mdi_sign-caution.svg';
-import {scale, height, width} from '../config/globalStyles';
+import {scale, height} from '../config/globalStyles';
 
 const Tab = createBottomTabNavigator();
 
