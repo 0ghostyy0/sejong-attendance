@@ -8,7 +8,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import AnalysisIcon from '../assets/images/mdi_sign-caution.svg';
-import {scale} from '../config/globalStyles';
+import {scale, height} from '../config/globalStyles';
 
 const Tab = createBottomTabNavigator();
 
@@ -19,6 +19,11 @@ const BottomTabNavi = () => {
       screenOptions={() => ({
         tabBarActiveTintColor: '#352214',
         tabBarInactiveTintColor: '#979799',
+        tabBarStyle: {
+          height: height * 85,
+          alignContent: 'center',
+          paddingBottom: height * 25,
+        },
       })}>
       <Tab.Screen
         name="attendance"
