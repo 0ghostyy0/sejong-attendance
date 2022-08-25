@@ -24,7 +24,7 @@ const AttendanceStackNavi = () => {
           // headerTransparent: true,
           headerTitle: '',
           headerBackTitle: '출석 확인하기',
-          headerStyle: {backgroundColor: '#f2f2f6'},
+          headerStyle: {backgroundColor: '#f4f3f6'},
           headerShadowVisible: false,
         }}
       />

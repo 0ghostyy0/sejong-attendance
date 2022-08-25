@@ -20,7 +20,7 @@ const LoginStackNavi = () => {
         component={LoginScreen}
         options={{
           headerShown: false,
-          headerStyle: {backgroundColor: '#f2f2f6'},
+          headerStyle: {backgroundColor: '#f4f3f6'},
         }}
       />
     </Stack.Navigator>

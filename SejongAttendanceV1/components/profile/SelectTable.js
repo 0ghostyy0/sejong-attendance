@@ -53,7 +53,7 @@ const SelectTable = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f2f2f6',
+    backgroundColor: '#f4f3f6',
   },
   cell: {
     //marginVertical: height * 2,

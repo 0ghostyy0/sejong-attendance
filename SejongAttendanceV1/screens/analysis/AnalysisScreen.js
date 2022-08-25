@@ -11,7 +11,7 @@ const AnalysisScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f2f2f6',
+    backgroundColor: '#f4f3f6',
   },
 });
 export default AnalysisScreen;

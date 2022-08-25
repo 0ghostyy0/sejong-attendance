@@ -42,7 +42,7 @@ const AddCourseScreen = ({
 
   return (
     <ScrollView
-      style={{backgroundColor: '#f2f2f6'}}
+      style={{backgroundColor: '#f4f3f6'}}
       showsVerticalScrollIndicator={false}
       alwaysBounceVertical={false}>
       <StatusBar barStyle={'light-content'} />
@@ -93,7 +93,7 @@ const AddCourseScreen = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f2f2f6',
+    backgroundColor: '#f4f3f6',
   },
 });
 

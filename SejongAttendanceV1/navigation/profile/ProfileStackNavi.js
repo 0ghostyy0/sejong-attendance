@@ -68,7 +68,7 @@ const ProfileStackNavi = ({navigation}) => {
         options={{
           headerLargeTitle: true,
           headerLargeTitleStyle: {fontSize: scale * 28},
-          headerStyle: {backgroundColor: '#f2f2f6'},
+          headerStyle: {backgroundColor: '#f4f3f6'},
           headerShadowVisible: false,
         }}
       />
@@ -80,7 +80,7 @@ const ProfileStackNavi = ({navigation}) => {
             headerShown: true,
             headerTitle: '강의 추가',
             headerBackTitle: '출석 확인하기',
-            headerStyle: {backgroundColor: '#f2f2f6'},
+            headerStyle: {backgroundColor: '#f4f3f6'},
             headerShadowVisible: false,
             headerLeft: () => (
               <Button
@@ -151,7 +151,7 @@ const ProfileStackNavi = ({navigation}) => {
           options={{
             headerShown: true,
             headerTitle: '단과대학',
-            headerStyle: {backgroundColor: '#f2f2f6'},
+            headerStyle: {backgroundColor: '#f4f3f6'},
             headerShadowVisible: false,
             headerBackTitleVisible: true,
             headerBackTitle: '출석 확인하기',
@@ -171,7 +171,7 @@ const ProfileStackNavi = ({navigation}) => {
           options={{
             headerShown: true,
             headerTitle: '학과',
-            headerStyle: {backgroundColor: '#f2f2f6'},
+            headerStyle: {backgroundColor: '#f4f3f6'},
             headerShadowVisible: false,
             headerRight: () => (
               <Button
@@ -191,7 +191,7 @@ const ProfileStackNavi = ({navigation}) => {
           headerShown: true,
           headerLargeTitle: false,
           headerTitle: '',
-          headerStyle: {backgroundColor: '#f2f2f6'},
+          headerStyle: {backgroundColor: '#f4f3f6'},
           headerShadowVisible: false,
         }}
       />

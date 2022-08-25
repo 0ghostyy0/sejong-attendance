@@ -39,7 +39,7 @@ const AddCollegeScreen = ({
   const colleges = collegesData.colleges;
 
   return (
-    <View style={{backgroundColor: '#f2f2f6'}}>
+    <View style={{backgroundColor: '#f4f3f6'}}>
       <ScrollView
         showsVerticalScrollIndicator={false}
         alwaysBounceVertical={false}
@@ -71,7 +71,7 @@ const AddCollegeScreen = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#f2f2f6',
+    backgroundColor: '#f4f3f6',
     height: '100%',
     marginTop: height * 18,
     marginBottom: height * 20,

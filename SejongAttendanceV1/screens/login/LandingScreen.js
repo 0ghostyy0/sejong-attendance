@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     flex: 1,
     //flexDirection: 'column',
     //justifyContent: 'space-between',
-    backgroundColor: '#f2f2f6',
+    backgroundColor: '#f4f3f6',
   },
   logo: {
     alignItems: 'center',

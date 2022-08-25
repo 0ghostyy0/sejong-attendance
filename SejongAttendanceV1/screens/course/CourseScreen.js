@@ -58,7 +58,7 @@ const CourseScreen = ({navigation, route}) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f2f6',
+    backgroundColor: '#f4f3f6',
   },
   title: {
     fontSize: scale * 24,
