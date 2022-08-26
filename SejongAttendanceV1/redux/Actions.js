@@ -42,8 +42,3 @@ export const setStudentId = data => ({
   type: 'SET_STUDENT_ID',
   payload: data,
 });
-
-export const setUnpassLectures = data => ({
-  type: 'SET_UNPASS_LECTURES',
-  payload: data,
-});
