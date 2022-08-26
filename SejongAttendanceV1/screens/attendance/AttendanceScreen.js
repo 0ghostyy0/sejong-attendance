@@ -15,6 +15,8 @@ import Config from 'react-native-config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useIsFocused} from '@react-navigation/native';
 import weekNumberCounter from '../../utils/weekNumberCounter';
+import {useDispatch} from 'react-redux';
+import {setCourseList, setStudentId} from '../../redux/Actions';
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -32,6 +34,7 @@ const AttendanceScreen = ({navigation}) => {
   const [thisWeek, setThisWeek] = useState(0);
   const [id, setId] = useState('');
   const [courses, setCourses] = useState([]);
+  const dispatch = useDispatch();
 
   const [refreshing, setRefreshing] = React.useState(false);
   const onRefresh = React.useCallback(() => {
@@ -53,6 +56,7 @@ const AttendanceScreen = ({navigation}) => {
       if (value !== null) {
         const data = JSON.parse(value);
         setCourses(data.courses);
+        dispatch(setCourseList(data.courses));
       }
     } catch (e) {
       console.log('강의 불러오기 실패');
@@ -65,6 +69,7 @@ const AttendanceScreen = ({navigation}) => {
       if (value !== null) {
         const data = JSON.parse(value);
         setId(data.id);
+        dispatch(setStudentId(data.id));
       }
     } catch (e) {
       console.log('학번 불러오기 실패');

@@ -87,7 +87,7 @@ const ProfileScreen = ({navigation}) => {
               style={{...styles.btn, ...styles.row1}}
               onPress={() => navigation.navigate('credit')}>
               <Text style={{...styles.text, alignSelf: 'center'}}>
-                만든 솨람
+                만든 사람
               </Text>
               <Entypo name={'chevron-thin-right'} style={styles.chevronIcon} />
             </TouchableOpacity>

@@ -6,6 +6,7 @@ const initialState = {
   courseDept: -1,
   courseCollegeName: '',
   courseDeptName: '',
+  courseList: [],
   unPassLectures: [
     {
       location: '1주차',
@@ -55,6 +56,16 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         courseDeptName: action.payload,
+      };
+    case 'SET_COURSE_LIST':
+      return {
+        ...state,
+        courseList: action.payload,
+      };
+    case 'SET_STUDENT_ID':
+      return {
+        ...state,
+        studentId: action.payload,
       };
     case 'SET_UNPASS_LECTURES':
       return {
