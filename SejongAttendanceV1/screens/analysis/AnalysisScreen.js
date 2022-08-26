@@ -1,8 +1,19 @@
 import React, {useState} from 'react';
-import {StyleSheet, View, Text, ScrollView, StatusBar} from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  StatusBar,
+  RefreshControl,
+} from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 import UnPassCourseCard from '../../components/course/UnPassCourseCard';
 import {useSelector} from 'react-redux';
+
+const wait = timeout => {
+  return new Promise(resolve => setTimeout(resolve, timeout));
+};
 
 const AnalysisScreen = () => {
   const studentId = useSelector(state => state.studentId);
@@ -10,11 +21,21 @@ const AnalysisScreen = () => {
   const [isThere, setIsThere] = useState(false);
   const [flag, setFlag] = useState(false);
 
+  const [refreshing, setRefreshing] = React.useState(false);
+  const onRefresh = React.useCallback(() => {
+    setRefreshing(true);
+    wait(1000).then(() => setRefreshing(false));
+  }, []);
+
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
       <Text style={styles.title}>급한거🔥</Text>
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }>
         {courseList.length > 0 ? (
           courseList.map((course, idx) => {
             return (
@@ -26,6 +47,7 @@ const AnalysisScreen = () => {
                 studentId={studentId}
                 isThere={isThere}
                 setIsThere={setIsThere}
+                refreshing={refreshing}
               />
             );
           })
