@@ -10,6 +10,7 @@ import ProfileScreen from '../../screens/profile/ProfileScreen';
 import AddCollegeScreen from '../../screens/profile/AddCollegeScreen';
 import AddDeptScreen from '../../screens/profile/AddDeptScreen';
 import CreditScreen from '../../screens/profile/CreditScreen';
+import HelpScreen from '../../screens/profile/HelpScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 //Redux
 import {useSelector} from 'react-redux';
@@ -184,6 +185,17 @@ const ProfileStackNavi = ({navigation}) => {
           }}
         />
       </Stack.Group>
+      <Stack.Screen
+        name="help"
+        component={HelpScreen}
+        options={{
+          headerShown: true,
+          headerLargeTitle: false,
+          headerTitle: '',
+          headerStyle: {backgroundColor: '#f4f3f6'},
+          headerShadowVisible: false,
+        }}
+      />
       <Stack.Screen
         name="credit"
         component={CreditScreen}
