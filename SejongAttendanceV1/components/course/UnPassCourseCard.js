@@ -11,6 +11,7 @@ const UnPassCourseCard = ({
   studentId,
   isThere,
   setIsThere,
+  refreshing,
 }) => {
   const [lectureData, setLectureData] = useState([]);
   const [isParse, setIsParse] = useState(0);
@@ -31,7 +32,7 @@ const UnPassCourseCard = ({
     console.log('lecture');
     console.log(lectureData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setLectureData, isParse]);
+  }, [setLectureData, isParse, refreshing]);
 
   return (
     <View>
