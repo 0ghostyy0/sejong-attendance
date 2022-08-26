@@ -1,0 +1,54 @@
+{
+  "name": "SejongAttendanceV1",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint .",
+    "postinstall": "rndebugger-open"
+  },
+  "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.17.7",
+    "@react-native-segmented-control/segmented-control": "2.4.0",
+    "@react-navigation/bottom-tabs": "^6.3.2",
+    "@react-navigation/native": "^6.0.11",
+    "@react-navigation/native-stack": "^6.7.0",
+    "axios": "^0.27.2",
+    "expo": "46.0.7",
+    "expo-file-system": "14.1.0",
+    "expo-modules-core": "0.11.3",
+    "install-expo-modules": "0.3.6",
+    "react": "18.0.0",
+    "react-native": "0.69.2",
+    "react-native-config": "^1.4.6",
+    "react-native-debugger-open": "0.3.25",
+    "react-native-exit-app": "^1.1.0",
+    "react-native-safe-area-context": "^4.3.1",
+    "react-native-screens": "^3.15.0",
+    "react-native-splash-screen": "3.3.0",
+    "react-native-svg": "^12.4.3",
+    "react-native-svg-transformer": "^1.0.0",
+    "react-native-tableview-simple": "4.3.1",
+    "react-native-vector-icons": "9.2.0",
+    "react-redux": "8.0.2",
+    "redux": "4.2.0",
+    "redux-devtools-extension": "2.13.9",
+    "xlsx": "0.18.5"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/runtime": "^7.12.5",
+    "@react-native-community/eslint-config": "^2.0.0",
+    "babel-jest": "^26.6.3",
+    "eslint": "^7.32.0",
+    "jest": "^26.6.3",
+    "metro-react-native-babel-preset": "^0.70.3",
+    "react-test-renderer": "18.0.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
