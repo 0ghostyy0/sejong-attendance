@@ -8,6 +8,7 @@ const AnalysisScreen = () => {
   const studentId = useSelector(state => state.studentId);
   const courseList = useSelector(state => state.courseList);
   const [isThere, setIsThere] = useState(false);
+  const [flag, setFlag] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -23,16 +24,18 @@ const AnalysisScreen = () => {
                 courseId={course.course_id}
                 classId={course.class_id}
                 studentId={studentId}
+                isThere={isThere}
                 setIsThere={setIsThere}
               />
             );
           })
         ) : (
           <View style={styles.emptyAttendanceContainer}>
+            {!flag ? setFlag(true) : null}
             <Text style={styles.emptyAttendanceText}>과목을 추가해주세요.</Text>
           </View>
         )}
-        {!isThere ? (
+        {!isThere && !flag ? (
           <View style={styles.emptyAttendanceContainer}>
             <Text style={styles.emptyAttendanceText}>모두 완료했어요 :)</Text>
           </View>
