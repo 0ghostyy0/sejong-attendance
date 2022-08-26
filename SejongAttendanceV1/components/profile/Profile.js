@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {StyleSheet, View, Text, Image} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import Freshman from '../../assets/images/freshman.svg';
 import Sophomore from '../../assets/images/sophomore.svg';
 import Junior from '../../assets/images/junior.svg';

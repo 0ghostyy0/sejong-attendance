@@ -1,5 +1,4 @@
 import React from 'react';
-import {Text} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import AnalysisScreen from '../screens/analysis/AnalysisScreen';
 import AttendanceStackNavi from './attendance/AttendanceStackNavi';
@@ -7,8 +6,7 @@ import ProfileStackNavi from './profile/ProfileStackNavi';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 
-import AnalysisIcon from '../assets/images/mdi_sign-caution.svg';
-import {scale, height} from '../config/globalStyles';
+import {height} from '../config/globalStyles';
 
 const Tab = createBottomTabNavigator();
 

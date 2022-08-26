@@ -1,6 +1,5 @@
 import XLSX from 'xlsx';
 import * as FileSystem from 'expo-file-system';
-import {executeNativeBackPress} from 'react-native-screens';
 
 export const getCurrentDate = () => {
   let time = new Date();

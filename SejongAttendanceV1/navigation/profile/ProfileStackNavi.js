@@ -1,6 +1,5 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {CommonActions} from '@react-navigation/native';
 import {Button, Alert} from 'react-native';
 import {scale} from '../../config/globalStyles';
 import Config from 'react-native-config';
