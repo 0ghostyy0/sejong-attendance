@@ -138,9 +138,9 @@ const ProfileScreen = ({navigation}) => {
                   },
                   buttonIndex => {
                     if (buttonIndex === 1) {
-                      removeStudent();
-                      removeCourses();
-                      RNExitApp.exitApp();
+                      removeStudent()
+                        .then(() => removeCourses())
+                        .then(() => RNExitApp.exitApp());
                     }
                   },
                 );
