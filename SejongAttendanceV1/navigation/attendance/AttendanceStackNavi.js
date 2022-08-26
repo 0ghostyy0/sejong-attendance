@@ -2,7 +2,6 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import AttendanceScreen from '../../screens/attendance/AttendanceScreen';
 import CourseScreen from '../../screens/course/CourseScreen';
-import {Modal} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 

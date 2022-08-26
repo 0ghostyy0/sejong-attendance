@@ -85,6 +85,16 @@ const ProfileScreen = ({navigation}) => {
           <View style={styles.margin1}>
             <TouchableOpacity
               style={{...styles.btn, ...styles.row1}}
+              onPress={() => navigation.navigate('help')}>
+              <Text style={{...styles.text, alignSelf: 'center'}}>
+                자주 묻는 질문
+              </Text>
+              <Entypo name={'chevron-thin-right'} style={styles.chevronIcon} />
+            </TouchableOpacity>
+          </View>
+          <View style={styles.margin1}>
+            <TouchableOpacity
+              style={{...styles.btn, ...styles.row1}}
               onPress={() => navigation.navigate('credit')}>
               <Text style={{...styles.text, alignSelf: 'center'}}>
                 만든 사람

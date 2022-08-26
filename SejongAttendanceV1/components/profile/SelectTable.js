@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {Cell, Separator} from 'react-native-tableview-simple';
-import {height, width, scale} from '../../config/globalStyles';
+import {Cell} from 'react-native-tableview-simple';
+import {scale} from '../../config/globalStyles';
 
 const SelectTable = ({
   id,

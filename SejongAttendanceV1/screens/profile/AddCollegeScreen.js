@@ -1,8 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {StyleSheet, View, StatusBar, ScrollView} from 'react-native';
 import {TableView, Section} from 'react-native-tableview-simple';
 import SelectTable from '../../components/profile/SelectTable';
-import {height, width, scale} from '../../config/globalStyles';
+import {height, width} from '../../config/globalStyles';
 //Redux
 import {connect} from 'react-redux';
 import {
