@@ -6,23 +6,10 @@ import Junior from '../../assets/images/junior.svg';
 import Senior from '../../assets/images/senior.svg';
 import {height, width, scale} from '../../config/globalStyles';
 
-import Config from 'react-native-config';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-
-const getStudentId = async setId => {
-  try {
-    const value = await AsyncStorage.getItem(Config.STUDENT_ID_KEY);
-    if (value !== null) {
-      const data = JSON.parse(value);
-      setId(data.id);
-    }
-  } catch (e) {
-    console.log(e.message);
-  }
-};
+import {useSelector} from 'react-redux';
 
 const Profile = () => {
-  const [id, setId] = useState('');
+  const studentId = useSelector(state => state.studentId);
   const time = new Date();
   const year = time.getFullYear();
   const month = time.getMonth();
@@ -55,26 +42,22 @@ const Profile = () => {
     semester = '겨울';
   }
 
-  useEffect(() => {
-    getStudentId(setId);
-  }, []);
-
   return (
     <View style={styles.component}>
       <View style={styles.row}>
         <View style={styles.profileImg}>
-          {id.substring(0, 2) === String(year).substring(2, 4) ? (
+          {studentId.substring(0, 2) === String(year).substring(2, 4) ? (
             <Freshman width={width * 40} height={height * 40} />
-          ) : id.substring(0, 2) === String(year - 1).substring(2, 4) ? (
+          ) : studentId.substring(0, 2) === String(year - 1).substring(2, 4) ? (
             <Sophomore width={width * 40} height={height * 40} />
-          ) : id.substring(0, 2) === String(year - 2).substring(2, 4) ? (
+          ) : studentId.substring(0, 2) === String(year - 2).substring(2, 4) ? (
             <Junior width={width * 40} height={height * 40} />
           ) : (
             <Senior width={width * 40} height={height * 40} />
           )}
         </View>
         <View style={styles.studentInfoContainer}>
-          <Text style={styles.studentID}>{id}</Text>
+          <Text style={styles.studentID}>{studentId}</Text>
           <Text style={styles.semester}>{`${year}학년도 ${semester}학기`}</Text>
         </View>
       </View>

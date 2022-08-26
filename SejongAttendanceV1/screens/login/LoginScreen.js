@@ -56,7 +56,6 @@ const LoginScreen = ({navigation}) => {
       ]);
     } finally {
       setLoading(false);
-      navigation.navigate('home'); // todo: disable on release
     }
   };
 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {StyleSheet, View, Text} from 'react-native';
 import parseXlsxData from '../../utils/parseXlsxData';
 import CourseCard from './CourseCard';
@@ -15,6 +15,18 @@ const UnPassCourseCard = ({
 }) => {
   const [lectureData, setLectureData] = useState([]);
   const [isParse, setIsParse] = useState(0);
+  const [flag, setFlag] = useState(false);
+  const mounted = useRef(false);
+
+  useEffect(() => {
+    if (!mounted.current) {
+      mounted.current = true;
+    } else {
+      if (flag === false) {
+        setIsThere(true);
+      }
+    }
+  }, [isThere]);
 
   useEffect(() => {
     console.log('unpasscoursecard');
@@ -39,7 +51,9 @@ const UnPassCourseCard = ({
       {lectureData !== undefined ? (
         lectureData.map((lecture, idx) => {
           if (lecture.lecture_status === 3) {
-            setIsThere(val => val + 1);
+            if (!flag) {
+              setFlag(true);
+            }
             return <CourseCard key={idx} lectureData={lecture} />;
           }
         })
@@ -54,7 +68,7 @@ const UnPassCourseCard = ({
 
 const styles = StyleSheet.create({
   emptyAttendanceContainer: {
-    marginTop: height * 190,
+    marginTop: height * 210,
     alignItems: 'center',
     justifyContent: 'center',
   },
