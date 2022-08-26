@@ -9,11 +9,11 @@ const UnPassCourseCard = ({
   courseId,
   classId,
   studentId,
-  isThere,
   setIsThere,
 }) => {
   const [lectureData, setLectureData] = useState([]);
   const [isParse, setIsParse] = useState(0);
+  const [flag, setFlag] = useState(false);
 
   useEffect(() => {
     console.log('unpasscoursecard');
@@ -38,7 +38,10 @@ const UnPassCourseCard = ({
       {lectureData !== undefined ? (
         lectureData.map((lecture, idx) => {
           if (lecture.lecture_status === 3) {
-            setIsThere(val => val + 1);
+            if (!flag) {
+              setIsThere(true);
+              setFlag(true);
+            }
             return <CourseCard key={idx} lectureData={lecture} />;
           }
         })
@@ -53,7 +56,7 @@ const UnPassCourseCard = ({
 
 const styles = StyleSheet.create({
   emptyAttendanceContainer: {
-    marginTop: height * 190,
+    marginTop: height * 210,
     alignItems: 'center',
     justifyContent: 'center',
   },

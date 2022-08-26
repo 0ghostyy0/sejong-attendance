@@ -7,7 +7,7 @@ import {useSelector} from 'react-redux';
 const AnalysisScreen = () => {
   const studentId = useSelector(state => state.studentId);
   const courseList = useSelector(state => state.courseList);
-  const [isThere, setIsThere] = useState(-1);
+  const [isThere, setIsThere] = useState(false);
 
   return (
     <View style={styles.container}>
@@ -23,16 +23,20 @@ const AnalysisScreen = () => {
                 courseId={course.course_id}
                 classId={course.class_id}
                 studentId={studentId}
-                isThere={isThere}
                 setIsThere={setIsThere}
               />
             );
           })
         ) : (
           <View style={styles.emptyAttendanceContainer}>
-            <Text style={styles.emptyAttendanceText}>과목 추가해주세요.</Text>
+            <Text style={styles.emptyAttendanceText}>과목을 추가해주세요.</Text>
           </View>
         )}
+        {!isThere ? (
+          <View style={styles.emptyAttendanceContainer}>
+            <Text style={styles.emptyAttendanceText}>모두 완료했어요 :)</Text>
+          </View>
+        ) : null}
       </ScrollView>
     </View>
   );
@@ -57,7 +61,7 @@ const styles = StyleSheet.create({
     marginTop: height * 8,
   },
   emptyAttendanceContainer: {
-    marginTop: height * 190,
+    marginTop: height * 210,
     alignItems: 'center',
     justifyContent: 'center',
   },
