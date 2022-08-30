@@ -44,13 +44,14 @@ const AttendanceScreen = ({navigation}) => {
 
   useEffect(() => {
     getAsyncStudendtId();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     getAsyncCourses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocused]);
+
+  // useEffect(() => {
+  //   getAsyncCourses();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [isFocused]);
 
   const getAsyncCourses = async () => {
     try {
@@ -112,7 +113,8 @@ const AttendanceScreen = ({navigation}) => {
                 studentId={id}
                 thisWeek={thisWeek}
                 navigation={navigation}
-                refreshing={refreshing}
+                refreshing={setRefreshing}
+                isFocused={isFocused}
               />
             );
           })}
