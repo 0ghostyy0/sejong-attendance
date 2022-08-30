@@ -12,7 +12,8 @@ import CreditScreen from '../../screens/profile/CreditScreen';
 import HelpScreen from '../../screens/profile/HelpScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 //Redux
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import {setCourseList} from '../../redux/Actions';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,7 @@ const ProfileStackNavi = ({navigation}) => {
   let checkCourseNumber = /^\d{6}$/;
   let checkClassNumber = /^\d{3}$/;
   let courseData = [];
+  const dispatch = useDispatch();
 
   const pushCourseToStorage = (
     courseName,
@@ -47,8 +49,10 @@ const ProfileStackNavi = ({navigation}) => {
         curValue = JSON.parse(oldValue).courses;
         curValue.push(courseData[0]);
       }
+      dispatch(setCourseList(curValue));
       const courses = JSON.stringify({courses: curValue});
       await AsyncStorage.setItem(Config.COURSES_KEY, courses);
+      return courses;
     } catch (error) {
       console.log('저장 실패');
       Alert.alert('저장 실패', '죄송합니다.\n다시 시도해주세요...죄송', [
@@ -128,7 +132,7 @@ const ProfileStackNavi = ({navigation}) => {
                     courseAddStorage();
                     Alert.alert(
                       '강의 추가',
-                      `${courseName}(${courseNum}-${courseClass})\강의를 추가했어요.👻`,
+                      `${courseName}(${courseNum}-${courseClass})\n강의를 추가했어요.👻`,
                       [
                         {
                           text: '오키',
