@@ -95,3 +95,5 @@ LOGIN_METHOD=PortalSSOToken
 STUDENT_ID_KEY=whateveryouwant
 COURSES_KEY=whateveryouwant
 ```
+## Thanks to
+[jeongbinboo🎾](https://github.com/jeongbinboo)
