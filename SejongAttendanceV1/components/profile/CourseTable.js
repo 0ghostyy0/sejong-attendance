@@ -5,6 +5,8 @@ import {height, width, scale} from '../../config/globalStyles';
 
 import Config from 'react-native-config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useDispatch} from 'react-redux';
+import {setCourseList, setIsChecked} from '../../redux/Actions';
 
 const delCourse = async newCourses => {
   try {
@@ -25,6 +27,8 @@ const CourseTable = ({
   navigation,
   setDelCourse,
 }) => {
+  const dispatch = useDispatch();
+
   return (
     <Cell
       contentContainerStyle={styles.cell}
@@ -48,6 +52,8 @@ const CourseTable = ({
             if (buttonIndex === 1) {
               courses.splice(course_idx, 1);
               delCourse(courses);
+              dispatch(setCourseList(courses));
+              dispatch(setIsChecked(0));
               setDelCourse(data => data + 1);
             }
           },
