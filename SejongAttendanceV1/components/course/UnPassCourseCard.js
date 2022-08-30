@@ -47,7 +47,7 @@ const UnPassCourseCard = ({
       });
     console.log(lectureData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setLectureData, isParse, refreshing]);
+  }, [setLectureData, isParse, refreshing, courseList]);
 
   return (
     <View>
