@@ -1,41 +1,24 @@
-import React, {useState} from 'react';
-import {
-  StyleSheet,
-  View,
-  Text,
-  ScrollView,
-  StatusBar,
-  RefreshControl,
-} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, View, Text, ScrollView, StatusBar} from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 import UnPassCourseCard from '../../components/course/UnPassCourseCard';
 import {useSelector} from 'react-redux';
 
-const wait = timeout => {
-  return new Promise(resolve => setTimeout(resolve, timeout));
-};
-
 const AnalysisScreen = () => {
   const studentId = useSelector(state => state.studentId);
   const courseList = useSelector(state => state.courseList);
-  const [isThere, setIsThere] = useState(false);
+  const isChecked = useSelector(state => state.isChecked);
   const [flag, setFlag] = useState(false);
 
-  const [refreshing, setRefreshing] = React.useState(false);
-  const onRefresh = React.useCallback(() => {
-    setRefreshing(true);
-    wait(1000).then(() => setRefreshing(false));
-  }, []);
+  useEffect(() => {
+    setFlag(false);
+  }, [courseList]);
 
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
       <Text style={styles.title}>급한거🔥</Text>
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-        }>
+      <ScrollView showsVerticalScrollIndicator={false}>
         {courseList.length > 0 ? (
           courseList.map((course, idx) => {
             return (
@@ -45,9 +28,6 @@ const AnalysisScreen = () => {
                 courseId={course.course_id}
                 classId={course.class_id}
                 studentId={studentId}
-                isThere={isThere}
-                setIsThere={setIsThere}
-                refreshing={refreshing}
               />
             );
           })
@@ -57,7 +37,7 @@ const AnalysisScreen = () => {
             <Text style={styles.emptyAttendanceText}>과목을 추가해주세요.</Text>
           </View>
         )}
-        {!isThere && !flag ? (
+        {isChecked === 0 && !flag ? (
           <View style={styles.emptyAttendanceContainer}>
             <Text style={styles.emptyAttendanceText}>모두 완료했어요 :)</Text>
           </View>
