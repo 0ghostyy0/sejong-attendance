@@ -3,8 +3,10 @@ import {StyleSheet, View, Text, ScrollView, StatusBar} from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 import UnPassCourseCard from '../../components/course/UnPassCourseCard';
 import {useSelector} from 'react-redux';
+import {useIsFocused} from '@react-navigation/native';
 
 const AnalysisScreen = () => {
+  const isFocused = useIsFocused();
   const studentId = useSelector(state => state.studentId);
   const courseList = useSelector(state => state.courseList);
   const isChecked = useSelector(state => state.isChecked);
@@ -28,6 +30,7 @@ const AnalysisScreen = () => {
                 courseId={course.course_id}
                 classId={course.class_id}
                 studentId={studentId}
+                isFocused={isFocused}
               />
             );
           })

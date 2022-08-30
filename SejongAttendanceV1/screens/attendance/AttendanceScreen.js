@@ -36,9 +36,11 @@ const AttendanceScreen = ({navigation}) => {
   const [courses, setCourses] = useState([]);
   const dispatch = useDispatch();
 
+  const [refreshCount, setRefreshCount] = useState(0);
   const [refreshing, setRefreshing] = React.useState(false);
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
+    setRefreshCount(value => value + 1);
     wait(1000).then(() => setRefreshing(false));
   }, []);
 
@@ -47,11 +49,6 @@ const AttendanceScreen = ({navigation}) => {
     getAsyncCourses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocused]);
-
-  // useEffect(() => {
-  //   getAsyncCourses();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [isFocused]);
 
   const getAsyncCourses = async () => {
     try {
@@ -113,7 +110,7 @@ const AttendanceScreen = ({navigation}) => {
                 studentId={id}
                 thisWeek={thisWeek}
                 navigation={navigation}
-                refreshing={setRefreshing}
+                refreshing={refreshCount}
                 isFocused={isFocused}
               />
             );

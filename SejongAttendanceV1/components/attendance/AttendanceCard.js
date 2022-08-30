@@ -15,14 +15,13 @@ const AttendanceCard = ({
   thisWeek,
   refreshing,
   navigation,
-  isFocused,
 }) => {
   const [isParse, setIsParse] = useState(0);
   const [unpassCount, setUnpassCount] = useState([]);
   const [lectureData, setLectureData] = useState([]);
 
   useEffect(() => {
-    parseXlsxData(deptId, courseId, classId, studentId)
+    parseXlsxData(deptId, courseId, classId, studentId, setIsParse)
       .then(data => {
         console.log(courseId);
         console.log(data);
@@ -34,11 +33,10 @@ const AttendanceCard = ({
         setIsParse(data => data + 1);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setLectureData, isParse, refreshing, isFocused]);
+  }, [isParse, refreshing]);
 
   useEffect(() => {
     setUnpassCount(checkStatusCounter(lectureData));
-    console.log(unpassCount);
   }, [lectureData]);
 
   return (

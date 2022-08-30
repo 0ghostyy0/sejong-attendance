@@ -35,7 +35,7 @@ const UnPassCourseCard = ({
   }, [flag]);
 
   useEffect(() => {
-    parseXlsxData(deptId, courseId, classId, studentId)
+    parseXlsxData(deptId, courseId, classId, studentId, setIsParse)
       .then(data => {
         console.log(data);
         setLectureData([...data]);
