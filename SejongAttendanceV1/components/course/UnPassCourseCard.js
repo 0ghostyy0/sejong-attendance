@@ -32,7 +32,7 @@ const UnPassCourseCard = ({
         dispatch(setIsChecked(1));
       }
     }
-  }, [flag]);
+  }, [courseList, flag]);
 
   useEffect(() => {
     parseXlsxData(deptId, courseId, classId, studentId, setIsParse)
@@ -47,7 +47,7 @@ const UnPassCourseCard = ({
       });
     console.log(lectureData);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setLectureData, isParse, refreshing, courseList]);
+  }, [setLectureData, isParse, refreshing, setFlag]);
 
   return (
     <View>
