@@ -1,5 +1,6 @@
 import XLSX from 'xlsx';
 import * as FileSystem from 'expo-file-system';
+import React, {useState} from 'react';
 
 export const getCurrentDate = () => {
   let time = new Date();
@@ -51,8 +52,27 @@ const parseLectureStatus = (startDate, endDate, currentDate, isPass) => {
     return 4;
   }
 };
+const readXlsxData = srcXlsFile => {
+  return new Promise((resolve, reject) => {
+    const xlsRawObjects = XLSX.read(srcXlsFile, {
+      type: 'string',
+    });
+    if (!xlsRawObjects) reject();
+    else resolve(xlsRawObjects);
+  });
+};
+const parseXlsxData = async (
+  deptId,
+  courseId,
+  classId,
+  studentId,
+  setIsParse,
+) => {
+  let srcXlsFile, xlsRawObjects;
+  let lectureData = [];
+  let parsedResult, lectureStatus;
+  let currentDate = getCurrentDate();
 
-const downloadXlsx = async (deptId, courseId, classId, studentId) => {
   const semester = '20222020';
   const ApiUrl = `https://blackboard.sejong.ac.kr/webapps/bbgs-OnlineAttendance-BB5cf774ff89eaf/excel?selectedUserId=${studentId}&crs_batch_uid=${semester}${deptId}${courseId}${classId}&title=${studentId}&column=사용자명,위치,컨텐츠명,학습한시간,학습인정시간,컨텐츠시간,온라인출석진도율,온라인출석상태(P/F)`;
 
@@ -60,70 +80,45 @@ const downloadXlsx = async (deptId, courseId, classId, studentId) => {
     await FileSystem.downloadAsync(
       encodeURI(ApiUrl),
       FileSystem.documentDirectory + courseId,
-    );
-  } catch (e) {
-    e.reason = '파일 다운로드 불가';
-    throw e;
-  }
-  let srcXlsFile;
-  try {
+    ).then(({status}) => {
+      console.log(status);
+      // if (status !== 200) throw new Error('helleo');
+    });
     srcXlsFile = await FileSystem.readAsStringAsync(
       FileSystem.documentDirectory + courseId,
     );
-  } catch (e) {
-    e.reason = '파일 파싱 불가';
-    throw e;
-  }
-
-  return srcXlsFile;
-};
-
-const parseXlsxData = async (deptId, courseId, classId, studentId) => {
-  let srcXlsFile, xlsRawObjects;
-  let lectureData = [];
-  let parsedResult, lectureStatus;
-  let currentDate = getCurrentDate();
-
-  await downloadXlsx(deptId, courseId, classId, studentId).then(
-    value => (srcXlsFile = value),
-  );
-  try {
-    xlsRawObjects = XLSX.read(srcXlsFile, {
-      type: 'string',
+    xlsRawObjects = await readXlsxData(srcXlsFile).catch(e => {
+      console.log(`read error ${courseId}`);
+      throw new Error(e);
     });
-  } catch (error) {
-    if ((error.reason = 'Error: Invalid HTML: could not find <table>')) {
-      console.log('다운로드 할 파일 문제');
-    } else {
-      console.log('모르는 문제...');
-    }
-    throw error;
+    console.log(xlsRawObjects);
+    let xlsParsedObjects = XLSX.utils.sheet_to_json(
+      xlsRawObjects.Sheets[xlsRawObjects.SheetNames[0]],
+    );
+    xlsParsedObjects.forEach(
+      singleObject => (
+        ((parsedResult = parseLectureName(singleObject['컨텐츠명'])),
+        (lectureStatus = parseLectureStatus(
+          parsedResult[0],
+          parsedResult[1],
+          currentDate,
+          singleObject['온라인출석상태(P/F)'],
+        ))),
+        lectureData.push({
+          location: singleObject['위치'],
+          progress: singleObject['온라인출석진도율'],
+          is_pass: singleObject['온라인출석상태(P/F)'] === 'P' ? true : false,
+          start_date: parsedResult[0],
+          end_date: parsedResult[1],
+          lecture_name: parsedResult[2],
+          lecture_status: lectureStatus,
+        })
+      ),
+    );
+  } catch (e) {
+    // console.log(setIsParse(data => data + 1));
+    throw new Error(`hello error ${e}`);
   }
-
-  //@todo : catch error 'TypeError: Cannot read property 'Sheets' of undefined'
-  let xlsParsedObjects = XLSX.utils.sheet_to_json(
-    xlsRawObjects.Sheets[xlsRawObjects.SheetNames[0]],
-  );
-  xlsParsedObjects.forEach(
-    singleObject => (
-      ((parsedResult = parseLectureName(singleObject['컨텐츠명'])),
-      (lectureStatus = parseLectureStatus(
-        parsedResult[0],
-        parsedResult[1],
-        currentDate,
-        singleObject['온라인출석상태(P/F)'],
-      ))),
-      lectureData.push({
-        location: singleObject['위치'],
-        progress: singleObject['온라인출석진도율'],
-        is_pass: singleObject['온라인출석상태(P/F)'] === 'P' ? true : false,
-        start_date: parsedResult[0],
-        end_date: parsedResult[1],
-        lecture_name: parsedResult[2],
-        lecture_status: lectureStatus,
-      })
-    ),
-  );
   return lectureData;
 };
 

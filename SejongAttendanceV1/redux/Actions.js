@@ -42,3 +42,8 @@ export const setStudentId = data => ({
   type: 'SET_STUDENT_ID',
   payload: data,
 });
+
+export const setIsChecked = data => ({
+  type: 'SET_IS_CHECKED',
+  payload: data,
+});
