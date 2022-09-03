@@ -1,4 +1,22 @@
-import {getCurrentDate} from './parseXlsxData';
+const getCurrentDate = () => {
+  let time = new Date();
+  let month, date, hour, min;
+  time.getMonth() + 1 < 10
+    ? (month = '0' + String(time.getMonth() + 1))
+    : String(time.getMonth() + 1);
+  time.getDate() < 10
+    ? (date = '0' + String(time.getDate()))
+    : (date = String(time.getDate()));
+  time.getHours() < 10
+    ? (hour = '0' + String(time.getHours()))
+    : (hour = String(time.getHours()));
+  time.getMinutes() < 10
+    ? (min = '0' + String(time.getMinutes()))
+    : (min = String(time.getMinutes()));
+
+  return month + date + hour + min;
+};
+
 const weekNumberCounter = () => {
   let currentDate = getCurrentDate();
   let weekNumber,
