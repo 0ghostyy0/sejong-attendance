@@ -12,7 +12,7 @@ const Profile = () => {
   const studentId = useSelector(state => state.studentId);
   const time = new Date();
   const year = time.getFullYear();
-  const month = time.getMonth();
+  const month = time.getMonth() + 1;
   const day = time.getDay();
   let semester = '';
 
