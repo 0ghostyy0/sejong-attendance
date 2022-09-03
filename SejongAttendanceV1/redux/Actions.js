@@ -47,3 +47,8 @@ export const setIsChecked = data => ({
   type: 'SET_IS_CHECKED',
   payload: data,
 });
+
+export const setCourseData = data => ({
+  type: 'SET_COURSE_DATA',
+  payload: data,
+});

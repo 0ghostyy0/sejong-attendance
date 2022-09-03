@@ -3,53 +3,27 @@ import {StyleSheet, View, Text, TouchableOpacity} from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import parseXlsxData from '../../utils/parseXlsxData';
-import checkStatusCounter from '../../utils/checkStatusCounter';
 
 const AttendanceCard = ({
   course,
-  deptId,
   courseId,
   classId,
-  studentId,
+  lectures,
+  unpassCount,
   thisWeek,
-  refreshing,
   navigation,
 }) => {
-  const [isParse, setIsParse] = useState(0);
-  const [unpassCount, setUnpassCount] = useState([]);
-  const [lectureData, setLectureData] = useState([]);
-
-  useEffect(() => {
-    parseXlsxData(deptId, courseId, classId, studentId, setIsParse)
-      .then(data => {
-        console.log(courseId);
-        console.log(data);
-        setLectureData(data);
-      })
-      .catch(error => {
-        console.log('error');
-        console.log(error);
-        setIsParse(data => data + 1);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isParse, refreshing]);
-
-  useEffect(() => {
-    setUnpassCount(checkStatusCounter(lectureData));
-  }, [lectureData]);
-
   return (
     <View style={styles.component}>
       <TouchableOpacity
         onPress={() => {
           navigation.navigate('single', {
-            names: [course, courseId, classId, lectureData],
+            names: [course, courseId, classId, lectures],
           });
         }}
         style={styles.card}>
         <View flexDirection="row" style={styles.row1}>
-          {(!thisWeek ? unpassCount[0] : unpassCount[1]) ? (
+          {(!thisWeek ? unpassCount.this_week : unpassCount.all) ? (
             <View style={styles.badgeUnpass}>
               <Text style={styles.badgeTextUnpass}>미완료</Text>
             </View>
@@ -70,11 +44,11 @@ const AttendanceCard = ({
             </Text>
           </View>
           {!thisWeek ? (
-            unpassCount[0] ? (
+            unpassCount.this_week ? (
               <View style={styles.attendanceNumberContainer}>
                 <Text style={styles.numOfAtendanceCaption}>미수강</Text>
                 <Text style={styles.numOfAttendanceText}>
-                  {unpassCount[0]}개
+                  {unpassCount.this_week}개
                 </Text>
               </View>
             ) : (
@@ -83,10 +57,12 @@ const AttendanceCard = ({
                 <Text style={styles.numOfAtendanceCaptionEmoji}>🙌🏻</Text>
               </View>
             )
-          ) : unpassCount[1] ? (
+          ) : unpassCount.all ? (
             <View style={styles.attendanceNumberContainer}>
               <Text style={styles.numOfAtendanceCaption}>미수강</Text>
-              <Text style={styles.numOfAttendanceText}>{unpassCount[1]}개</Text>
+              <Text style={styles.numOfAttendanceText}>
+                {unpassCount.all}개
+              </Text>
             </View>
           ) : (
             <View style={styles.attendanceNumberContainer}>
