@@ -127,7 +127,7 @@ const AttendanceScreen = ({navigation}) => {
       });
       console.log(response.data);
       if (!response.data) {
-        Alert.alert('서버 오류', '죄송합니다.\n잠시 후 다시 시도해주세요.', [
+        Alert.alert('블랙보드 서버 오류', '잠시 후 다시 시도해주세요.', [
           {
             text: '확인',
             onPress: () => navigation.navigate('courses'),
@@ -138,7 +138,12 @@ const AttendanceScreen = ({navigation}) => {
         dispatch(setCourseData(response.data));
       }
     } catch (e) {
-      console.error('악시오스~');
+      Alert.alert('블랙보드 서버 오류', '잠시 후 다시 시도해주세요.', [
+        {
+          text: '확인',
+          onPress: () => navigation.navigate('courses'),
+        },
+      ]);
     }
   };
 
