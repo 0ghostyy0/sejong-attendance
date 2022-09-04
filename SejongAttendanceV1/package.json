@@ -17,10 +17,6 @@
     "@react-navigation/native": "^6.0.11",
     "@react-navigation/native-stack": "^6.7.0",
     "axios": "^0.27.2",
-    "expo": "46.0.7",
-    "expo-file-system": "14.1.0",
-    "expo-modules-core": "0.11.3",
-    "install-expo-modules": "0.3.6",
     "react": "18.0.0",
     "react-native": "0.69.2",
     "react-native-config": "^1.4.6",
@@ -35,8 +31,7 @@
     "react-native-vector-icons": "9.2.0",
     "react-redux": "8.0.2",
     "redux": "4.2.0",
-    "redux-devtools-extension": "2.13.9",
-    "xlsx": "0.18.5"
+    "redux-devtools-extension": "2.13.9"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
