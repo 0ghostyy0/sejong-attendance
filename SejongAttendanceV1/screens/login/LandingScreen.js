@@ -41,7 +41,7 @@ const LandingScreen = ({navigation}) => {
           <Text style={styles.btn_text}>세종대학교 구성원 인증하기</Text>
         </TouchableOpacity>
         <Text style={styles.caution}>
-          출석귀신은 서버를 통하지 않고 운영돼요.
+          출석귀신은 데이터를 서버에 저장하지 않아요.
         </Text>
         <Text style={styles.caution}>
           내 출석기록은 아무도 확인할 수 없으니 걱정마세요!

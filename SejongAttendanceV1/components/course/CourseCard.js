@@ -7,11 +7,11 @@ const CourseCard = ({navigation, lectureData}) => {
     <View style={styles.component}>
       <View style={styles.card}>
         <View flexDirection="row" style={styles.row1}>
-          {lectureData.lecture_status === 2 ? (
+          {lectureData.status === 2 ? (
             <View style={styles.badgePass}>
               <Text style={styles.badgeTextPass}>완료</Text>
             </View>
-          ) : lectureData.lecture_status === 1 ? (
+          ) : lectureData.status === 1 ? (
             <View style={styles.badgeNotyet}>
               <Text style={styles.badgeTextNotyet}>기간아님</Text>
             </View>

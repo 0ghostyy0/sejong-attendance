@@ -7,6 +7,7 @@ const initialState = {
   courseCollegeName: '',
   courseDeptName: '',
   courseList: [],
+  courseData: [],
   isChecked: 0,
 };
 
@@ -61,6 +62,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         isChecked: action.payload,
+      };
+    case 'SET_COURSE_DATA':
+      return {
+        ...state,
+        courseData: action.payload,
       };
     default:
       return state;

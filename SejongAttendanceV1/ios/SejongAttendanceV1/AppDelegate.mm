@@ -23,7 +23,7 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   RCTTurboModuleManager *_turboModuleManager;
   RCTSurfacePresenterBridgeAdapter *_bridgeAdapter;
   std::shared_ptr<const facebook::react::ReactNativeConfig> _reactNativeConfig;
-  facebook::react::ContextContainer::Shared _contextContainer;
+  facebook::react::ConttContainer::Shared _contextContainer;
 }
 @end
 #endif
@@ -34,8 +34,7 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 {
   RCTAppSetupPrepareApp(application);
 
-  // RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
-  RCTBridge *bridge = [self.reactDelegate createBridgeWithDelegate:self launchOptions:launchOptions];
+  RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:launchOptions];
 
 
 #if RCT_NEW_ARCH_ENABLED
@@ -47,8 +46,8 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
 #endif
 
   NSDictionary *initProps = [self prepareInitialProps];
-  // UIView *rootView = RCTAppSetupDefaultRootView(bridge, @"SejongAttendanceV1", initProps);
-  UIView *rootView = [self.reactDelegate createRootViewWithBridge:bridge moduleName:@"SejongAttendanceV1" initialProperties:nil];
+  UIView *rootView = RCTAppSetupDefaultRootView(bridge, @"SejongAttendanceV1", initProps);
+
   if (@available(iOS 13.0, *)) {
     rootView.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     rootView.backgroundColor = [UIColor systemBackgroundColor];
@@ -57,13 +56,11 @@ static NSString *const kRNConcurrentRoot = @"concurrentRoot";
   }
 
   self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-  // UIViewController *rootViewController = [UIViewController new];
-  UIViewController *rootViewController = [self.reactDelegate createRootViewController];
+  UIViewController *rootViewController = [UIViewController new];
 
   rootViewController.view = rootView;
   self.window.rootViewController = rootViewController;
   [self.window makeKeyAndVisible];
-  [super application:application didFinishLaunchingWithOptions:launchOptions];
 
    [RNSplashScreen show];
   return YES;

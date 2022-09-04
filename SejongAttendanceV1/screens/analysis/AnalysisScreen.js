@@ -1,50 +1,65 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View, Text, ScrollView, StatusBar} from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
-import UnPassCourseCard from '../../components/course/UnPassCourseCard';
+import CourseCard from '../../components/course/CourseCard';
+//Redux
 import {useSelector} from 'react-redux';
-import {useIsFocused} from '@react-navigation/native';
 
 const AnalysisScreen = () => {
-  const isFocused = useIsFocused();
-  const studentId = useSelector(state => state.studentId);
   const courseList = useSelector(state => state.courseList);
-  const isChecked = useSelector(state => state.isChecked);
-  const [flag, setFlag] = useState(false);
+  const courseData = useSelector(state => state.courseData);
+  const [unpassLectures, setUnpassLectures] = useState([]);
+  const [sortedLectures, setSortedLectures] = useState([]);
 
   useEffect(() => {
-    setFlag(false);
-  }, [courseList]);
+    if (courseData.length > 0) {
+      sortLectures();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [courseData, courseList]);
+
+  const sortLectures = () => {
+    let result = [];
+    setUnpassLectures([]);
+    for (let i in courseData) {
+      let lectures = courseData[i].lectures;
+      // console.log(lectures[0]);
+      if (lectures.length > 0) {
+        for (let j in lectures) {
+          if (lectures[j].status === 3) {
+            setUnpassLectures(data => [...data, lectures[j]]);
+          }
+        }
+      }
+    }
+    if (unpassLectures.length > 0) {
+      result = unpassLectures.sort((a, b) => {
+        if (a.end_date < b.end_date) {
+          return -1;
+        }
+        if (a.end_date > b.end_date) {
+          return 1;
+        }
+        return 0;
+      });
+      setSortedLectures(result);
+    }
+  };
 
   return (
     <View style={styles.container}>
       <StatusBar barStyle={'dark-content'} />
       <Text style={styles.title}>급한거🔥</Text>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {courseList.length > 0 ? (
-          courseList.map((course, idx) => {
-            return (
-              <UnPassCourseCard
-                key={idx}
-                deptId={course.dept_id}
-                courseId={course.course_id}
-                classId={course.class_id}
-                studentId={studentId}
-                isFocused={isFocused}
-              />
-            );
+        {sortedLectures.length > 0 ? (
+          sortedLectures.map((lecture, idx) => {
+            return <CourseCard key={idx} lectureData={lecture} />;
           })
         ) : (
           <View style={styles.emptyAttendanceContainer}>
-            {!flag ? setFlag(true) : null}
-            <Text style={styles.emptyAttendanceText}>과목을 추가해주세요.</Text>
-          </View>
-        )}
-        {isChecked === 0 && !flag ? (
-          <View style={styles.emptyAttendanceContainer}>
             <Text style={styles.emptyAttendanceText}>모두 완료했어요 :)</Text>
           </View>
-        ) : null}
+        )}
       </ScrollView>
     </View>
   );

@@ -6,17 +6,23 @@ import {
   ScrollView,
   TouchableOpacity,
   StatusBar,
+  Alert,
   RefreshControl,
 } from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
-import AttendanceCard from '../../components/attendance/AttendanceCard';
-import SegmentedControl from '@react-native-segmented-control/segmented-control';
 import Config from 'react-native-config';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useIsFocused} from '@react-navigation/native';
+import axios from 'axios';
+//Functions
 import weekNumberCounter from '../../utils/weekNumberCounter';
+//Components
+import AttendanceCard from '../../components/attendance/AttendanceCard';
+import SegmentedControl from '@react-native-segmented-control/segmented-control';
+//Redux
 import {useDispatch} from 'react-redux';
-import {setCourseList, setStudentId} from '../../redux/Actions';
+import {useSelector} from 'react-redux';
+import {setCourseList, setStudentId, setCourseData} from '../../redux/Actions';
 
 const wait = timeout => {
   return new Promise(resolve => setTimeout(resolve, timeout));
@@ -30,11 +36,16 @@ const AttendanceScreen = ({navigation}) => {
   let today_num = time.getDay();
   let weekNumber = weekNumberCounter();
 
-  const isFocused = useIsFocused();
-  const [thisWeek, setThisWeek] = useState(0);
-  const [id, setId] = useState('');
-  const [courses, setCourses] = useState([]);
   const dispatch = useDispatch();
+  const isFocused = useIsFocused();
+  const [loading, setLoading] = useState(false);
+  const [thisWeek, setThisWeek] = useState(0);
+  const [id, setId] = useState(''); // redux 들어가는 학번
+  const [asyncCourses, setAsyncCourses] = useState([]); // redux 들어가는 강의목록
+  const [courses, setCourses] = useState([]); //server 들어가는 강의목록
+  const [axiosCount, setAxiosCount] = useState(0);
+  const courseData = useSelector(state => state.courseData);
+  const courseList = useSelector(state => state.courseList);
 
   const [refreshCount, setRefreshCount] = useState(0);
   const [refreshing, setRefreshing] = React.useState(false);
@@ -45,17 +56,49 @@ const AttendanceScreen = ({navigation}) => {
   }, []);
 
   useEffect(() => {
-    getAsyncStudendtId();
+    getAsyncStudentId();
     getAsyncCourses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isFocused]);
+
+  useEffect(() => {
+    if (asyncCourses && id) {
+      setCourses([]);
+      setAxiosCount(0);
+      for (let i in asyncCourses) {
+        setCourses(data => [
+          ...data,
+          {
+            student_id: id,
+            dept_id: asyncCourses[i].dept_id,
+            course_name: asyncCourses[i].name,
+            course_id: asyncCourses[i].course_id,
+            class_id: asyncCourses[i].class_id,
+          },
+        ]);
+        setAxiosCount(value => value + 1);
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [asyncCourses, id, refreshCount]);
+
+  useEffect(() => {
+    if (
+      courses.length === asyncCourses.length &&
+      axiosCount === asyncCourses.length &&
+      axiosCount !== 0
+    ) {
+      getCoursesData();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [axiosCount, refreshCount]);
 
   const getAsyncCourses = async () => {
     try {
       const value = await AsyncStorage.getItem(Config.COURSES_KEY);
       if (value !== null) {
         const data = JSON.parse(value);
-        setCourses(data.courses);
+        setAsyncCourses(data.courses);
         dispatch(setCourseList(data.courses));
       }
     } catch (e) {
@@ -63,7 +106,7 @@ const AttendanceScreen = ({navigation}) => {
     }
   };
 
-  const getAsyncStudendtId = async () => {
+  const getAsyncStudentId = async () => {
     try {
       const value = await AsyncStorage.getItem(Config.STUDENT_ID_KEY);
       if (value !== null) {
@@ -73,6 +116,34 @@ const AttendanceScreen = ({navigation}) => {
       }
     } catch (e) {
       console.log('학번 불러오기 실패');
+    }
+  };
+
+  const getCoursesData = async () => {
+    try {
+      setLoading(true);
+      const response = await axios.post(`${Config.COURSE_API_URL}`, {
+        courses: courses,
+      });
+      console.log(response.data);
+      if (!response.data) {
+        Alert.alert('블랙보드 서버 오류', '잠시 후 다시 시도해주세요.', [
+          {
+            text: '확인',
+            onPress: () => navigation.navigate('courses'),
+          },
+        ]);
+      }
+      if (response.data) {
+        dispatch(setCourseData(response.data));
+      }
+    } catch (e) {
+      Alert.alert('블랙보드 서버 오류', '잠시 후 다시 시도해주세요.', [
+        {
+          text: '확인',
+          onPress: () => navigation.navigate('courses'),
+        },
+      ]);
     }
   };
 
@@ -93,25 +164,23 @@ const AttendanceScreen = ({navigation}) => {
         }}
       />
 
-      {courses.length > 0 ? (
+      {courseData.length > 0 ? (
         <ScrollView
           showsVerticalScrollIndicator={false}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
           }>
-          {courses.map((course, idx) => {
+          {courseData.map((course, idx) => {
             return (
               <AttendanceCard
                 key={idx}
-                course={course.name}
-                deptId={course.dept_id}
+                course={course.course_name}
                 courseId={course.course_id}
                 classId={course.class_id}
-                studentId={id}
+                lectures={course.lectures}
+                unpassCount={course.unpass_count}
                 thisWeek={thisWeek}
                 navigation={navigation}
-                refreshing={refreshCount}
-                isFocused={isFocused}
               />
             );
           })}
