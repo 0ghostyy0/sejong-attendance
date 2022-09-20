@@ -11,7 +11,8 @@
 
 >프로젝트 릴리즈: 2022.08.27(App Store)
 
-[<img width=150px src=https://github.com/luciancah/sejong-attendance/blob/master/Docs/assets/appstore.png?raw=true>](https://github.com/luciancah/sejong-attendance/blob/master/Docs/assets/appstore.png?raw=true)
+[<img width=150px src=https://user-images.githubusercontent.com/42789819/115149387-d42e1980-a09e-11eb-88e3-94ca9b5b604b.png>](https://apps.apple.com/kr/app/%EC%B6%9C%EC%84%9D%EA%B7%80%EC%8B%A0-%EC%84%B8%EC%A2%85%EB%8C%80%ED%95%99%EA%B5%90-%EC%98%A8%EB%9D%BC%EC%9D%B8-%EC%B6%9C%EC%84%9D%EA%B4%80%EB%A6%AC/id1641685544)
+
 
 ## Developers
 <table>
