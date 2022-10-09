@@ -98,13 +98,6 @@
 			name = SejongAttendanceV1;
 			sourceTree = "<group>";
 		};
-		25A68D9AC5E96559B3F41267 /* SejongAttendanceV1Tests */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = SejongAttendanceV1Tests;
-			sourceTree = "<group>";
-		};
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,13 +148,6 @@
 				5257A17E7B59B1E5907152F4 /* Pods-SejongAttendanceV1-SejongAttendanceV1Tests.release.xcconfig */,
 			);
 			path = Pods;
-			sourceTree = "<group>";
-		};
-		C3FB24E75FD6AFF2FC7FB24D /* SejongAttendanceV1 */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = SejongAttendanceV1;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -510,7 +496,7 @@
 				CODE_SIGN_ENTITLEMENTS = SejongAttendanceV1/SejongAttendanceV1.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1.0;
+				CURRENT_PROJECT_VERSION = 1.1.1;
 				DEVELOPMENT_TEAM = PL3MPVK83S;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = SejongAttendanceV1/Info.plist;
@@ -519,7 +505,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -545,7 +531,7 @@
 				CODE_SIGN_ENTITLEMENTS = SejongAttendanceV1/SejongAttendanceV1.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1.1.0;
+				CURRENT_PROJECT_VERSION = 1.1.1;
 				DEVELOPMENT_TEAM = PL3MPVK83S;
 				INFOPLIST_FILE = SejongAttendanceV1/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -553,7 +539,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.1.0;
+				MARKETING_VERSION = 1.1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
