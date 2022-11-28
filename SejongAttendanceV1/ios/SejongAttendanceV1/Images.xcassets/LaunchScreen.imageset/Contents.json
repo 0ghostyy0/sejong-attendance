@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "splash_3000_halloween.png",
+      "filename" : "splash_3000_christmas.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "splash_3000_halloween@2x.png",
+      "filename" : "splash_3000_christmas@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "splash_3000_halloween@3x.png",
+      "filename" : "splash_3000_christmas@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
