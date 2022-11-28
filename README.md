@@ -39,7 +39,6 @@
 - redux
 - expo-file-system
 - XLSX (sheetJS)
-- axios
 
 ```
 - Open-Source API
@@ -60,11 +59,20 @@
 ## Milestone
 | 버전 |기간                           |    기능     |
 | :----------------------------------- | :----------------------------------------------------------: | :-----------: |
-| [1.0.0](https://github.com/luciancah/sejong-attendance/releases/tag/v1.0.0)                           | 2022.07 ~ 2022.08 |  MVP : 강의 목록 관리 / 강의별 진도율 모아보기 (기간 분리) / 급한 강의 모아보기 |
+| [1.0.0](https://github.com/luciancah/sejong-attendance/releases/tag/v1.0.0)                           | 2022.07 ~ 2022.08 |  MVP: 강의 목록 관리 / 강의별 진도율 모아보기 (기간 분리) / 급한 강의 모아보기 |
+| [1.0.1](https://github.com/luciancah/sejong-attendance/releases/tag/v1.0.1)                           | 2022.08 | 버그 수정: refresh 없이 미수강 개수 바로 뜨지 않음 |
+| 1.1.0 | 2022.09 | 기능 수정: 백엔드 서버에서 출석현황 처리 |
+| 1.1.1 | 2022.10 | 할로윈 맞이 업데이트 & 10주차 이후 주차 표시 문제 수정 |
 
   
-
-
+## 귀신 변천사
+<table>
+<tr>
+<td align="center"><img src="https://github.com/luciancah/sejong-attendance/blob/master/Docs/assets/ghosts/v1.png?raw=true" width="100px;" alt=""/><br /><sub><b>v1</b></sub></a></td>
+<td align="center"><img src="https://github.com/luciancah/sejong-attendance/blob/master/Docs/assets/ghosts/v2.png?raw=true" width="100px;" alt=""/><br /><sub><b>halloween</b></sub></a></td>
+<td align="center"><img src="https://github.com/luciancah/sejong-attendance/blob/master/Docs/assets/ghosts/v3.png?raw=true" width="100px;" alt=""/><br /><sub><b>christmas</b></sub></a></td>
+</tr>
+</table>
   
 
 ## Run Locally
