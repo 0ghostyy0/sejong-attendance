@@ -1,7 +1,7 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {Button, Alert} from 'react-native';
-import {scale} from '../../config/globalStyles';
+import {Button, Alert, Platform, TouchableOpacity, Text} from 'react-native';
+import {scale, width, height} from '../../config/globalStyles';
 import Config from 'react-native-config';
 //Screens
 import AddCourseScreen from '../../screens/profile/AddCourseScreen';
@@ -86,67 +86,138 @@ const ProfileStackNavi = ({navigation}) => {
             headerBackTitle: '출석 확인하기',
             headerStyle: {backgroundColor: '#f4f3f6'},
             headerShadowVisible: false,
-            headerLeft: () => (
-              <Button
-                title="취소"
-                onPress={() => {
-                  navigation.navigate('마이페이지');
-                }}
-              />
-            ),
-            headerRight: () => (
-              <Button
-                title="추가"
-                onPress={() => {
-                  if (
-                    !courseNum.length ||
-                    !courseName.length ||
-                    !courseDept.length ||
-                    !courseName.length
-                  ) {
-                    Alert.alert(
-                      '강의 정보를 완성해주세요.',
-                      `정보를 전부 입력해야\n 데이터를 받아올 수 있어요.`,
-                      [
-                        {
-                          text: '확인',
-                          onPress: () => {},
-                        },
-                      ],
-                    );
-                  } else if (
-                    !checkCourseNumber.test(courseNum) ||
-                    !checkClassNumber.test(courseClass)
-                  ) {
-                    Alert.alert(
-                      '강의 정보가 잘못됐어요',
-                      `학수번호 숫자 6자리,\n 분반 숫자 3자리인지 확인해주세요.`,
-                      [
-                        {
-                          text: '확인',
-                          onPress: () => {},
-                        },
-                      ],
-                    );
-                  } else {
-                    courseAddStorage();
-                    Alert.alert(
-                      '강의 추가',
-                      `${courseName}(${courseNum}-${courseClass})\n강의를 추가했어요.👻`,
-                      [
-                        {
-                          text: '오키',
-                          onPress: () => navigation.navigate('마이페이지'),
-                        },
-                      ],
-                    );
-                    setTimeout(() => {
-                      navigation.navigate('마이페이지');
-                    }, 10);
-                  }
-                }}
-              />
-            ),
+            headerLeft: () =>
+              Platform.OS === 'ios' ? (
+                <Button
+                  title="취소"
+                  onPress={() => {
+                    navigation.navigate('마이페이지');
+                  }}
+                />
+              ) : (
+                <TouchableOpacity
+                  style={{
+                    width: width * 36,
+                    alignItems: 'center',
+                    marginRight: width * 12,
+                  }}
+                  onPress={() => {
+                    navigation.navigate('마이페이지');
+                  }}>
+                  <Text style={{fontSize: scale * 14}}>취소</Text>
+                </TouchableOpacity>
+              ),
+            headerRight: () =>
+              Platform.OS === 'ios' ? (
+                <Button
+                  title="추가"
+                  onPress={() => {
+                    if (
+                      !courseNum.length ||
+                      !courseName.length ||
+                      !courseDept.length ||
+                      !courseName.length
+                    ) {
+                      Alert.alert(
+                        '강의 정보를 완성해주세요.',
+                        `정보를 전부 입력해야\n 데이터를 받아올 수 있어요.`,
+                        [
+                          {
+                            text: '확인',
+                            onPress: () => {},
+                          },
+                        ],
+                      );
+                    } else if (
+                      !checkCourseNumber.test(courseNum) ||
+                      !checkClassNumber.test(courseClass)
+                    ) {
+                      Alert.alert(
+                        '강의 정보가 잘못됐어요',
+                        `학수번호 숫자 6자리,\n 분반 숫자 3자리인지 확인해주세요.`,
+                        [
+                          {
+                            text: '확인',
+                            onPress: () => {},
+                          },
+                        ],
+                      );
+                    } else {
+                      courseAddStorage();
+                      Alert.alert(
+                        '강의 추가',
+                        `${courseName}(${courseNum}-${courseClass})\n강의를 추가했어요.👻`,
+                        [
+                          {
+                            text: '오키',
+                            onPress: () => navigation.navigate('마이페이지'),
+                          },
+                        ],
+                      );
+                      setTimeout(() => {
+                        navigation.navigate('마이페이지');
+                      }, 10);
+                    }
+                  }}
+                />
+              ) : (
+                <TouchableOpacity
+                  style={{
+                    width: width * 36,
+                    alignItems: 'center',
+                    marginLeft: width * 12,
+                  }}
+                  onPress={() => {
+                    if (
+                      !courseNum.length ||
+                      !courseName.length ||
+                      !courseDept.length ||
+                      !courseName.length
+                    ) {
+                      Alert.alert(
+                        '강의 정보를 완성해주세요.',
+                        `정보를 전부 입력해야\n 데이터를 받아올 수 있어요.`,
+                        [
+                          {
+                            text: '확인',
+                            onPress: () => {},
+                          },
+                        ],
+                      );
+                    } else if (
+                      !checkCourseNumber.test(courseNum) ||
+                      !checkClassNumber.test(courseClass)
+                    ) {
+                      Alert.alert(
+                        '강의 정보가 잘못됐어요',
+                        `학수번호 숫자 6자리,\n 분반 숫자 3자리인지 확인해주세요.`,
+                        [
+                          {
+                            text: '확인',
+                            onPress: () => {},
+                          },
+                        ],
+                      );
+                    } else {
+                      courseAddStorage();
+                      Alert.alert(
+                        '강의 추가',
+                        `${courseName}(${courseNum}-${courseClass})\n강의를 추가했어요.👻`,
+                        [
+                          {
+                            text: '오키',
+                            onPress: () => navigation.navigate('마이페이지'),
+                          },
+                        ],
+                      );
+                      setTimeout(() => {
+                        navigation.navigate('마이페이지');
+                      }, 10);
+                    }
+                  }}>
+                  <Text style={{fontSize: scale * 14}}>추가</Text>
+                </TouchableOpacity>
+              ),
           }}
         />
         <Stack.Screen
@@ -159,14 +230,27 @@ const ProfileStackNavi = ({navigation}) => {
             headerShadowVisible: false,
             headerBackTitleVisible: true,
             headerBackTitle: '출석 확인하기',
-            headerRight: () => (
-              <Button
-                title="추가"
-                onPress={() => {
-                  navigation.navigate('addcourse');
-                }}
-              />
-            ),
+            headerRight: () =>
+              Platform.OS === 'ios' ? (
+                <Button
+                  title="추가"
+                  onPress={() => {
+                    navigation.navigate('addcourse');
+                  }}
+                />
+              ) : (
+                <TouchableOpacity
+                  style={{
+                    width: width * 36,
+                    alignItems: 'center',
+                    marginRight: width * 12,
+                  }}
+                  onPress={() => {
+                    navigation.navigate('addcourse');
+                  }}>
+                  <Text style={{fontSize: scale * 14}}>추가</Text>
+                </TouchableOpacity>
+              ),
           }}
         />
         <Stack.Screen
@@ -177,14 +261,27 @@ const ProfileStackNavi = ({navigation}) => {
             headerTitle: '학과',
             headerStyle: {backgroundColor: '#f4f3f6'},
             headerShadowVisible: false,
-            headerRight: () => (
-              <Button
-                title="추가"
-                onPress={() => {
-                  navigation.navigate('addcourse');
-                }}
-              />
-            ),
+            headerRight: () =>
+              Platform.OS === 'ios' ? (
+                <Button
+                  title="추가"
+                  onPress={() => {
+                    navigation.navigate('addcourse');
+                  }}
+                />
+              ) : (
+                <TouchableOpacity
+                  style={{
+                    width: width * 36,
+                    alignItems: 'center',
+                    marginRight: width * 12,
+                  }}
+                  onPress={() => {
+                    navigation.navigate('addcourse');
+                  }}>
+                  <Text style={{fontSize: scale * 14}}>추가</Text>
+                </TouchableOpacity>
+              ),
           }}
         />
       </Stack.Group>

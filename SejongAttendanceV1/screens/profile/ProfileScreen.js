@@ -8,6 +8,8 @@ import {
   SafeAreaView,
   StatusBar,
   ActionSheetIOS,
+  Platform,
+  Alert,
 } from 'react-native';
 import RNExitApp from 'react-native-exit-app';
 import Profile from '../../components/profile/Profile';
@@ -106,19 +108,36 @@ const ProfileScreen = ({navigation}) => {
             <TouchableOpacity
               style={styles.btn}
               onPress={() => {
-                ActionSheetIOS.showActionSheetWithOptions(
-                  {
-                    options: ['취소', '강의 초기화하기'],
-                    destructiveButtonIndex: 1,
-                    cancelButtonIndex: 0,
-                    title: `저장된 데이터가 모두 삭제됩니다.\n강의 정보를 삭제하시겠습니까?`,
-                  },
-                  buttonIndex => {
-                    if (buttonIndex === 1) {
-                      removeCourses();
-                    }
-                  },
-                );
+                Platform.OS === 'ios'
+                  ? ActionSheetIOS.showActionSheetWithOptions(
+                      {
+                        options: ['취소', '강의 초기화하기'],
+                        destructiveButtonIndex: 1,
+                        cancelButtonIndex: 0,
+                        title: `저장된 데이터가 모두 삭제됩니다.\n강의 정보를 삭제하시겠습니까?`,
+                      },
+                      buttonIndex => {
+                        if (buttonIndex === 1) {
+                          removeCourses();
+                        }
+                      },
+                    )
+                  : Alert.alert(
+                      '강의 초기화하기',
+                      `저장된 데이터가 모두 삭제됩니다.\n강의 정보를 삭제하시겠습니까?`,
+                      [
+                        {
+                          text: '취소',
+                          style: 'cancel',
+                        },
+                        {
+                          text: '삭제하기',
+                          onPress: () => {
+                            removeCourses();
+                          },
+                        },
+                      ],
+                    );
               }}>
               <Text style={{...styles.text, color: '#eb5828'}}>
                 모든 강의 정보 초기화
@@ -129,21 +148,40 @@ const ProfileScreen = ({navigation}) => {
             <TouchableOpacity
               style={styles.btn}
               onPress={() => {
-                ActionSheetIOS.showActionSheetWithOptions(
-                  {
-                    options: ['취소', '계정 삭제하기'],
-                    destructiveButtonIndex: 1,
-                    cancelButtonIndex: 0,
-                    title: `저장된 데이터가 모두 삭제됩니다.\n계정을 삭제하시겠습니까?`,
-                  },
-                  buttonIndex => {
-                    if (buttonIndex === 1) {
-                      removeStudent()
-                        .then(() => removeCourses())
-                        .then(() => RNExitApp.exitApp());
-                    }
-                  },
-                );
+                Platform.OS === 'ios'
+                  ? ActionSheetIOS.showActionSheetWithOptions(
+                      {
+                        options: ['취소', '계정 삭제하기'],
+                        destructiveButtonIndex: 1,
+                        cancelButtonIndex: 0,
+                        title: `저장된 데이터가 모두 삭제됩니다.\n계정을 삭제하시겠습니까?`,
+                      },
+                      buttonIndex => {
+                        if (buttonIndex === 1) {
+                          removeStudent()
+                            .then(() => removeCourses())
+                            .then(() => RNExitApp.exitApp());
+                        }
+                      },
+                    )
+                  : Alert.alert(
+                      '계정 삭제하기',
+                      `저장된 데이터가 모두 삭제됩니다.\n계정을 삭제하시겠습니까?`,
+                      [
+                        {
+                          text: '취소',
+                          style: 'cancel',
+                        },
+                        {
+                          text: '삭제하기',
+                          onPress: () => {
+                            removeStudent()
+                              .then(() => removeCourses())
+                              .then(() => RNExitApp.exitApp());
+                          },
+                        },
+                      ],
+                    );
               }}>
               <Text style={{...styles.text, color: '#eb5828'}}>
                 계정 삭제하기

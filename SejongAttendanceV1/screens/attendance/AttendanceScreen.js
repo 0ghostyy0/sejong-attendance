@@ -8,6 +8,7 @@ import {
   StatusBar,
   Alert,
   RefreshControl,
+  Platform,
 } from 'react-native';
 import {height, width, scale} from '../../config/globalStyles';
 import Config from 'react-native-config';
@@ -138,6 +139,7 @@ const AttendanceScreen = ({navigation}) => {
         dispatch(setCourseData(response.data));
       }
     } catch (e) {
+      console.log(e);
       Alert.alert('블랙보드 서버 오류', '잠시 후 다시 시도해주세요.', [
         {
           text: '확인',
@@ -157,6 +159,7 @@ const AttendanceScreen = ({navigation}) => {
       </Text>
       <SegmentedControl
         style={styles.SegmentedControl}
+        appearance="light"
         values={['수강 가능', '전체 주차']}
         selectedIndex={thisWeek}
         onChange={event => {
@@ -212,8 +215,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: scale * 28,
     fontWeight: 'bold',
-    marginTop: height * 95,
     marginLeft: width * 16,
+    ...Platform.select({
+      ios: {
+        marginTop: height * 95,
+      },
+      android: {
+        marginTop: height * 36,
+      },
+    }),
   },
   week: {
     fontSize: scale * 18,
