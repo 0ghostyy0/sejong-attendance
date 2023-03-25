@@ -46,7 +46,7 @@ const AddCollegeScreen = ({
         style={styles.container}>
         <StatusBar barStyle={'dark-content'} />
         <View style={styles.innerContainer}>
-          <TableView style={styles.tableview}>
+          <TableView style={styles.tableview} appearance={'light'}>
             <Section roundedCorners={true} hideSurroundingSeparators={true}>
               {colleges.map(college => (
                 <SelectTable

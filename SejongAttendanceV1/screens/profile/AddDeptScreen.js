@@ -37,7 +37,7 @@ const AddDeptScreen = ({
         style={styles.container}>
         <StatusBar barStyle={'light-content'} />
         <View>
-          <TableView style={styles.tableview}>
+          <TableView style={styles.tableview} appearance={'light'}>
             <Section roundedCorners={true} hideSurroundingSeparators={true}>
               {depts.map(dept => (
                 <SelectTable
