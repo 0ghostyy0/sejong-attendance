@@ -73,7 +73,14 @@ const styles = StyleSheet.create({
   title: {
     fontSize: scale * 28,
     fontWeight: 'bold',
-    marginTop: height * 95,
+    ...Platform.select({
+      ios: {
+        marginTop: height * 95,
+      },
+      android: {
+        marginTop: height * 36,
+      },
+    }),
     marginLeft: width * 16,
     marginBottom: height * 14,
   },

@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     // backgroundColor: '#000',
   },
-
   header: {
     fontSize: scale * 12,
     color: '#86858c',

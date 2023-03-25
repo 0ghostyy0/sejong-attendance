@@ -10,7 +10,7 @@ const MapCourseTable = ({navigation, courses}) => {
   return (
     <View style={styles.shadow}>
       {courses.length > 0 ? (
-        <TableView style={styles.tableview}>
+        <TableView style={styles.tableview} appearance={'light'}>
           <Section roundedCorners={true} hideSurroundingSeparators={true}>
             {courses.map((course, idx) => (
               <CourseTable

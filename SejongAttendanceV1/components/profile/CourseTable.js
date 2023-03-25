@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, ActionSheetIOS} from 'react-native';
+import {StyleSheet, ActionSheetIOS, Platform, Alert} from 'react-native';
 import {Cell} from 'react-native-tableview-simple';
 import {height, width, scale} from '../../config/globalStyles';
 
@@ -40,24 +40,46 @@ const CourseTable = ({
       titleTextStyle={styles.titleText}
       subtitleTextStyle={styles.subtitleText}
       onPress={() => {
-        ActionSheetIOS.showActionSheetWithOptions(
-          {
-            options: ['취소', '삭제하기'],
-            destructiveButtonIndex: 1,
-            cancelButtonIndex: 0,
-            title: `${course} (${course_num})`,
-            // userInterfaceStyle: 'dark',
-          },
-          buttonIndex => {
-            if (buttonIndex === 1) {
-              courses.splice(course_idx, 1);
-              delCourse(courses);
-              dispatch(setCourseList(courses));
-              dispatch(setIsChecked(0));
-              setDelCourse(data => data + 1);
-            }
-          },
-        );
+        Platform.OS === 'ios'
+          ? ActionSheetIOS.showActionSheetWithOptions(
+              {
+                options: ['취소', '삭제하기'],
+                destructiveButtonIndex: 1,
+                cancelButtonIndex: 0,
+                title: `${course} (${course_num})`,
+                // userInterfaceStyle: 'dark',
+              },
+              buttonIndex => {
+                if (buttonIndex === 1) {
+                  courses.splice(course_idx, 1);
+                  delCourse(courses);
+                  dispatch(setCourseList(courses));
+                  dispatch(setIsChecked(0));
+                  setDelCourse(data => data + 1);
+                }
+              },
+            )
+          : Alert.alert(
+              `${course} (${course_num})`,
+              '삭제하시겠습니까?',
+              [
+                {
+                  text: '취소',
+                  style: 'cancel',
+                },
+                {
+                  text: '삭제',
+                  onPress: () => {
+                    courses.splice(course_idx, 1);
+                    delCourse(courses);
+                    dispatch(setCourseList(courses));
+                    dispatch(setIsChecked(0));
+                    setDelCourse(data => data + 1);
+                  },
+                },
+              ],
+              {cancelable: false},
+            );
       }}
     />
   );
