@@ -7,11 +7,14 @@
 세종대학교 블랙보드 ```blackboard.sejong.ac.kr``` 상의 온라인 강의 출석 진도율을 한 번에 모아볼 수 있는 서비스 입니다.
 <br>
 강의 전체 진도율, 강의 별 상세 정보 확인, 모든 수업 중 급한 강의 정보를 모아볼 수 있는 서비스를 제공합니다.
+<br>
+iOS AppStore 생산성 차트 63위(2022.10), 74위(2023.03)
 >프로젝트 기간: 2022.07 ~ 2022.08
 
 >프로젝트 릴리즈: 2022.08.27(App Store)
 
-[<img width=150px src=https://user-images.githubusercontent.com/42789819/115149387-d42e1980-a09e-11eb-88e3-94ca9b5b604b.png>](https://apps.apple.com/kr/app/%EC%B6%9C%EC%84%9D%EA%B7%80%EC%8B%A0-%EC%84%B8%EC%A2%85%EB%8C%80%ED%95%99%EA%B5%90-%EC%98%A8%EB%9D%BC%EC%9D%B8-%EC%B6%9C%EC%84%9D%EA%B4%80%EB%A6%AC/id1641685544)
+[<img height=50px src=https://user-images.githubusercontent.com/42789819/115149387-d42e1980-a09e-11eb-88e3-94ca9b5b604b.png>](https://apps.apple.com/kr/app/%EC%B6%9C%EC%84%9D%EA%B7%80%EC%8B%A0-%EC%84%B8%EC%A2%85%EB%8C%80%ED%95%99%EA%B5%90-%EC%98%A8%EB%9D%BC%EC%9D%B8-%EC%B6%9C%EC%84%9D%EA%B4%80%EB%A6%AC/id1641685544)
+[<img height=50px src=https://www.fcsok.org/wp-content/uploads/2020/04/get-it-on-google-play-badge.png>](https://play.google.com/store/apps/details?id=com.sejongattendancev1)
 
 
 ## Developers
@@ -64,6 +67,7 @@
 | 1.1.0 | 2022.09 | 기능 수정: 백엔드 서버에서 출석현황 처리 |
 | 1.1.1 | 2022.10 | 할로윈 맞이 업데이트 & 10주차 이후 주차 표시 문제 수정 |
 | 1.1.3 | 2023.03 | 2023학년도 1학기 대응(주차, 학과정보, API 경로) |
+| 1.1.4 | 2023.03 | AOS 출시 |
 
   
 ## 귀신 변천사
